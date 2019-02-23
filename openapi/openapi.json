@@ -1,0 +1,1006 @@
+{
+ "openapi": "3.0.1",
+ "info": {
+  "title": "OpenAPI Demo",
+  "description": "Automatically generated",
+  "contact": {
+   "name": "wzshiming",
+   "url": "https://github.com/wzshiming/gen"
+  },
+  "version": "0.0.1"
+ },
+ "servers": [
+  {
+   "url": "/"
+  },
+  {
+   "url": "{scheme}{host}{port}{path}",
+   "variables": {
+    "host": {
+     "enum": [
+      "localhost"
+     ],
+     "default": "localhost"
+    },
+    "path": {
+     "enum": [
+      "/"
+     ],
+     "default": "/"
+    },
+    "port": {
+     "enum": [
+      ""
+     ],
+     "default": ""
+    },
+    "scheme": {
+     "enum": [
+      "http://",
+      "https://"
+     ],
+     "default": "http://"
+    }
+   }
+  }
+ ],
+ "paths": {
+  "/auth": {
+   "get": {
+    "tags": [
+     "AuthService"
+    ],
+    "summary": "List of the Auth #route:\"GET /\"#",
+    "description": "List of the Auth #route:\"GET /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AuthWithID"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "AuthService"
+    ],
+    "summary": "Create a Auth #route:\"POST /\"#",
+    "description": "Create a Auth #route:\"POST /\"#",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/auth"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   }
+  },
+  "/auth/{auth_id}": {
+   "get": {
+    "tags": [
+     "AuthService"
+    ],
+    "summary": "Get the Auth #route:\"GET /{auth_id}\"#",
+    "description": "Get the Auth #route:\"GET /{auth_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/auth_id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AuthWithID"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   },
+   "put": {
+    "tags": [
+     "AuthService"
+    ],
+    "summary": "Update the Auth #route:\"PUT /{auth_id}\"#",
+    "description": "Update the Auth #route:\"PUT /{auth_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/auth_id"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/auth"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   },
+   "delete": {
+    "tags": [
+     "AuthService"
+    ],
+    "summary": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
+    "description": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/auth_id"
+     }
+    ],
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   }
+  },
+  "/file": {
+   "post": {
+    "tags": [
+     "FileService"
+    ],
+    "summary": "Upload a file #route:\"POST /\"#",
+    "description": "Upload a file #route:\"POST /\"#",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/file"
+    },
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/file/{filename}": {
+   "get": {
+    "tags": [
+     "FileService"
+    ],
+    "summary": "Get a file #route:\"GET /{filename}\"#",
+    "description": "Get a file #route:\"GET /{filename}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/filename"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "#content:\"application/octet-stream\"#",
+      "content": {
+       "application/octet-stream": {}
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/item": {
+   "get": {
+    "tags": [
+     "ItemService"
+    ],
+    "summary": "List of the Item #route:\"GET /\"#",
+    "description": "List of the Item #route:\"GET /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ItemWithID"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "ItemService"
+    ],
+    "summary": "Create a Item #route:\"POST /\"#",
+    "description": "Create a Item #route:\"POST /\"#",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/item"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/item/{item_id}": {
+   "get": {
+    "tags": [
+     "ItemService"
+    ],
+    "summary": "Get the Item #route:\"GET /{item_id}\"#",
+    "description": "Get the Item #route:\"GET /{item_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/item_id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ItemWithID"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "ItemService"
+    ],
+    "summary": "Update the Item #route:\"PUT /{item_id}\"#",
+    "description": "Update the Item #route:\"PUT /{item_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/item_id"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/item"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "ItemService"
+    ],
+    "summary": "Delete the Item #route:\"DELETE /{item_id}\"#",
+    "description": "Delete the Item #route:\"DELETE /{item_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/item_id"
+     }
+    ],
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/midd": {
+   "get": {
+    "tags": [
+     "MiddService"
+    ],
+    "summary": "List of the Midd #route:\"GET /\"#",
+    "description": "List of the Midd #route:\"GET /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/MiddWithID"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "MiddService"
+    ],
+    "summary": "Create a Midd #route:\"POST /\"#",
+    "description": "Create a Midd #route:\"POST /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/midd"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/midd/{midd_id}": {
+   "get": {
+    "tags": [
+     "MiddService"
+    ],
+    "summary": "Get the Midd #route:\"GET /{midd_id}\"#",
+    "description": "Get the Midd #route:\"GET /{midd_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/midd_id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MiddWithID"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "MiddService"
+    ],
+    "summary": "Update the Midd #route:\"PUT /{midd_id}\"#",
+    "description": "Update the Midd #route:\"PUT /{midd_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/midd_id"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/midd"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "MiddService"
+    ],
+    "summary": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
+    "description": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/midd_id"
+     }
+    ],
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Auth": {
+    "type": "object",
+    "properties": {
+     "message": {
+      "type": "string",
+      "description": "Name is the message"
+     },
+     "name": {
+      "type": "string",
+      "description": "Name is the name"
+     }
+    },
+    "description": "Auth is a auth"
+   },
+   "AuthWithID": {
+    "type": "object",
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/Auth"
+     }
+    ],
+    "properties": {
+     "auth_id": {
+      "type": "integer",
+      "format": "int64"
+     }
+    },
+    "description": "AuthWithID is Auth with ID"
+   },
+   "Item": {
+    "type": "object",
+    "properties": {
+     "Message": {
+      "type": "string",
+      "description": "Message is the message of item"
+     },
+     "Name": {
+      "type": "string",
+      "description": "Name is the name of item"
+     }
+    },
+    "description": "Item is a item"
+   },
+   "ItemWithID": {
+    "type": "object",
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/Item"
+     }
+    ],
+    "properties": {
+     "item_id": {
+      "type": "integer",
+      "format": "int64"
+     }
+    },
+    "description": "ItemWithID is Item with ID"
+   },
+   "Midd": {
+    "type": "object",
+    "properties": {
+     "message": {
+      "type": "string",
+      "description": "Name is the message"
+     },
+     "midd_id": {
+      "type": "integer",
+      "description": "MiddID is the Midd ID",
+      "format": "int64"
+     },
+     "name": {
+      "type": "string",
+      "description": "Name is the name"
+     }
+    },
+    "description": "Midd is a midd"
+   },
+   "MiddWithID": {
+    "type": "object",
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/Midd"
+     }
+    ],
+    "properties": {
+     "midd_id": {
+      "type": "integer",
+      "format": "int64"
+     }
+    },
+    "description": "MiddWithID is Midd with ID"
+   },
+   "Reader": {
+    "type": "string",
+    "description": "Reader is the interface that wraps the basic Read method.\n\nRead reads up to len(p) bytes into p. It returns the number of bytes\nread (0 \u003c= n \u003c= len(p)) and any error encountered. Even if Read\nreturns n \u003c len(p), it may use all of p as scratch space during the call.\nIf some data is available but not len(p) bytes, Read conventionally\nreturns what is available instead of waiting for more.\n\nWhen Read encounters an error or end-of-file condition after\nsuccessfully reading n \u003e 0 bytes, it returns the number of\nbytes read. It may return the (non-nil) error from the same call\nor return the error (and n == 0) from a subsequent call.\nAn instance of this general case is that a Reader returning\na non-zero number of bytes at the end of the input stream may\nreturn either err == EOF or err == nil. The next Read should\nreturn 0, EOF.\n\nCallers should always process the n \u003e 0 bytes returned before\nconsidering the error err. Doing so correctly handles I/O errors\nthat happen after reading some bytes and also both of the\nallowed EOF behaviors.\n\nImplementations of Read are discouraged from returning a\nzero byte count with a nil error, except when len(p) == 0.\nCallers should treat a return of 0 and nil as indicating that\nnothing happened; in particular it does not indicate EOF.\n\nImplementations must not retain p.",
+    "format": "binary"
+   },
+   "Session": {
+    "type": "object"
+   }
+  },
+  "responses": {
+   "auth": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/AuthWithID"
+      }
+     }
+    }
+   },
+   "auths": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/AuthWithID"
+       }
+      }
+     }
+    }
+   },
+   "err": {
+    "description": "Response code is 400",
+    "content": {
+     "text/plain": {
+      "schema": {
+       "type": "string",
+       "format": "error"
+      }
+     }
+    }
+   },
+   "file": {
+    "description": "#content:\"application/octet-stream\"#",
+    "content": {
+     "application/octet-stream": {}
+    }
+   },
+   "filename": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "item": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/ItemWithID"
+      }
+     }
+    }
+   },
+   "items": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/ItemWithID"
+       }
+      }
+     }
+    }
+   },
+   "midd": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/MiddWithID"
+      }
+     }
+    }
+   },
+   "midds": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "array",
+       "items": {
+        "$ref": "#/components/schemas/MiddWithID"
+       }
+      }
+     }
+    }
+   },
+   "session": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Session"
+      }
+     }
+    }
+   },
+   "token": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "string"
+      }
+     }
+    }
+   },
+   "userID": {
+    "description": "Response code is 200",
+    "content": {
+     "application/json": {
+      "schema": {
+       "type": "integer",
+       "format": "uin64"
+      }
+     }
+    }
+   }
+  },
+  "parameters": {
+   "auth_id": {
+    "name": "auth_id",
+    "in": "path",
+    "description": "#name:\"auth_id\"#",
+    "required": true,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "filename": {
+    "name": "filename",
+    "in": "path",
+    "required": true,
+    "schema": {
+     "type": "string"
+    }
+   },
+   "item_id": {
+    "name": "item_id",
+    "in": "path",
+    "description": "#name:\"item_id\"#",
+    "required": true,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "limit": {
+    "name": "limit",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "midd_id": {
+    "name": "midd_id",
+    "in": "path",
+    "description": "#name:\"midd_id\"#",
+    "required": true,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "offset": {
+    "name": "offset",
+    "in": "query",
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "token": {
+    "name": "token",
+    "in": "header",
+    "description": "#in:\"header\"#",
+    "schema": {
+     "type": "string"
+    }
+   },
+   "x-token": {
+    "name": "x-token",
+    "in": "header",
+    "description": "#in:\"header\" name:\"x-token\"#",
+    "schema": {
+     "type": "string"
+    }
+   }
+  },
+  "requestBodies": {
+   "auth": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Auth"
+      }
+     }
+    }
+   },
+   "file": {
+    "content": {
+     "application/octet-stream": {
+      "schema": {
+       "$ref": "#/components/schemas/Reader"
+      }
+     },
+     "multipart/form-data": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "file": {
+         "$ref": "#/components/schemas/Reader"
+        }
+       }
+      }
+     }
+    }
+   },
+   "item": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Item"
+      }
+     }
+    }
+   },
+   "midd": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Midd"
+      }
+     }
+    }
+   }
+  },
+  "securitySchemes": {
+   "Verify": {
+    "type": "apiKey",
+    "description": "Verify #security:\"apiKey\"#",
+    "name": "token",
+    "in": "header"
+   }
+  }
+ },
+ "tags": [
+  {
+   "name": "AuthService",
+   "description": "AuthService #path:\"/auth/\"#"
+  },
+  {
+   "name": "FileService",
+   "description": "FileService #path:\"/file/\"#"
+  },
+  {
+   "name": "ItemService",
+   "description": "ItemService #path:\"/item/\"#"
+  },
+  {
+   "name": "MiddService",
+   "description": "MiddService #path:\"/midd/\"#"
+  }
+ ]
+}
