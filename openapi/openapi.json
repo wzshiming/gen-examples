@@ -644,7 +644,12 @@
     "type": "object",
     "allOf": [
      {
-      "$ref": "#/components/schemas/Auth"
+      "allOf": [
+       {
+        "$ref": "#/components/schemas/Auth"
+       }
+      ],
+      "description": "Auth is a auth"
      }
     ],
     "properties": {
@@ -673,7 +678,12 @@
     "type": "object",
     "allOf": [
      {
-      "$ref": "#/components/schemas/Item"
+      "allOf": [
+       {
+        "$ref": "#/components/schemas/Item"
+       }
+      ],
+      "description": "Item is a item"
      }
     ],
     "properties": {
@@ -707,7 +717,12 @@
     "type": "object",
     "allOf": [
      {
-      "$ref": "#/components/schemas/Midd"
+      "allOf": [
+       {
+        "$ref": "#/components/schemas/Midd"
+       }
+      ],
+      "description": "Midd is a midd"
      }
     ],
     "properties": {
@@ -850,7 +865,7 @@
      "application/json": {
       "schema": {
        "type": "integer",
-       "format": "uin64"
+       "format": "uint64"
       }
      }
     }

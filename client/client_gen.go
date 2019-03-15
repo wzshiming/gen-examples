@@ -31,7 +31,7 @@ type FileService struct {
 	BasePath string //
 }
 
-//
+// Item is a item
 type Item struct {
 	Name    string // Name is the name of item
 	Message string // Message is the message of item
@@ -62,31 +62,30 @@ type MiddWithID struct {
 	Midd     //
 }
 
-//
 type Session struct{}
 
 // Verify #security:"apiKey"#
-func Verify(_varToken string /* #in:"header"# */) {
+func Verify(_token string /* #in:"header"# */) {
 	Client = Client.
-		SetHeader("token", fmt.Sprint(_varToken))
+		SetHeader("token", fmt.Sprint(_token))
 
 }
 
 var Client = requests.NewClient().NewRequest()
 
 // Update the Auth #route:"PUT /{auth_id}"#
-func (AuthService) Update(_varAuthID int /* #name:"auth_id"# */, _varAuth *Auth) (_varErr error) {
+func (AuthService) Update(_authID int /* #name:"auth_id"# */, _auth *Auth) (err error) {
 	resp, err := Client.Clone().
-		SetPath("auth_id", fmt.Sprint(_varAuthID)).
-		SetJSON(_varAuth).
-		Put("/auth/{auth_id}")
+		SetPath("auth_id", fmt.Sprint(_authID)).
+		SetJSON(_auth).
+		Put("auth/{auth_id}")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -99,20 +98,20 @@ func (AuthService) Update(_varAuthID int /* #name:"auth_id"# */, _varAuth *Auth)
 }
 
 // List of the Auth #route:"GET /"#
-func (AuthService) List(_varOffset int, _varLimit int) (_varAuths []*AuthWithID, _varErr error) {
+func (AuthService) List(_offset int, _limit int) (_auths []*AuthWithID, err error) {
 	resp, err := Client.Clone().
-		SetQuery("offset", fmt.Sprint(_varOffset)).
-		SetQuery("limit", fmt.Sprint(_varLimit)).
-		Get("/auth")
+		SetQuery("offset", fmt.Sprint(_offset)).
+		SetQuery("limit", fmt.Sprint(_limit)).
+		Get("auth")
 	if err != nil {
 		return nil, err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varAuths)
+		err = json.Unmarshal(resp.Body(), &_auths)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -125,19 +124,19 @@ func (AuthService) List(_varOffset int, _varLimit int) (_varAuths []*AuthWithID,
 }
 
 // Get the Auth #route:"GET /{auth_id}"#
-func (AuthService) Get(_varAuthID int /* #name:"auth_id"# */) (_varAuth *AuthWithID, _varErr error) {
+func (AuthService) Get(_authID int /* #name:"auth_id"# */) (_auth *AuthWithID, err error) {
 	resp, err := Client.Clone().
-		SetPath("auth_id", fmt.Sprint(_varAuthID)).
-		Get("/auth/{auth_id}")
+		SetPath("auth_id", fmt.Sprint(_authID)).
+		Get("auth/{auth_id}")
 	if err != nil {
 		return nil, err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varAuth)
+		err = json.Unmarshal(resp.Body(), &_auth)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -150,17 +149,17 @@ func (AuthService) Get(_varAuthID int /* #name:"auth_id"# */) (_varAuth *AuthWit
 }
 
 // Delete the Auth #route:"DELETE /{auth_id}"#
-func (AuthService) Delete(_varAuthID int /* #name:"auth_id"# */) (_varErr error) {
+func (AuthService) Delete(_authID int /* #name:"auth_id"# */) (err error) {
 	resp, err := Client.Clone().
-		SetPath("auth_id", fmt.Sprint(_varAuthID)).
-		Delete("/auth/{auth_id}")
+		SetPath("auth_id", fmt.Sprint(_authID)).
+		Delete("auth/{auth_id}")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -173,17 +172,17 @@ func (AuthService) Delete(_varAuthID int /* #name:"auth_id"# */) (_varErr error)
 }
 
 // Create a Auth #route:"POST /"#
-func (AuthService) Create(_varAuth *Auth) (_varErr error) {
+func (AuthService) Create(_auth *Auth) (err error) {
 	resp, err := Client.Clone().
-		SetJSON(_varAuth).
-		Post("/auth")
+		SetJSON(_auth).
+		Post("auth")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -196,19 +195,19 @@ func (AuthService) Create(_varAuth *Auth) (_varErr error) {
 }
 
 // Upload a file #route:"POST /"#
-func (FileService) Upload(_varFile io.Reader) (_varFilename string, _varErr error) {
+func (FileService) Upload(_file io.Reader) (_filename string, err error) {
 	resp, err := Client.Clone().
-		SetBody(_varFile).
-		Post("/file")
+		SetBody(_file).
+		Post("file")
 	if err != nil {
 		return "", err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varFilename)
+		err = json.Unmarshal(resp.Body(), &_filename)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -221,10 +220,10 @@ func (FileService) Upload(_varFile io.Reader) (_varFilename string, _varErr erro
 }
 
 // Get a file #route:"GET /{filename}"#
-func (FileService) Get(_varFilename string) (_varFile []byte /* #content:"application/octet-stream"# */, _varErr error) {
+func (FileService) Get(_filename string) (_file []byte /* #content:"application/octet-stream"# */, err error) {
 	resp, err := Client.Clone().
-		SetPath("filename", fmt.Sprint(_varFilename)).
-		Get("/file/{filename}")
+		SetPath("filename", fmt.Sprint(_filename)).
+		Get("file/{filename}")
 	if err != nil {
 		return nil, err
 	}
@@ -232,7 +231,7 @@ func (FileService) Get(_varFilename string) (_varFile []byte /* #content:"applic
 	switch code := resp.StatusCode(); code {
 	case 200:
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -245,18 +244,18 @@ func (FileService) Get(_varFilename string) (_varFile []byte /* #content:"applic
 }
 
 // Update the Item #route:"PUT /{item_id}"#
-func (ItemService) Update(_varItemID int /* #name:"item_id"# */, _varItem *Item) (_varErr error) {
+func (ItemService) Update(_itemID int /* #name:"item_id"# */, _item *Item) (err error) {
 	resp, err := Client.Clone().
-		SetPath("item_id", fmt.Sprint(_varItemID)).
-		SetJSON(_varItem).
-		Put("/item/{item_id}")
+		SetPath("item_id", fmt.Sprint(_itemID)).
+		SetJSON(_item).
+		Put("item/{item_id}")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -269,20 +268,20 @@ func (ItemService) Update(_varItemID int /* #name:"item_id"# */, _varItem *Item)
 }
 
 // List of the Item #route:"GET /"#
-func (ItemService) List(_varOffset int, _varLimit int) (_varItems []*ItemWithID, _varErr error) {
+func (ItemService) List(_offset int, _limit int) (_items []*ItemWithID, err error) {
 	resp, err := Client.Clone().
-		SetQuery("offset", fmt.Sprint(_varOffset)).
-		SetQuery("limit", fmt.Sprint(_varLimit)).
-		Get("/item")
+		SetQuery("offset", fmt.Sprint(_offset)).
+		SetQuery("limit", fmt.Sprint(_limit)).
+		Get("item")
 	if err != nil {
 		return nil, err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varItems)
+		err = json.Unmarshal(resp.Body(), &_items)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -295,19 +294,19 @@ func (ItemService) List(_varOffset int, _varLimit int) (_varItems []*ItemWithID,
 }
 
 // Get the Item #route:"GET /{item_id}"#
-func (ItemService) Get(_varItemID int /* #name:"item_id"# */) (_varItem *ItemWithID, _varErr error) {
+func (ItemService) Get(_itemID int /* #name:"item_id"# */) (_item *ItemWithID, err error) {
 	resp, err := Client.Clone().
-		SetPath("item_id", fmt.Sprint(_varItemID)).
-		Get("/item/{item_id}")
+		SetPath("item_id", fmt.Sprint(_itemID)).
+		Get("item/{item_id}")
 	if err != nil {
 		return nil, err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varItem)
+		err = json.Unmarshal(resp.Body(), &_item)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -320,17 +319,17 @@ func (ItemService) Get(_varItemID int /* #name:"item_id"# */) (_varItem *ItemWit
 }
 
 // Delete the Item #route:"DELETE /{item_id}"#
-func (ItemService) Delete(_varItemID int /* #name:"item_id"# */) (_varErr error) {
+func (ItemService) Delete(_itemID int /* #name:"item_id"# */) (err error) {
 	resp, err := Client.Clone().
-		SetPath("item_id", fmt.Sprint(_varItemID)).
-		Delete("/item/{item_id}")
+		SetPath("item_id", fmt.Sprint(_itemID)).
+		Delete("item/{item_id}")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -343,17 +342,17 @@ func (ItemService) Delete(_varItemID int /* #name:"item_id"# */) (_varErr error)
 }
 
 // Create a Item #route:"POST /"#
-func (ItemService) Create(_varItem *Item) (_varErr error) {
+func (ItemService) Create(_item *Item) (err error) {
 	resp, err := Client.Clone().
-		SetJSON(_varItem).
-		Post("/item")
+		SetJSON(_item).
+		Post("item")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -366,18 +365,18 @@ func (ItemService) Create(_varItem *Item) (_varErr error) {
 }
 
 // Update the Midd #route:"PUT /{midd_id}"#
-func (MiddService) Update(_varXToken string /* #in:"header" name:"x-token"# */, _varMiddID int /* #name:"midd_id"# */, _varMidd *Midd) (_varErr error) {
+func (MiddService) Update(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */, _midd *Midd) (err error) {
 	resp, err := Client.Clone().
-		SetPath("midd_id", fmt.Sprint(_varMiddID)).
-		SetJSON(_varMidd).
-		Put("/midd/{midd_id}")
+		SetPath("midd_id", fmt.Sprint(_middID)).
+		SetJSON(_midd).
+		Put("midd/{midd_id}")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -390,20 +389,20 @@ func (MiddService) Update(_varXToken string /* #in:"header" name:"x-token"# */, 
 }
 
 // List of the Midd #route:"GET /"#
-func (MiddService) List(_varXToken string /* #in:"header" name:"x-token"# */, _varOffset int, _varLimit int) (_varMidds []*MiddWithID, _varErr error) {
+func (MiddService) List(_xToken string /* #in:"header" name:"x-token"# */, _offset int, _limit int) (_midds []*MiddWithID, err error) {
 	resp, err := Client.Clone().
-		SetQuery("offset", fmt.Sprint(_varOffset)).
-		SetQuery("limit", fmt.Sprint(_varLimit)).
-		Get("/midd")
+		SetQuery("offset", fmt.Sprint(_offset)).
+		SetQuery("limit", fmt.Sprint(_limit)).
+		Get("midd")
 	if err != nil {
 		return nil, err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varMidds)
+		err = json.Unmarshal(resp.Body(), &_midds)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -416,19 +415,19 @@ func (MiddService) List(_varXToken string /* #in:"header" name:"x-token"# */, _v
 }
 
 // Get the Midd #route:"GET /{midd_id}"#
-func (MiddService) Get(_varXToken string /* #in:"header" name:"x-token"# */, _varMiddID int /* #name:"midd_id"# */) (_varMidd *MiddWithID, _varErr error) {
+func (MiddService) Get(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (_midd *MiddWithID, err error) {
 	resp, err := Client.Clone().
-		SetPath("midd_id", fmt.Sprint(_varMiddID)).
-		Get("/midd/{midd_id}")
+		SetPath("midd_id", fmt.Sprint(_middID)).
+		Get("midd/{midd_id}")
 	if err != nil {
 		return nil, err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_varMidd)
+		err = json.Unmarshal(resp.Body(), &_midd)
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -441,17 +440,17 @@ func (MiddService) Get(_varXToken string /* #in:"header" name:"x-token"# */, _va
 }
 
 // Delete the Midd #route:"DELETE /{midd_id}"#
-func (MiddService) Delete(_varXToken string /* #in:"header" name:"x-token"# */, _varMiddID int /* #name:"midd_id"# */) (_varErr error) {
+func (MiddService) Delete(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (err error) {
 	resp, err := Client.Clone().
-		SetPath("midd_id", fmt.Sprint(_varMiddID)).
-		Delete("/midd/{midd_id}")
+		SetPath("midd_id", fmt.Sprint(_middID)).
+		Delete("midd/{midd_id}")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
@@ -464,17 +463,17 @@ func (MiddService) Delete(_varXToken string /* #in:"header" name:"x-token"# */, 
 }
 
 // Create a Midd #route:"POST /"#
-func (MiddService) Create(_varXToken string /* #in:"header" name:"x-token"# */, _varMidd *Midd) (_varErr error) {
+func (MiddService) Create(_xToken string /* #in:"header" name:"x-token"# */, _midd *Midd) (err error) {
 	resp, err := Client.Clone().
-		SetJSON(_varMidd).
-		Post("/midd")
+		SetJSON(_midd).
+		Post("midd")
 	if err != nil {
 		return err
 	}
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		_varErr = fmt.Errorf(string(resp.Body()))
+		err = fmt.Errorf(string(resp.Body()))
 	default:
 		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
 	}
