@@ -47,45 +47,46 @@ func RouteAuthService(router *mux.Router, _authService *githubComWzshimingGenExa
 	if router == nil {
 		router = mux.NewRouter()
 	}
-	subrouter := router.PathPrefix("/auth").Subrouter()
-	if len(fs) != 0 {
-		subrouter.Use(fs...)
-	}
 
-	// Registered routing GET /auth
-	var __operationGetAuth http.Handler
-	__operationGetAuth = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationGetAuth(_authService, w, r)
-	})
-	subrouter.Methods("GET").Path("").Handler(__operationGetAuth)
+	_routeAuth := router.PathPrefix("/auth").Subrouter()
+	if len(fs) != 0 {
+		_routeAuth.Use(fs...)
+	}
 
 	// Registered routing POST /auth
 	var __operationPostAuth http.Handler
 	__operationPostAuth = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationPostAuth(_authService, w, r)
 	})
-	subrouter.Methods("POST").Path("").Handler(__operationPostAuth)
+	_routeAuth.Methods("POST").Path("").Handler(__operationPostAuth)
 
-	// Registered routing PUT /auth/{auth_id}
-	var __operationPutAuthAuthID http.Handler
-	__operationPutAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationPutAuthAuthID(_authService, w, r)
+	// Registered routing GET /auth
+	var __operationGetAuth http.Handler
+	__operationGetAuth = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetAuth(_authService, w, r)
 	})
-	subrouter.Methods("PUT").Path("/{auth_id}").Handler(__operationPutAuthAuthID)
-
-	// Registered routing GET /auth/{auth_id}
-	var __operationGetAuthAuthID http.Handler
-	__operationGetAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationGetAuthAuthID(_authService, w, r)
-	})
-	subrouter.Methods("GET").Path("/{auth_id}").Handler(__operationGetAuthAuthID)
+	_routeAuth.Methods("GET").Path("").Handler(__operationGetAuth)
 
 	// Registered routing DELETE /auth/{auth_id}
 	var __operationDeleteAuthAuthID http.Handler
 	__operationDeleteAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationDeleteAuthAuthID(_authService, w, r)
 	})
-	subrouter.Methods("DELETE").Path("/{auth_id}").Handler(__operationDeleteAuthAuthID)
+	_routeAuth.Methods("DELETE").Path("/{auth_id}").Handler(__operationDeleteAuthAuthID)
+
+	// Registered routing GET /auth/{auth_id}
+	var __operationGetAuthAuthID http.Handler
+	__operationGetAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetAuthAuthID(_authService, w, r)
+	})
+	_routeAuth.Methods("GET").Path("/{auth_id}").Handler(__operationGetAuthAuthID)
+
+	// Registered routing PUT /auth/{auth_id}
+	var __operationPutAuthAuthID http.Handler
+	__operationPutAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPutAuthAuthID(_authService, w, r)
+	})
+	_routeAuth.Methods("PUT").Path("/{auth_id}").Handler(__operationPutAuthAuthID)
 
 	return router
 }
@@ -95,9 +96,10 @@ func RouteFileService(router *mux.Router, _fileService *githubComWzshimingGenExa
 	if router == nil {
 		router = mux.NewRouter()
 	}
-	subrouter := router.PathPrefix("/file").Subrouter()
+
+	_routeFile := router.PathPrefix("/file").Subrouter()
 	if len(fs) != 0 {
-		subrouter.Use(fs...)
+		_routeFile.Use(fs...)
 	}
 
 	// Registered routing POST /file
@@ -105,14 +107,14 @@ func RouteFileService(router *mux.Router, _fileService *githubComWzshimingGenExa
 	__operationPostFile = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationPostFile(_fileService, w, r)
 	})
-	subrouter.Methods("POST").Path("").Handler(__operationPostFile)
+	_routeFile.Methods("POST").Path("").Handler(__operationPostFile)
 
 	// Registered routing GET /file/{filename}
 	var __operationGetFileFilename http.Handler
 	__operationGetFileFilename = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationGetFileFilename(_fileService, w, r)
 	})
-	subrouter.Methods("GET").Path("/{filename}").Handler(__operationGetFileFilename)
+	_routeFile.Methods("GET").Path("/{filename}").Handler(__operationGetFileFilename)
 
 	return router
 }
@@ -122,45 +124,46 @@ func RouteItemService(router *mux.Router, _itemService *githubComWzshimingGenExa
 	if router == nil {
 		router = mux.NewRouter()
 	}
-	subrouter := router.PathPrefix("/item").Subrouter()
-	if len(fs) != 0 {
-		subrouter.Use(fs...)
-	}
 
-	// Registered routing GET /item
-	var __operationGetItem http.Handler
-	__operationGetItem = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationGetItem(_itemService, w, r)
-	})
-	subrouter.Methods("GET").Path("").Handler(__operationGetItem)
+	_routeItem := router.PathPrefix("/item").Subrouter()
+	if len(fs) != 0 {
+		_routeItem.Use(fs...)
+	}
 
 	// Registered routing POST /item
 	var __operationPostItem http.Handler
 	__operationPostItem = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationPostItem(_itemService, w, r)
 	})
-	subrouter.Methods("POST").Path("").Handler(__operationPostItem)
+	_routeItem.Methods("POST").Path("").Handler(__operationPostItem)
 
-	// Registered routing PUT /item/{item_id}
-	var __operationPutItemItemID http.Handler
-	__operationPutItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationPutItemItemID(_itemService, w, r)
+	// Registered routing GET /item
+	var __operationGetItem http.Handler
+	__operationGetItem = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetItem(_itemService, w, r)
 	})
-	subrouter.Methods("PUT").Path("/{item_id}").Handler(__operationPutItemItemID)
-
-	// Registered routing GET /item/{item_id}
-	var __operationGetItemItemID http.Handler
-	__operationGetItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationGetItemItemID(_itemService, w, r)
-	})
-	subrouter.Methods("GET").Path("/{item_id}").Handler(__operationGetItemItemID)
+	_routeItem.Methods("GET").Path("").Handler(__operationGetItem)
 
 	// Registered routing DELETE /item/{item_id}
 	var __operationDeleteItemItemID http.Handler
 	__operationDeleteItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationDeleteItemItemID(_itemService, w, r)
 	})
-	subrouter.Methods("DELETE").Path("/{item_id}").Handler(__operationDeleteItemItemID)
+	_routeItem.Methods("DELETE").Path("/{item_id}").Handler(__operationDeleteItemItemID)
+
+	// Registered routing GET /item/{item_id}
+	var __operationGetItemItemID http.Handler
+	__operationGetItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetItemItemID(_itemService, w, r)
+	})
+	_routeItem.Methods("GET").Path("/{item_id}").Handler(__operationGetItemItemID)
+
+	// Registered routing PUT /item/{item_id}
+	var __operationPutItemItemID http.Handler
+	__operationPutItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPutItemItemID(_itemService, w, r)
+	})
+	_routeItem.Methods("PUT").Path("/{item_id}").Handler(__operationPutItemItemID)
 
 	return router
 }
@@ -170,45 +173,46 @@ func RouteMiddService(router *mux.Router, _middService *githubComWzshimingGenExa
 	if router == nil {
 		router = mux.NewRouter()
 	}
-	subrouter := router.PathPrefix("/midd").Subrouter()
-	if len(fs) != 0 {
-		subrouter.Use(fs...)
-	}
 
-	// Registered routing GET /midd
-	var __operationGetMidd http.Handler
-	__operationGetMidd = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationGetMidd(_middService, w, r)
-	})
-	subrouter.Methods("GET").Path("").Handler(__operationGetMidd)
+	_routeMidd := router.PathPrefix("/midd").Subrouter()
+	if len(fs) != 0 {
+		_routeMidd.Use(fs...)
+	}
 
 	// Registered routing POST /midd
 	var __operationPostMidd http.Handler
 	__operationPostMidd = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationPostMidd(_middService, w, r)
 	})
-	subrouter.Methods("POST").Path("").Handler(__operationPostMidd)
+	_routeMidd.Methods("POST").Path("").Handler(__operationPostMidd)
 
-	// Registered routing PUT /midd/{midd_id}
-	var __operationPutMiddMiddID http.Handler
-	__operationPutMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationPutMiddMiddID(_middService, w, r)
+	// Registered routing GET /midd
+	var __operationGetMidd http.Handler
+	__operationGetMidd = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetMidd(_middService, w, r)
 	})
-	subrouter.Methods("PUT").Path("/{midd_id}").Handler(__operationPutMiddMiddID)
-
-	// Registered routing GET /midd/{midd_id}
-	var __operationGetMiddMiddID http.Handler
-	__operationGetMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_operationGetMiddMiddID(_middService, w, r)
-	})
-	subrouter.Methods("GET").Path("/{midd_id}").Handler(__operationGetMiddMiddID)
+	_routeMidd.Methods("GET").Path("").Handler(__operationGetMidd)
 
 	// Registered routing DELETE /midd/{midd_id}
 	var __operationDeleteMiddMiddID http.Handler
 	__operationDeleteMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_operationDeleteMiddMiddID(_middService, w, r)
 	})
-	subrouter.Methods("DELETE").Path("/{midd_id}").Handler(__operationDeleteMiddMiddID)
+	_routeMidd.Methods("DELETE").Path("/{midd_id}").Handler(__operationDeleteMiddMiddID)
+
+	// Registered routing GET /midd/{midd_id}
+	var __operationGetMiddMiddID http.Handler
+	__operationGetMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetMiddMiddID(_middService, w, r)
+	})
+	_routeMidd.Methods("GET").Path("/{midd_id}").Handler(__operationGetMiddMiddID)
+
+	// Registered routing PUT /midd/{midd_id}
+	var __operationPutMiddMiddID http.Handler
+	__operationPutMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPutMiddMiddID(_middService, w, r)
+	})
+	_routeMidd.Methods("PUT").Path("/{midd_id}").Handler(__operationPutMiddMiddID)
 
 	return router
 }
@@ -233,9 +237,9 @@ func _requestBodyAuth(w http.ResponseWriter, r *http.Request) (_auth *githubComW
 // _requestPathAuthID Parsing the path for of auth_id
 func _requestPathAuthID(w http.ResponseWriter, r *http.Request) (_authID int, err error) {
 
-	var _raw_authID = mux.Vars(r)["auth_id"]
+	var _rawAuthID = mux.Vars(r)["auth_id"]
 
-	if __authID, err := strconv.ParseInt(_raw_authID, 0, 0); err == nil {
+	if __authID, err := strconv.ParseInt(_rawAuthID, 0, 0); err == nil {
 		_authID = int(__authID)
 	}
 
@@ -282,8 +286,8 @@ func _requestBodyFile(w http.ResponseWriter, r *http.Request) (_file io.Reader, 
 // _requestPathFilename Parsing the path for of filename
 func _requestPathFilename(w http.ResponseWriter, r *http.Request) (_filename string, err error) {
 
-	var _raw_filename = mux.Vars(r)["filename"]
-	_filename = string(_raw_filename)
+	var _rawFilename = mux.Vars(r)["filename"]
+	_filename = string(_rawFilename)
 
 	return
 }
@@ -308,9 +312,9 @@ func _requestBodyItem(w http.ResponseWriter, r *http.Request) (_item *githubComW
 // _requestPathItemID Parsing the path for of item_id
 func _requestPathItemID(w http.ResponseWriter, r *http.Request) (_itemID int, err error) {
 
-	var _raw_itemID = mux.Vars(r)["item_id"]
+	var _rawItemID = mux.Vars(r)["item_id"]
 
-	if __itemID, err := strconv.ParseInt(_raw_itemID, 0, 0); err == nil {
+	if __itemID, err := strconv.ParseInt(_rawItemID, 0, 0); err == nil {
 		_itemID = int(__itemID)
 	}
 
@@ -320,9 +324,13 @@ func _requestPathItemID(w http.ResponseWriter, r *http.Request) (_itemID int, er
 // _requestQueryLimit Parsing the query for of limit
 func _requestQueryLimit(w http.ResponseWriter, r *http.Request) (_limit int, err error) {
 
-	var _raw_limit = r.URL.Query().Get("limit")
+	var _rawLimit = r.URL.Query()["limit"]
 
-	if __limit, err := strconv.ParseInt(_raw_limit, 0, 0); err == nil {
+	if len(_rawLimit) == 0 {
+		return
+	}
+
+	if __limit, err := strconv.ParseInt(_rawLimit[0], 0, 0); err == nil {
 		_limit = int(__limit)
 	}
 
@@ -349,9 +357,9 @@ func _requestBodyMidd(w http.ResponseWriter, r *http.Request) (_midd *githubComW
 // _requestPathMiddID Parsing the path for of midd_id
 func _requestPathMiddID(w http.ResponseWriter, r *http.Request) (_middID int, err error) {
 
-	var _raw_middID = mux.Vars(r)["midd_id"]
+	var _rawMiddID = mux.Vars(r)["midd_id"]
 
-	if __middID, err := strconv.ParseInt(_raw_middID, 0, 0); err == nil {
+	if __middID, err := strconv.ParseInt(_rawMiddID, 0, 0); err == nil {
 		_middID = int(__middID)
 	}
 
@@ -361,9 +369,13 @@ func _requestPathMiddID(w http.ResponseWriter, r *http.Request) (_middID int, er
 // _requestQueryOffset Parsing the query for of offset
 func _requestQueryOffset(w http.ResponseWriter, r *http.Request) (_offset int, err error) {
 
-	var _raw_offset = r.URL.Query().Get("offset")
+	var _rawOffset = r.URL.Query()["offset"]
 
-	if __offset, err := strconv.ParseInt(_raw_offset, 0, 0); err == nil {
+	if len(_rawOffset) == 0 {
+		return
+	}
+
+	if __offset, err := strconv.ParseInt(_rawOffset[0], 0, 0); err == nil {
 		_offset = int(__offset)
 	}
 
@@ -373,8 +385,8 @@ func _requestQueryOffset(w http.ResponseWriter, r *http.Request) (_offset int, e
 // _requestHeaderToken Parsing the header for of token
 func _requestHeaderToken(w http.ResponseWriter, r *http.Request) (_token string, err error) {
 
-	var _raw_token = r.Header.Get("token")
-	_token = string(_raw_token)
+	var _rawToken = r.Header.Get("token")
+	_token = string(_rawToken)
 
 	return
 }
@@ -382,8 +394,8 @@ func _requestHeaderToken(w http.ResponseWriter, r *http.Request) (_token string,
 // _requestHeaderXToken Parsing the header for of x-token
 func _requestHeaderXToken(w http.ResponseWriter, r *http.Request) (_xToken string, err error) {
 
-	var _raw_xToken = r.Header.Get("x-token")
-	_xToken = string(_raw_xToken)
+	var _rawXToken = r.Header.Get("x-token")
+	_xToken = string(_rawXToken)
 
 	return
 }

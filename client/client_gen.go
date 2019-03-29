@@ -128,7 +128,7 @@ func (AuthService) List(_offset int, _limit int) (_auths []*AuthWithID, err erro
 }
 
 // Get the Auth #route:"GET /{auth_id}"#
-func (AuthService) Get(_authID int /* #name:"auth_id"# */) (_auth *AuthWithID, err error) {
+func (AuthService) Get(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID, err error) {
 	resp, err := Client.Clone().
 		SetPath("auth_id", fmt.Sprint(_authID)).
 		Get("auth/{auth_id}")
@@ -138,7 +138,7 @@ func (AuthService) Get(_authID int /* #name:"auth_id"# */) (_auth *AuthWithID, e
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_auth)
+		err = json.Unmarshal(resp.Body(), &_auth_1)
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
@@ -232,9 +232,9 @@ func (FileService) Upload(_file io.Reader) (_filename string, err error) {
 }
 
 // Get a file #route:"GET /{filename}"#
-func (FileService) Get(_filename string) (_file []byte /* #content:"application/octet-stream"# */, err error) {
+func (FileService) Get(_filename_1 string) (_file_1 []byte /* #content:"application/octet-stream"# */, err error) {
 	resp, err := Client.Clone().
-		SetPath("filename", fmt.Sprint(_filename)).
+		SetPath("filename", fmt.Sprint(_filename_1)).
 		Get("file/{filename}")
 	if err != nil {
 		return nil, err
@@ -312,7 +312,7 @@ func (ItemService) List(_offset int, _limit int) (_items []*ItemWithID, err erro
 }
 
 // Get the Item #route:"GET /{item_id}"#
-func (ItemService) Get(_itemID int /* #name:"item_id"# */) (_item *ItemWithID, err error) {
+func (ItemService) Get(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID, err error) {
 	resp, err := Client.Clone().
 		SetPath("item_id", fmt.Sprint(_itemID)).
 		Get("item/{item_id}")
@@ -322,7 +322,7 @@ func (ItemService) Get(_itemID int /* #name:"item_id"# */) (_item *ItemWithID, e
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_item)
+		err = json.Unmarshal(resp.Body(), &_item_1)
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
@@ -443,7 +443,7 @@ func (MiddService) List(_xToken string /* #in:"header" name:"x-token"# */, _offs
 }
 
 // Get the Midd #route:"GET /{midd_id}"#
-func (MiddService) Get(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (_midd *MiddWithID, err error) {
+func (MiddService) Get(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (_midd_1 *MiddWithID, err error) {
 	resp, err := Client.Clone().
 		SetPath("midd_id", fmt.Sprint(_middID)).
 		Get("midd/{midd_id}")
@@ -453,7 +453,7 @@ func (MiddService) Get(_xToken string /* #in:"header" name:"x-token"# */, _middI
 
 	switch code := resp.StatusCode(); code {
 	case 200:
-		err = json.Unmarshal(resp.Body(), &_midd)
+		err = json.Unmarshal(resp.Body(), &_midd_1)
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
