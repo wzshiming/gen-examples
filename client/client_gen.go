@@ -87,7 +87,9 @@ func (AuthService) Update(_authID int /* #name:"auth_id"# */, _auth *Auth) (err 
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -113,7 +115,9 @@ func (AuthService) List(_offset int, _limit int) (_auths []*AuthWithID, err erro
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -138,7 +142,9 @@ func (AuthService) Get(_authID int /* #name:"auth_id"# */) (_auth *AuthWithID, e
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -161,7 +167,9 @@ func (AuthService) Delete(_authID int /* #name:"auth_id"# */) (err error) {
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -184,7 +192,9 @@ func (AuthService) Create(_auth *Auth) (err error) {
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -209,7 +219,9 @@ func (FileService) Upload(_file io.Reader) (_filename string, err error) {
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -233,7 +245,9 @@ func (FileService) Get(_filename string) (_file []byte /* #content:"application/
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -257,7 +271,9 @@ func (ItemService) Update(_itemID int /* #name:"item_id"# */, _item *Item) (err 
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -283,7 +299,9 @@ func (ItemService) List(_offset int, _limit int) (_items []*ItemWithID, err erro
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -308,7 +326,9 @@ func (ItemService) Get(_itemID int /* #name:"item_id"# */) (_item *ItemWithID, e
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -331,7 +351,9 @@ func (ItemService) Delete(_itemID int /* #name:"item_id"# */) (err error) {
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -354,7 +376,9 @@ func (ItemService) Create(_item *Item) (err error) {
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -378,7 +402,9 @@ func (MiddService) Update(_xToken string /* #in:"header" name:"x-token"# */, _mi
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -404,7 +430,9 @@ func (MiddService) List(_xToken string /* #in:"header" name:"x-token"# */, _offs
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -429,7 +457,9 @@ func (MiddService) Get(_xToken string /* #in:"header" name:"x-token"# */, _middI
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -452,7 +482,9 @@ func (MiddService) Delete(_xToken string /* #in:"header" name:"x-token"# */, _mi
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
@@ -475,7 +507,9 @@ func (MiddService) Create(_xToken string /* #in:"header" name:"x-token"# */, _mi
 	case 400:
 		err = fmt.Errorf(string(resp.Body()))
 	default:
-		err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
 	}
 
 	if err != nil {
