@@ -6,17 +6,18 @@ package route
 import (
 	bytes "bytes"
 	json "encoding/json"
+	io "io"
+	ioutil "io/ioutil"
+	http "net/http"
+	strconv "strconv"
+	strings "strings"
+
 	mux "github.com/gorilla/mux"
 	githubComWzshimingGenExamplesServiceAuth "github.com/wzshiming/gen-examples/service/auth"
 	githubComWzshimingGenExamplesServiceFile "github.com/wzshiming/gen-examples/service/file"
 	githubComWzshimingGenExamplesServiceGroup "github.com/wzshiming/gen-examples/service/group"
 	githubComWzshimingGenExamplesServiceItem "github.com/wzshiming/gen-examples/service/item"
 	githubComWzshimingGenExamplesServiceMidd "github.com/wzshiming/gen-examples/service/midd"
-	io "io"
-	ioutil "io/ioutil"
-	http "net/http"
-	strconv "strconv"
-	strings "strings"
 )
 
 // Router is all routing for package
@@ -373,12 +374,15 @@ func RouteMiddService(router *mux.Router, _middService *githubComWzshimingGenExa
 // _requestBodyAuth Parsing the body for of auth
 func _requestBodyAuth(w http.ResponseWriter, r *http.Request) (_auth *githubComWzshimingGenExamplesServiceAuth.Auth, err error) {
 
+	defer r.Body.Close()
+
 	var __auth []byte
 	__auth, err = ioutil.ReadAll(r.Body)
-	if err == nil {
-		r.Body.Close()
-		err = json.Unmarshal(__auth, &_auth)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
+	err = json.Unmarshal(__auth, &_auth)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -396,11 +400,18 @@ func _requestPathAuthID(w http.ResponseWriter, r *http.Request) (_authID int, er
 		_authID = int(__authID)
 	}
 
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
 	return
 }
 
 // _requestBodyFile Parsing the body for of file
 func _requestBodyFile(w http.ResponseWriter, r *http.Request) (_file io.Reader, err error) {
+
+	defer r.Body.Close()
 
 	body := r.Body
 	contentType := r.Header.Get("Content-Type")
@@ -426,11 +437,6 @@ func _requestBodyFile(w http.ResponseWriter, r *http.Request) (_file io.Reader, 
 		http.Error(w, err.Error(), 400)
 		return
 	}
-	err = r.Body.Close()
-	if err != nil {
-		http.Error(w, err.Error(), 400)
-		return
-	}
 	_file = __file
 
 	return
@@ -441,6 +447,10 @@ func _requestPathFilename(w http.ResponseWriter, r *http.Request) (_filename str
 
 	var _rawFilename = mux.Vars(r)["filename"]
 	_filename = string(_rawFilename)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
 
 	return
 }
@@ -448,12 +458,15 @@ func _requestPathFilename(w http.ResponseWriter, r *http.Request) (_filename str
 // _requestBodyItem Parsing the body for of item
 func _requestBodyItem(w http.ResponseWriter, r *http.Request) (_item *githubComWzshimingGenExamplesServiceItem.Item, err error) {
 
+	defer r.Body.Close()
+
 	var __item []byte
 	__item, err = ioutil.ReadAll(r.Body)
-	if err == nil {
-		r.Body.Close()
-		err = json.Unmarshal(__item, &_item)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
+	err = json.Unmarshal(__item, &_item)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -469,6 +482,11 @@ func _requestPathItemID(w http.ResponseWriter, r *http.Request) (_itemID int, er
 
 	if __itemID, err := strconv.ParseInt(_rawItemID, 0, 0); err == nil {
 		_itemID = int(__itemID)
+	}
+
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
 
 	return
@@ -487,18 +505,26 @@ func _requestQueryLimit(w http.ResponseWriter, r *http.Request) (_limit int, err
 		_limit = int(__limit)
 	}
 
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
 	return
 }
 
 // _requestBodyMidd Parsing the body for of midd
 func _requestBodyMidd(w http.ResponseWriter, r *http.Request) (_midd *githubComWzshimingGenExamplesServiceMidd.Midd, err error) {
 
+	defer r.Body.Close()
+
 	var __midd []byte
 	__midd, err = ioutil.ReadAll(r.Body)
-	if err == nil {
-		r.Body.Close()
-		err = json.Unmarshal(__midd, &_midd)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
+	err = json.Unmarshal(__midd, &_midd)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -514,6 +540,11 @@ func _requestPathMiddID(w http.ResponseWriter, r *http.Request) (_middID int, er
 
 	if __middID, err := strconv.ParseInt(_rawMiddID, 0, 0); err == nil {
 		_middID = int(__middID)
+	}
+
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
 	}
 
 	return
@@ -532,6 +563,11 @@ func _requestQueryOffset(w http.ResponseWriter, r *http.Request) (_offset int, e
 		_offset = int(__offset)
 	}
 
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
 	return
 }
 
@@ -540,6 +576,10 @@ func _requestHeaderToken(w http.ResponseWriter, r *http.Request) (_token string,
 
 	var _rawToken = r.Header.Get("token")
 	_token = string(_rawToken)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
 
 	return
 }
@@ -549,6 +589,10 @@ func _requestHeaderXToken(w http.ResponseWriter, r *http.Request) (_xToken strin
 
 	var _rawXToken = r.Header.Get("x-token")
 	_xToken = string(_rawXToken)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
 
 	return
 }
@@ -623,7 +667,7 @@ func _securityAPIKeyVerifyAPIKey(w http.ResponseWriter, r *http.Request) (_userI
 func _securityBasicVerifyBasic(w http.ResponseWriter, r *http.Request) (_userID uint64, err error) {
 
 	// Call github.com/wzshiming/gen-examples/service/auth VerifyBasic.
-	_userID, err = githubComWzshimingGenExamplesServiceAuth.VerifyBasic(r.URL.User)
+	_userID, err = githubComWzshimingGenExamplesServiceAuth.VerifyBasic(r)
 
 	// Response code 400 Bad Request for err.
 	if err != nil {
@@ -642,13 +686,14 @@ func _operationPutAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 	var _authID int
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -690,13 +735,14 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 	var _limit int
 	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -759,13 +805,14 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 	var _authID int
 	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -821,13 +868,14 @@ func _operationDeleteAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.Auth
 	var _userID_1 uint64
 	var _authID int
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -861,13 +909,14 @@ func _operationPostAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService,
 	var _userID_1 uint64
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -1290,13 +1339,14 @@ func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 	var _authID int
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -1338,13 +1388,14 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 	var _limit int
 	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -1407,13 +1458,14 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 	var _authID int
 	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -1469,13 +1521,14 @@ func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGrou
 	var _userID_1 uint64
 	var _authID int
 
-	// Permission verification call VerifyApiKey.
-	_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
-	if err != nil {
-		// Permission verification call VerifyBasic.
+	// Permission verification
+	if r.Header.Get("token") != "" { // Call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
 		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}
@@ -1509,13 +1562,14 @@ func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group,
 	var _userID_1 uint64
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call VerifyBasic.
-	_userID_1, err = _securityBasicVerifyBasic(w, r)
-	if err != nil {
-		// Permission verification call VerifyApiKey.
+	// Permission verification
+	if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	} else if r.Header.Get("token") != "" { // Call VerifyApiKey.
 		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	} else {
+		http.Error(w, err.Error(), 401)
 	}
-
 	if err != nil {
 		return
 	}

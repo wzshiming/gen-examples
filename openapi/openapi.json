@@ -50,14 +50,14 @@
     "tags": [
      "AuthService"
     ],
-    "summary": "List of the Auth #route:\"GET /\"#",
-    "description": "List of the Auth #route:\"GET /\"#",
+    "summary": "List of the Auth ",
+    "description": "List of the Auth \n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/offset"
+      "$ref": "#/components/parameters/offset_query"
      },
      {
-      "$ref": "#/components/parameters/limit"
+      "$ref": "#/components/parameters/limit_query"
      }
     ],
     "responses": {
@@ -99,10 +99,10 @@
     "tags": [
      "AuthService"
     ],
-    "summary": "Create a Auth #route:\"POST /\"#",
-    "description": "Create a Auth #route:\"POST /\"#",
+    "summary": "Create a Auth ",
+    "description": "Create a Auth \n#route:\"POST /\"#",
     "requestBody": {
-     "$ref": "#/components/requestBodies/auth"
+     "$ref": "#/components/requestBodies/auth_body"
     },
     "responses": {
      "400": {
@@ -119,10 +119,10 @@
     },
     "security": [
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      },
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      }
     ]
    }
@@ -132,11 +132,11 @@
     "tags": [
      "AuthService"
     ],
-    "summary": "Get the Auth #route:\"GET /{auth_id}\"#",
-    "description": "Get the Auth #route:\"GET /{auth_id}\"#",
+    "summary": "Get the Auth ",
+    "description": "Get the Auth \n#route:\"GET /{auth_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/auth_id"
+      "$ref": "#/components/parameters/auth_id_path"
      }
     ],
     "responses": {
@@ -175,15 +175,15 @@
     "tags": [
      "AuthService"
     ],
-    "summary": "Update the Auth #route:\"PUT /{auth_id}\"#",
-    "description": "Update the Auth #route:\"PUT /{auth_id}\"#",
+    "summary": "Update the Auth ",
+    "description": "Update the Auth \n#route:\"PUT /{auth_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/auth_id"
+      "$ref": "#/components/parameters/auth_id_path"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/auth"
+     "$ref": "#/components/requestBodies/auth_body"
     },
     "responses": {
      "400": {
@@ -211,11 +211,11 @@
     "tags": [
      "AuthService"
     ],
-    "summary": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
-    "description": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
+    "summary": "Delete the Auth ",
+    "description": "Delete the Auth \n#route:\"DELETE /{auth_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/auth_id"
+      "$ref": "#/components/parameters/auth_id_path"
      }
     ],
     "responses": {
@@ -246,10 +246,10 @@
     "tags": [
      "FileService"
     ],
-    "summary": "Upload a file #route:\"POST /\"#",
-    "description": "Upload a file #route:\"POST /\"#",
+    "summary": "Upload a file ",
+    "description": "Upload a file \n#route:\"POST /\"#",
     "requestBody": {
-     "$ref": "#/components/requestBodies/file"
+     "$ref": "#/components/requestBodies/file_body"
     },
     "responses": {
      "200": {
@@ -281,18 +281,23 @@
     "tags": [
      "FileService"
     ],
-    "summary": "Get a file #route:\"GET /{filename}\"#",
-    "description": "Get a file #route:\"GET /{filename}\"#",
+    "summary": "Get a file ",
+    "description": "Get a file \n#route:\"GET /{filename}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/filename"
+      "$ref": "#/components/parameters/filename_path"
      }
     ],
     "responses": {
      "200": {
-      "description": "#content:\"application/octet-stream\"#",
+      "description": "\n#content:\"application/octet-stream\"#",
       "content": {
-       "application/octet-stream": {}
+       "application/octet-stream": {
+        "schema": {
+         "type": "string",
+         "format": "binary"
+        }
+       }
       }
      },
      "400": {
@@ -314,14 +319,14 @@
     "tags": [
      "Group"
     ],
-    "summary": "List of the Auth #route:\"GET /\"#",
-    "description": "List of the Auth #route:\"GET /\"#",
+    "summary": "List of the Auth ",
+    "description": "List of the Auth \n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/offset"
+      "$ref": "#/components/parameters/offset_query"
      },
      {
-      "$ref": "#/components/parameters/limit"
+      "$ref": "#/components/parameters/limit_query"
      }
     ],
     "responses": {
@@ -363,10 +368,10 @@
     "tags": [
      "Group"
     ],
-    "summary": "Create a Auth #route:\"POST /\"#",
-    "description": "Create a Auth #route:\"POST /\"#",
+    "summary": "Create a Auth ",
+    "description": "Create a Auth \n#route:\"POST /\"#",
     "requestBody": {
-     "$ref": "#/components/requestBodies/auth"
+     "$ref": "#/components/requestBodies/auth_body"
     },
     "responses": {
      "400": {
@@ -396,11 +401,11 @@
     "tags": [
      "Group"
     ],
-    "summary": "Get the Auth #route:\"GET /{auth_id}\"#",
-    "description": "Get the Auth #route:\"GET /{auth_id}\"#",
+    "summary": "Get the Auth ",
+    "description": "Get the Auth \n#route:\"GET /{auth_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/auth_id"
+      "$ref": "#/components/parameters/auth_id_path"
      }
     ],
     "responses": {
@@ -439,15 +444,15 @@
     "tags": [
      "Group"
     ],
-    "summary": "Update the Auth #route:\"PUT /{auth_id}\"#",
-    "description": "Update the Auth #route:\"PUT /{auth_id}\"#",
+    "summary": "Update the Auth ",
+    "description": "Update the Auth \n#route:\"PUT /{auth_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/auth_id"
+      "$ref": "#/components/parameters/auth_id_path"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/auth"
+     "$ref": "#/components/requestBodies/auth_body"
     },
     "responses": {
      "400": {
@@ -475,11 +480,11 @@
     "tags": [
      "Group"
     ],
-    "summary": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
-    "description": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
+    "summary": "Delete the Auth ",
+    "description": "Delete the Auth \n#route:\"DELETE /{auth_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/auth_id"
+      "$ref": "#/components/parameters/auth_id_path"
      }
     ],
     "responses": {
@@ -510,10 +515,10 @@
     "tags": [
      "Group"
     ],
-    "summary": "Upload a file #route:\"POST /\"#",
-    "description": "Upload a file #route:\"POST /\"#",
+    "summary": "Upload a file ",
+    "description": "Upload a file \n#route:\"POST /\"#",
     "requestBody": {
-     "$ref": "#/components/requestBodies/file"
+     "$ref": "#/components/requestBodies/file_body"
     },
     "responses": {
      "200": {
@@ -545,18 +550,23 @@
     "tags": [
      "Group"
     ],
-    "summary": "Get a file #route:\"GET /{filename}\"#",
-    "description": "Get a file #route:\"GET /{filename}\"#",
+    "summary": "Get a file ",
+    "description": "Get a file \n#route:\"GET /{filename}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/filename"
+      "$ref": "#/components/parameters/filename_path"
      }
     ],
     "responses": {
      "200": {
-      "description": "#content:\"application/octet-stream\"#",
+      "description": "\n#content:\"application/octet-stream\"#",
       "content": {
-       "application/octet-stream": {}
+       "application/octet-stream": {
+        "schema": {
+         "type": "string",
+         "format": "binary"
+        }
+       }
       }
      },
      "400": {
@@ -578,14 +588,14 @@
     "tags": [
      "Group"
     ],
-    "summary": "List of the Item #route:\"GET /\"#",
-    "description": "List of the Item #route:\"GET /\"#",
+    "summary": "List of the Item ",
+    "description": "List of the Item \n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/offset"
+      "$ref": "#/components/parameters/offset_query"
      },
      {
-      "$ref": "#/components/parameters/limit"
+      "$ref": "#/components/parameters/limit_query"
      }
     ],
     "responses": {
@@ -619,10 +629,10 @@
     "tags": [
      "Group"
     ],
-    "summary": "Create a Item #route:\"POST /\"#",
-    "description": "Create a Item #route:\"POST /\"#",
+    "summary": "Create a Item ",
+    "description": "Create a Item \n#route:\"POST /\"#",
     "requestBody": {
-     "$ref": "#/components/requestBodies/item"
+     "$ref": "#/components/requestBodies/item_body"
     },
     "responses": {
      "400": {
@@ -644,11 +654,11 @@
     "tags": [
      "Group"
     ],
-    "summary": "Get the Item #route:\"GET /{item_id}\"#",
-    "description": "Get the Item #route:\"GET /{item_id}\"#",
+    "summary": "Get the Item ",
+    "description": "Get the Item \n#route:\"GET /{item_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/item_id"
+      "$ref": "#/components/parameters/item_id_path"
      }
     ],
     "responses": {
@@ -679,15 +689,15 @@
     "tags": [
      "Group"
     ],
-    "summary": "Update the Item #route:\"PUT /{item_id}\"#",
-    "description": "Update the Item #route:\"PUT /{item_id}\"#",
+    "summary": "Update the Item ",
+    "description": "Update the Item \n#route:\"PUT /{item_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/item_id"
+      "$ref": "#/components/parameters/item_id_path"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/item"
+     "$ref": "#/components/requestBodies/item_body"
     },
     "responses": {
      "400": {
@@ -707,11 +717,11 @@
     "tags": [
      "Group"
     ],
-    "summary": "Delete the Item #route:\"DELETE /{item_id}\"#",
-    "description": "Delete the Item #route:\"DELETE /{item_id}\"#",
+    "summary": "Delete the Item ",
+    "description": "Delete the Item \n#route:\"DELETE /{item_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/item_id"
+      "$ref": "#/components/parameters/item_id_path"
      }
     ],
     "responses": {
@@ -734,17 +744,17 @@
     "tags": [
      "Group"
     ],
-    "summary": "List of the Midd #route:\"GET /\"#",
-    "description": "List of the Midd #route:\"GET /\"#",
+    "summary": "List of the Midd ",
+    "description": "List of the Midd \n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/offset"
+      "$ref": "#/components/parameters/offset_query"
      },
      {
-      "$ref": "#/components/parameters/limit"
+      "$ref": "#/components/parameters/limit_query"
      }
     ],
     "responses": {
@@ -778,15 +788,15 @@
     "tags": [
      "Group"
     ],
-    "summary": "Create a Midd #route:\"POST /\"#",
-    "description": "Create a Midd #route:\"POST /\"#",
+    "summary": "Create a Midd ",
+    "description": "Create a Midd \n#route:\"POST /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/midd"
+     "$ref": "#/components/requestBodies/midd_body"
     },
     "responses": {
      "400": {
@@ -808,14 +818,14 @@
     "tags": [
      "Group"
     ],
-    "summary": "Get the Midd #route:\"GET /{midd_id}\"#",
-    "description": "Get the Midd #route:\"GET /{midd_id}\"#",
+    "summary": "Get the Midd ",
+    "description": "Get the Midd \n#route:\"GET /{midd_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/midd_id"
+      "$ref": "#/components/parameters/midd_id_path"
      }
     ],
     "responses": {
@@ -846,18 +856,18 @@
     "tags": [
      "Group"
     ],
-    "summary": "Update the Midd #route:\"PUT /{midd_id}\"#",
-    "description": "Update the Midd #route:\"PUT /{midd_id}\"#",
+    "summary": "Update the Midd ",
+    "description": "Update the Midd \n#route:\"PUT /{midd_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/midd_id"
+      "$ref": "#/components/parameters/midd_id_path"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/midd"
+     "$ref": "#/components/requestBodies/midd_body"
     },
     "responses": {
      "400": {
@@ -877,14 +887,14 @@
     "tags": [
      "Group"
     ],
-    "summary": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
-    "description": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
+    "summary": "Delete the Midd ",
+    "description": "Delete the Midd \n#route:\"DELETE /{midd_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/midd_id"
+      "$ref": "#/components/parameters/midd_id_path"
      }
     ],
     "responses": {
@@ -907,14 +917,14 @@
     "tags": [
      "ItemService"
     ],
-    "summary": "List of the Item #route:\"GET /\"#",
-    "description": "List of the Item #route:\"GET /\"#",
+    "summary": "List of the Item ",
+    "description": "List of the Item \n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/offset"
+      "$ref": "#/components/parameters/offset_query"
      },
      {
-      "$ref": "#/components/parameters/limit"
+      "$ref": "#/components/parameters/limit_query"
      }
     ],
     "responses": {
@@ -948,10 +958,10 @@
     "tags": [
      "ItemService"
     ],
-    "summary": "Create a Item #route:\"POST /\"#",
-    "description": "Create a Item #route:\"POST /\"#",
+    "summary": "Create a Item ",
+    "description": "Create a Item \n#route:\"POST /\"#",
     "requestBody": {
-     "$ref": "#/components/requestBodies/item"
+     "$ref": "#/components/requestBodies/item_body"
     },
     "responses": {
      "400": {
@@ -973,11 +983,11 @@
     "tags": [
      "ItemService"
     ],
-    "summary": "Get the Item #route:\"GET /{item_id}\"#",
-    "description": "Get the Item #route:\"GET /{item_id}\"#",
+    "summary": "Get the Item ",
+    "description": "Get the Item \n#route:\"GET /{item_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/item_id"
+      "$ref": "#/components/parameters/item_id_path"
      }
     ],
     "responses": {
@@ -1008,15 +1018,15 @@
     "tags": [
      "ItemService"
     ],
-    "summary": "Update the Item #route:\"PUT /{item_id}\"#",
-    "description": "Update the Item #route:\"PUT /{item_id}\"#",
+    "summary": "Update the Item ",
+    "description": "Update the Item \n#route:\"PUT /{item_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/item_id"
+      "$ref": "#/components/parameters/item_id_path"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/item"
+     "$ref": "#/components/requestBodies/item_body"
     },
     "responses": {
      "400": {
@@ -1036,11 +1046,11 @@
     "tags": [
      "ItemService"
     ],
-    "summary": "Delete the Item #route:\"DELETE /{item_id}\"#",
-    "description": "Delete the Item #route:\"DELETE /{item_id}\"#",
+    "summary": "Delete the Item ",
+    "description": "Delete the Item \n#route:\"DELETE /{item_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/item_id"
+      "$ref": "#/components/parameters/item_id_path"
      }
     ],
     "responses": {
@@ -1063,17 +1073,17 @@
     "tags": [
      "MiddService"
     ],
-    "summary": "List of the Midd #route:\"GET /\"#",
-    "description": "List of the Midd #route:\"GET /\"#",
+    "summary": "List of the Midd ",
+    "description": "List of the Midd \n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/offset"
+      "$ref": "#/components/parameters/offset_query"
      },
      {
-      "$ref": "#/components/parameters/limit"
+      "$ref": "#/components/parameters/limit_query"
      }
     ],
     "responses": {
@@ -1107,15 +1117,15 @@
     "tags": [
      "MiddService"
     ],
-    "summary": "Create a Midd #route:\"POST /\"#",
-    "description": "Create a Midd #route:\"POST /\"#",
+    "summary": "Create a Midd ",
+    "description": "Create a Midd \n#route:\"POST /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/midd"
+     "$ref": "#/components/requestBodies/midd_body"
     },
     "responses": {
      "400": {
@@ -1137,14 +1147,14 @@
     "tags": [
      "MiddService"
     ],
-    "summary": "Get the Midd #route:\"GET /{midd_id}\"#",
-    "description": "Get the Midd #route:\"GET /{midd_id}\"#",
+    "summary": "Get the Midd ",
+    "description": "Get the Midd \n#route:\"GET /{midd_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/midd_id"
+      "$ref": "#/components/parameters/midd_id_path"
      }
     ],
     "responses": {
@@ -1175,18 +1185,18 @@
     "tags": [
      "MiddService"
     ],
-    "summary": "Update the Midd #route:\"PUT /{midd_id}\"#",
-    "description": "Update the Midd #route:\"PUT /{midd_id}\"#",
+    "summary": "Update the Midd ",
+    "description": "Update the Midd \n#route:\"PUT /{midd_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/midd_id"
+      "$ref": "#/components/parameters/midd_id_path"
      }
     ],
     "requestBody": {
-     "$ref": "#/components/requestBodies/midd"
+     "$ref": "#/components/requestBodies/midd_body"
     },
     "responses": {
      "400": {
@@ -1206,14 +1216,14 @@
     "tags": [
      "MiddService"
     ],
-    "summary": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
-    "description": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
+    "summary": "Delete the Midd ",
+    "description": "Delete the Midd \n#route:\"DELETE /{midd_id}\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/x-token"
+      "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/midd_id"
+      "$ref": "#/components/parameters/midd_id_path"
      }
     ],
     "responses": {
@@ -1235,6 +1245,10 @@
  "components": {
   "schemas": {
    "Auth": {
+    "required": [
+     "name",
+     "message"
+    ],
     "type": "object",
     "properties": {
      "message": {
@@ -1250,9 +1264,12 @@
    },
    "AuthService": {
     "type": "object",
-    "description": "AuthService #path:\"/auth/\"#"
+    "description": "AuthService \n#path:\"/auth/\"#"
    },
    "AuthWithID": {
+    "required": [
+     "auth_id"
+    ],
     "type": "object",
     "allOf": [
      {
@@ -1266,22 +1283,29 @@
     ],
     "properties": {
      "auth_id": {
-      "type": "integer",
+      "type": "string",
       "format": "int64"
      }
     },
     "description": "AuthWithID is Auth with ID"
    },
    "FileService": {
+    "required": [
+     "BasePath"
+    ],
     "type": "object",
     "properties": {
      "BasePath": {
       "type": "string"
      }
     },
-    "description": "FileService #path:\"/file/\"#"
+    "description": "FileService \n#path:\"/file/\"#"
    },
    "Item": {
+    "required": [
+     "Name",
+     "Message"
+    ],
     "type": "object",
     "properties": {
      "Message": {
@@ -1297,9 +1321,12 @@
    },
    "ItemService": {
     "type": "object",
-    "description": "ItemService #path:\"/item/\"#"
+    "description": "ItemService \n#path:\"/item/\"#"
    },
    "ItemWithID": {
+    "required": [
+     "item_id"
+    ],
     "type": "object",
     "allOf": [
      {
@@ -1313,13 +1340,18 @@
     ],
     "properties": {
      "item_id": {
-      "type": "integer",
+      "type": "string",
       "format": "int64"
      }
     },
     "description": "ItemWithID is Item with ID"
    },
    "Midd": {
+    "required": [
+     "midd_id",
+     "name",
+     "message"
+    ],
     "type": "object",
     "properties": {
      "message": {
@@ -1340,9 +1372,12 @@
    },
    "MiddService": {
     "type": "object",
-    "description": "MiddService #path:\"/midd/\"#"
+    "description": "MiddService \n#path:\"/midd/\"#"
    },
    "MiddWithID": {
+    "required": [
+     "midd_id"
+    ],
     "type": "object",
     "allOf": [
      {
@@ -1356,7 +1391,7 @@
     ],
     "properties": {
      "midd_id": {
-      "type": "integer",
+      "type": "string",
       "format": "int64"
      }
     },
@@ -1372,7 +1407,7 @@
    }
   },
   "responses": {
-   "auth": {
+   "auth_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1382,7 +1417,7 @@
      }
     }
    },
-   "auths": {
+   "auths_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1395,7 +1430,7 @@
      }
     }
    },
-   "err": {
+   "err_body": {
     "description": "Response code is 400",
     "content": {
      "text/plain": {
@@ -1406,13 +1441,18 @@
      }
     }
    },
-   "file": {
-    "description": "#content:\"application/octet-stream\"#",
+   "file_body": {
+    "description": "\n#content:\"application/octet-stream\"#",
     "content": {
-     "application/octet-stream": {}
+     "application/octet-stream": {
+      "schema": {
+       "type": "string",
+       "format": "binary"
+      }
+     }
     }
    },
-   "filename": {
+   "filename_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1422,7 +1462,7 @@
      }
     }
    },
-   "item": {
+   "item_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1432,7 +1472,7 @@
      }
     }
    },
-   "items": {
+   "items_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1445,7 +1485,7 @@
      }
     }
    },
-   "midd": {
+   "midd_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1455,7 +1495,7 @@
      }
     }
    },
-   "midds": {
+   "midds_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1468,7 +1508,7 @@
      }
     }
    },
-   "session": {
+   "session_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1478,7 +1518,7 @@
      }
     }
    },
-   "token": {
+   "token_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1488,7 +1528,7 @@
      }
     }
    },
-   "userID": {
+   "userID_body": {
     "description": "Response code is 200",
     "content": {
      "application/json": {
@@ -1501,7 +1541,7 @@
    }
   },
   "parameters": {
-   "auth_id": {
+   "auth_id_path": {
     "name": "auth_id",
     "in": "path",
     "description": "#name:\"auth_id\"#",
@@ -1511,7 +1551,7 @@
      "format": "int64"
     }
    },
-   "filename": {
+   "filename_path": {
     "name": "filename",
     "in": "path",
     "required": true,
@@ -1519,7 +1559,7 @@
      "type": "string"
     }
    },
-   "item_id": {
+   "item_id_path": {
     "name": "item_id",
     "in": "path",
     "description": "#name:\"item_id\"#",
@@ -1529,7 +1569,7 @@
      "format": "int64"
     }
    },
-   "limit": {
+   "limit_query": {
     "name": "limit",
     "in": "query",
     "schema": {
@@ -1537,7 +1577,7 @@
      "format": "int64"
     }
    },
-   "midd_id": {
+   "midd_id_path": {
     "name": "midd_id",
     "in": "path",
     "description": "#name:\"midd_id\"#",
@@ -1547,7 +1587,7 @@
      "format": "int64"
     }
    },
-   "offset": {
+   "offset_query": {
     "name": "offset",
     "in": "query",
     "schema": {
@@ -1555,7 +1595,7 @@
      "format": "int64"
     }
    },
-   "token": {
+   "token_header": {
     "name": "token",
     "in": "header",
     "description": "#in:\"header\"#",
@@ -1563,7 +1603,7 @@
      "type": "string"
     }
    },
-   "x-token": {
+   "x-token_header": {
     "name": "x-token",
     "in": "header",
     "description": "#in:\"header\" name:\"x-token\"#",
@@ -1573,7 +1613,7 @@
    }
   },
   "requestBodies": {
-   "auth": {
+   "auth_body": {
     "content": {
      "application/json": {
       "schema": {
@@ -1582,13 +1622,8 @@
      }
     }
    },
-   "file": {
+   "file_body": {
     "content": {
-     "application/octet-stream": {
-      "schema": {
-       "$ref": "#/components/schemas/Reader"
-      }
-     },
      "multipart/form-data": {
       "schema": {
        "type": "object",
@@ -1601,7 +1636,7 @@
      }
     }
    },
-   "item": {
+   "item_body": {
     "content": {
      "application/json": {
       "schema": {
@@ -1610,7 +1645,7 @@
      }
     }
    },
-   "midd": {
+   "midd_body": {
     "content": {
      "application/json": {
       "schema": {
@@ -1623,13 +1658,13 @@
   "securitySchemes": {
    "VerifyApiKey": {
     "type": "apiKey",
-    "description": "VerifyApiKey #security:\"apiKey\"#",
+    "description": "VerifyApiKey \n#security:\"apiKey\"#",
     "name": "token",
     "in": "header"
    },
    "VerifyBasic": {
     "type": "http",
-    "description": "VerifyBasic #security:\"basic\"#",
+    "description": "VerifyBasic \n#security:\"basic\"#",
     "scheme": "basic"
    }
   }
@@ -1637,23 +1672,23 @@
  "tags": [
   {
    "name": "AuthService",
-   "description": "AuthService #path:\"/auth/\"#"
+   "description": "AuthService \n#path:\"/auth/\"#"
   },
   {
    "name": "FileService",
-   "description": "FileService #path:\"/file/\"#"
+   "description": "FileService \n#path:\"/file/\"#"
   },
   {
    "name": "Group",
-   "description": "Group #path:\"/group\"#"
+   "description": "Group \n#path:\"/group\"#"
   },
   {
    "name": "ItemService",
-   "description": "ItemService #path:\"/item/\"#"
+   "description": "ItemService \n#path:\"/item/\"#"
   },
   {
    "name": "MiddService",
-   "description": "MiddService #path:\"/midd/\"#"
+   "description": "MiddService \n#path:\"/midd/\"#"
   }
  ]
 }
