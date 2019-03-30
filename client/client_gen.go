@@ -266,7 +266,7 @@ func (FileService) Get(_filename_1 string) (_file_1 []byte /* #content:"applicat
 }
 
 // Update the Item #route:"PUT /{item_id}"#
-func (Group) Update(_itemID int /* #name:"item_id"# */, _item *Item) (err error) {
+func (Group) ItemUpdate(_itemID int /* #name:"item_id"# */, _item *Item) (err error) {
 	resp, err := Client.Clone().
 		SetPath("item_id", fmt.Sprint(_itemID)).
 		SetJSON(_item).
@@ -292,7 +292,7 @@ func (Group) Update(_itemID int /* #name:"item_id"# */, _item *Item) (err error)
 }
 
 // List of the Item #route:"GET /"#
-func (Group) List(_offset int, _limit int) (_items []*ItemWithID, err error) {
+func (Group) ItemList(_offset int, _limit int) (_items []*ItemWithID, err error) {
 	resp, err := Client.Clone().
 		SetQuery("offset", fmt.Sprint(_offset)).
 		SetQuery("limit", fmt.Sprint(_limit)).
@@ -320,7 +320,7 @@ func (Group) List(_offset int, _limit int) (_items []*ItemWithID, err error) {
 }
 
 // Get the Item #route:"GET /{item_id}"#
-func (Group) Get(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID, err error) {
+func (Group) ItemGet(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID, err error) {
 	resp, err := Client.Clone().
 		SetPath("item_id", fmt.Sprint(_itemID)).
 		Get("group/item/{item_id}")
@@ -347,7 +347,7 @@ func (Group) Get(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID, err e
 }
 
 // Delete the Item #route:"DELETE /{item_id}"#
-func (Group) Delete(_itemID int /* #name:"item_id"# */) (err error) {
+func (Group) ItemDelete(_itemID int /* #name:"item_id"# */) (err error) {
 	resp, err := Client.Clone().
 		SetPath("item_id", fmt.Sprint(_itemID)).
 		Delete("group/item/{item_id}")
@@ -372,7 +372,7 @@ func (Group) Delete(_itemID int /* #name:"item_id"# */) (err error) {
 }
 
 // Create a Item #route:"POST /"#
-func (Group) Create(_item *Item) (err error) {
+func (Group) ItemCreate(_item *Item) (err error) {
 	resp, err := Client.Clone().
 		SetJSON(_item).
 		Post("group/item")
@@ -397,7 +397,7 @@ func (Group) Create(_item *Item) (err error) {
 }
 
 // Upload a file #route:"POST /"#
-func (Group) Upload(_file io.Reader) (_filename string, err error) {
+func (Group) FileUpload(_file io.Reader) (_filename string, err error) {
 	resp, err := Client.Clone().
 		SetBody(_file).
 		Post("group/file")
@@ -424,7 +424,7 @@ func (Group) Upload(_file io.Reader) (_filename string, err error) {
 }
 
 // Get a file #route:"GET /{filename}"#
-func (Group) Get_1(_filename_1 string) (_file_1 []byte /* #content:"application/octet-stream"# */, err error) {
+func (Group) FileGet(_filename_1 string) (_file_1 []byte /* #content:"application/octet-stream"# */, err error) {
 	resp, err := Client.Clone().
 		SetPath("filename", fmt.Sprint(_filename_1)).
 		Get("group/file/{filename}")
@@ -450,7 +450,7 @@ func (Group) Get_1(_filename_1 string) (_file_1 []byte /* #content:"application/
 }
 
 // Update the Auth #route:"PUT /{auth_id}"#
-func (Group) Update_1(_authID int /* #name:"auth_id"# */, _auth *Auth) (err error) {
+func (Group) AuthUpdate(_authID int /* #name:"auth_id"# */, _auth *Auth) (err error) {
 	resp, err := Client.Clone().
 		SetPath("auth_id", fmt.Sprint(_authID)).
 		SetJSON(_auth).
@@ -476,7 +476,7 @@ func (Group) Update_1(_authID int /* #name:"auth_id"# */, _auth *Auth) (err erro
 }
 
 // List of the Auth #route:"GET /"#
-func (Group) List_1(_offset int, _limit int) (_auths []*AuthWithID, err error) {
+func (Group) AuthList(_offset int, _limit int) (_auths []*AuthWithID, err error) {
 	resp, err := Client.Clone().
 		SetQuery("offset", fmt.Sprint(_offset)).
 		SetQuery("limit", fmt.Sprint(_limit)).
@@ -504,7 +504,7 @@ func (Group) List_1(_offset int, _limit int) (_auths []*AuthWithID, err error) {
 }
 
 // Get the Auth #route:"GET /{auth_id}"#
-func (Group) Get_2(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID, err error) {
+func (Group) AuthGet(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID, err error) {
 	resp, err := Client.Clone().
 		SetPath("auth_id", fmt.Sprint(_authID)).
 		Get("group/auth/{auth_id}")
@@ -531,7 +531,7 @@ func (Group) Get_2(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID, err
 }
 
 // Delete the Auth #route:"DELETE /{auth_id}"#
-func (Group) Delete_1(_authID int /* #name:"auth_id"# */) (err error) {
+func (Group) AuthDelete(_authID int /* #name:"auth_id"# */) (err error) {
 	resp, err := Client.Clone().
 		SetPath("auth_id", fmt.Sprint(_authID)).
 		Delete("group/auth/{auth_id}")
@@ -556,7 +556,7 @@ func (Group) Delete_1(_authID int /* #name:"auth_id"# */) (err error) {
 }
 
 // Create a Auth #route:"POST /"#
-func (Group) Create_1(_auth *Auth) (err error) {
+func (Group) AuthCreate(_auth *Auth) (err error) {
 	resp, err := Client.Clone().
 		SetJSON(_auth).
 		Post("group/auth")
@@ -581,7 +581,7 @@ func (Group) Create_1(_auth *Auth) (err error) {
 }
 
 // Update the Midd #route:"PUT /{midd_id}"#
-func (Group) Update_2(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */, _midd *Midd) (err error) {
+func (Group) MiddUpdate(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */, _midd *Midd) (err error) {
 	resp, err := Client.Clone().
 		SetPath("midd_id", fmt.Sprint(_middID)).
 		SetJSON(_midd).
@@ -607,7 +607,7 @@ func (Group) Update_2(_xToken string /* #in:"header" name:"x-token"# */, _middID
 }
 
 // List of the Midd #route:"GET /"#
-func (Group) List_2(_xToken string /* #in:"header" name:"x-token"# */, _offset int, _limit int) (_midds []*MiddWithID, err error) {
+func (Group) MiddList(_xToken string /* #in:"header" name:"x-token"# */, _offset int, _limit int) (_midds []*MiddWithID, err error) {
 	resp, err := Client.Clone().
 		SetQuery("offset", fmt.Sprint(_offset)).
 		SetQuery("limit", fmt.Sprint(_limit)).
@@ -635,7 +635,7 @@ func (Group) List_2(_xToken string /* #in:"header" name:"x-token"# */, _offset i
 }
 
 // Get the Midd #route:"GET /{midd_id}"#
-func (Group) Get_3(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (_midd_1 *MiddWithID, err error) {
+func (Group) MiddGet(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (_midd_1 *MiddWithID, err error) {
 	resp, err := Client.Clone().
 		SetPath("midd_id", fmt.Sprint(_middID)).
 		Get("group/midd/{midd_id}")
@@ -662,7 +662,7 @@ func (Group) Get_3(_xToken string /* #in:"header" name:"x-token"# */, _middID in
 }
 
 // Delete the Midd #route:"DELETE /{midd_id}"#
-func (Group) Delete_2(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (err error) {
+func (Group) MiddDelete(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (err error) {
 	resp, err := Client.Clone().
 		SetPath("midd_id", fmt.Sprint(_middID)).
 		Delete("group/midd/{midd_id}")
@@ -687,7 +687,7 @@ func (Group) Delete_2(_xToken string /* #in:"header" name:"x-token"# */, _middID
 }
 
 // Create a Midd #route:"POST /"#
-func (Group) Create_2(_xToken string /* #in:"header" name:"x-token"# */, _midd *Midd) (err error) {
+func (Group) MiddCreate(_xToken string /* #in:"header" name:"x-token"# */, _midd *Midd) (err error) {
 	resp, err := Client.Clone().
 		SetJSON(_midd).
 		Post("group/midd")
