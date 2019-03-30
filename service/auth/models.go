@@ -10,6 +10,7 @@
 package auth
 
 import (
+	"net/url"
 	"strconv"
 )
 
@@ -19,7 +20,12 @@ type Auth struct {
 	Message string `json:"message"` // Name is the message
 }
 
-// Verify #security:"apiKey"#
-func Verify(token string /* #in:"header"# */) (userID uint64, err error) {
+// VerifyApiKey #security:"apiKey"#
+func VerifyApiKey(token string /* #in:"header"# */) (userID uint64, err error) {
 	return strconv.ParseUint(token, 0, 0)
+}
+
+// VerifyBasic #security:"basic"#
+func VerifyBasic(userInfo *url.Userinfo) (userID uint64, err error) {
+	return strconv.ParseUint(userInfo.Username(), 0, 0)
 }
