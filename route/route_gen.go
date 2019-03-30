@@ -9,8 +9,9 @@ import (
 	mux "github.com/gorilla/mux"
 	githubComWzshimingGenExamplesServiceAuth "github.com/wzshiming/gen-examples/service/auth"
 	githubComWzshimingGenExamplesServiceFile "github.com/wzshiming/gen-examples/service/file"
+	githubComWzshimingGenExamplesServiceGroup "github.com/wzshiming/gen-examples/service/group"
 	githubComWzshimingGenExamplesServiceItem "github.com/wzshiming/gen-examples/service/item"
-	githubComWzshimingGenExamplesServiceMiddle "github.com/wzshiming/gen-examples/service/middle"
+	githubComWzshimingGenExamplesServiceMidd "github.com/wzshiming/gen-examples/service/midd"
 	io "io"
 	ioutil "io/ioutil"
 	http "net/http"
@@ -31,12 +32,16 @@ func Router() http.Handler {
 	var _fileService githubComWzshimingGenExamplesServiceFile.FileService
 	RouteFileService(router, &_fileService)
 
+	// Group Define the method scope
+	var _group githubComWzshimingGenExamplesServiceGroup.Group
+	RouteGroup(router, &_group)
+
 	// ItemService Define the method scope
 	var _itemService githubComWzshimingGenExamplesServiceItem.ItemService
 	RouteItemService(router, &_itemService)
 
 	// MiddService Define the method scope
-	var _middService githubComWzshimingGenExamplesServiceMiddle.MiddService
+	var _middService githubComWzshimingGenExamplesServiceMidd.MiddService
 	RouteMiddService(router, &_middService)
 
 	return router
@@ -119,6 +124,154 @@ func RouteFileService(router *mux.Router, _fileService *githubComWzshimingGenExa
 	return router
 }
 
+// RouteGroup is routing for Group
+func RouteGroup(router *mux.Router, _group *githubComWzshimingGenExamplesServiceGroup.Group, fs ...mux.MiddlewareFunc) *mux.Router {
+	if router == nil {
+		router = mux.NewRouter()
+	}
+
+	_routeGroupMidd := router.PathPrefix("/group/midd").Subrouter()
+	if len(fs) != 0 {
+		_routeGroupMidd.Use(fs...)
+	}
+
+	// Registered routing POST /group/midd
+	var __operationPostGroupMidd http.Handler
+	__operationPostGroupMidd = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPostGroupMidd(_group, w, r)
+	})
+	_routeGroupMidd.Methods("POST").Path("").Handler(__operationPostGroupMidd)
+
+	// Registered routing GET /group/midd
+	var __operationGetGroupMidd http.Handler
+	__operationGetGroupMidd = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupMidd(_group, w, r)
+	})
+	_routeGroupMidd.Methods("GET").Path("").Handler(__operationGetGroupMidd)
+
+	// Registered routing DELETE /group/midd/{midd_id}
+	var __operationDeleteGroupMiddMiddID http.Handler
+	__operationDeleteGroupMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationDeleteGroupMiddMiddID(_group, w, r)
+	})
+	_routeGroupMidd.Methods("DELETE").Path("/{midd_id}").Handler(__operationDeleteGroupMiddMiddID)
+
+	// Registered routing GET /group/midd/{midd_id}
+	var __operationGetGroupMiddMiddID http.Handler
+	__operationGetGroupMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupMiddMiddID(_group, w, r)
+	})
+	_routeGroupMidd.Methods("GET").Path("/{midd_id}").Handler(__operationGetGroupMiddMiddID)
+
+	// Registered routing PUT /group/midd/{midd_id}
+	var __operationPutGroupMiddMiddID http.Handler
+	__operationPutGroupMiddMiddID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPutGroupMiddMiddID(_group, w, r)
+	})
+	_routeGroupMidd.Methods("PUT").Path("/{midd_id}").Handler(__operationPutGroupMiddMiddID)
+
+	_routeGroupItem := router.PathPrefix("/group/item").Subrouter()
+	if len(fs) != 0 {
+		_routeGroupItem.Use(fs...)
+	}
+
+	// Registered routing POST /group/item
+	var __operationPostGroupItem http.Handler
+	__operationPostGroupItem = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPostGroupItem(_group, w, r)
+	})
+	_routeGroupItem.Methods("POST").Path("").Handler(__operationPostGroupItem)
+
+	// Registered routing GET /group/item
+	var __operationGetGroupItem http.Handler
+	__operationGetGroupItem = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupItem(_group, w, r)
+	})
+	_routeGroupItem.Methods("GET").Path("").Handler(__operationGetGroupItem)
+
+	// Registered routing DELETE /group/item/{item_id}
+	var __operationDeleteGroupItemItemID http.Handler
+	__operationDeleteGroupItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationDeleteGroupItemItemID(_group, w, r)
+	})
+	_routeGroupItem.Methods("DELETE").Path("/{item_id}").Handler(__operationDeleteGroupItemItemID)
+
+	// Registered routing GET /group/item/{item_id}
+	var __operationGetGroupItemItemID http.Handler
+	__operationGetGroupItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupItemItemID(_group, w, r)
+	})
+	_routeGroupItem.Methods("GET").Path("/{item_id}").Handler(__operationGetGroupItemItemID)
+
+	// Registered routing PUT /group/item/{item_id}
+	var __operationPutGroupItemItemID http.Handler
+	__operationPutGroupItemItemID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPutGroupItemItemID(_group, w, r)
+	})
+	_routeGroupItem.Methods("PUT").Path("/{item_id}").Handler(__operationPutGroupItemItemID)
+
+	_routeGroupFile := router.PathPrefix("/group/file").Subrouter()
+	if len(fs) != 0 {
+		_routeGroupFile.Use(fs...)
+	}
+
+	// Registered routing POST /group/file
+	var __operationPostGroupFile http.Handler
+	__operationPostGroupFile = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPostGroupFile(_group, w, r)
+	})
+	_routeGroupFile.Methods("POST").Path("").Handler(__operationPostGroupFile)
+
+	// Registered routing GET /group/file/{filename}
+	var __operationGetGroupFileFilename http.Handler
+	__operationGetGroupFileFilename = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupFileFilename(_group, w, r)
+	})
+	_routeGroupFile.Methods("GET").Path("/{filename}").Handler(__operationGetGroupFileFilename)
+
+	_routeGroupAuth := router.PathPrefix("/group/auth").Subrouter()
+	if len(fs) != 0 {
+		_routeGroupAuth.Use(fs...)
+	}
+
+	// Registered routing POST /group/auth
+	var __operationPostGroupAuth http.Handler
+	__operationPostGroupAuth = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPostGroupAuth(_group, w, r)
+	})
+	_routeGroupAuth.Methods("POST").Path("").Handler(__operationPostGroupAuth)
+
+	// Registered routing GET /group/auth
+	var __operationGetGroupAuth http.Handler
+	__operationGetGroupAuth = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupAuth(_group, w, r)
+	})
+	_routeGroupAuth.Methods("GET").Path("").Handler(__operationGetGroupAuth)
+
+	// Registered routing DELETE /group/auth/{auth_id}
+	var __operationDeleteGroupAuthAuthID http.Handler
+	__operationDeleteGroupAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationDeleteGroupAuthAuthID(_group, w, r)
+	})
+	_routeGroupAuth.Methods("DELETE").Path("/{auth_id}").Handler(__operationDeleteGroupAuthAuthID)
+
+	// Registered routing GET /group/auth/{auth_id}
+	var __operationGetGroupAuthAuthID http.Handler
+	__operationGetGroupAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationGetGroupAuthAuthID(_group, w, r)
+	})
+	_routeGroupAuth.Methods("GET").Path("/{auth_id}").Handler(__operationGetGroupAuthAuthID)
+
+	// Registered routing PUT /group/auth/{auth_id}
+	var __operationPutGroupAuthAuthID http.Handler
+	__operationPutGroupAuthAuthID = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_operationPutGroupAuthAuthID(_group, w, r)
+	})
+	_routeGroupAuth.Methods("PUT").Path("/{auth_id}").Handler(__operationPutGroupAuthAuthID)
+
+	return router
+}
+
 // RouteItemService is routing for ItemService
 func RouteItemService(router *mux.Router, _itemService *githubComWzshimingGenExamplesServiceItem.ItemService, fs ...mux.MiddlewareFunc) *mux.Router {
 	if router == nil {
@@ -169,7 +322,7 @@ func RouteItemService(router *mux.Router, _itemService *githubComWzshimingGenExa
 }
 
 // RouteMiddService is routing for MiddService
-func RouteMiddService(router *mux.Router, _middService *githubComWzshimingGenExamplesServiceMiddle.MiddService, fs ...mux.MiddlewareFunc) *mux.Router {
+func RouteMiddService(router *mux.Router, _middService *githubComWzshimingGenExamplesServiceMidd.MiddService, fs ...mux.MiddlewareFunc) *mux.Router {
 	if router == nil {
 		router = mux.NewRouter()
 	}
@@ -338,7 +491,7 @@ func _requestQueryLimit(w http.ResponseWriter, r *http.Request) (_limit int, err
 }
 
 // _requestBodyMidd Parsing the body for of midd
-func _requestBodyMidd(w http.ResponseWriter, r *http.Request) (_midd *githubComWzshimingGenExamplesServiceMiddle.Midd, err error) {
+func _requestBodyMidd(w http.ResponseWriter, r *http.Request) (_midd *githubComWzshimingGenExamplesServiceMidd.Midd, err error) {
 
 	var __midd []byte
 	__midd, err = ioutil.ReadAll(r.Body)
@@ -401,7 +554,7 @@ func _requestHeaderXToken(w http.ResponseWriter, r *http.Request) (_xToken strin
 }
 
 // _middlewareSessionMiddelSession Is the middleware of MiddelSession
-func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_session *githubComWzshimingGenExamplesServiceMiddle.Session, err error) {
+func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_session *githubComWzshimingGenExamplesServiceMidd.Session, err error) {
 	var _xToken string
 
 	// Parsing x-token.
@@ -410,8 +563,8 @@ func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_s
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddelSession.
-	_session, err = githubComWzshimingGenExamplesServiceMiddle.MiddelSession(_xToken)
+	// Call github.com/wzshiming/gen-examples/service/midd MiddelSession.
+	_session, err = githubComWzshimingGenExamplesServiceMidd.MiddelSession(_xToken)
 
 	// Response code 400 Bad Request for err.
 	if err != nil {
@@ -424,7 +577,7 @@ func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_s
 
 // _middlewareTokenMiddelToken Is the middleware of MiddelToken
 func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token_1 string, err error) {
-	var _session_1 *githubComWzshimingGenExamplesServiceMiddle.Session
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
 
 	// Permission middlewares call MiddelSession.
 	_session_1, err = _middlewareSessionMiddelSession(w, r)
@@ -432,8 +585,8 @@ func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddelToken.
-	_token_1, err = githubComWzshimingGenExamplesServiceMiddle.MiddelToken(_session_1)
+	// Call github.com/wzshiming/gen-examples/service/midd MiddelToken.
+	_token_1, err = githubComWzshimingGenExamplesServiceMidd.MiddelToken(_session_1)
 
 	// Response code 400 Bad Request for err.
 	if err != nil {
@@ -795,6 +948,770 @@ func _operationGetFileFilename(s *githubComWzshimingGenExamplesServiceFile.FileS
 	return
 }
 
+// _operationPutGroupItemItemID Is the route of Update
+func _operationPutGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _itemID int
+	var _item *githubComWzshimingGenExamplesServiceItem.Item
+
+	// Parsing item_id.
+	_itemID, err = _requestPathItemID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing item.
+	_item, err = _requestBodyItem(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Update.
+	err = s.Item.Update(_itemID, _item)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationGetGroupItem Is the route of List
+func _operationGetGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _offset int
+	var _limit int
+	var _items []*githubComWzshimingGenExamplesServiceItem.ItemWithID
+
+	// Parsing offset.
+	_offset, err = _requestQueryOffset(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing limit.
+	_limit, err = _requestQueryLimit(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/item Group.Item.List.
+	_items, err = s.Item.List(_offset, _limit)
+
+	// Response code 200 OK for items.
+	if _items != nil {
+		var __items []byte
+		__items, err = json.Marshal(_items)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__items)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __items []byte
+	__items, err = json.Marshal(_items)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__items)
+
+	return
+}
+
+// _operationGetGroupItemItemID Is the route of Get
+func _operationGetGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _itemID int
+	var _item_1 *githubComWzshimingGenExamplesServiceItem.ItemWithID
+
+	// Parsing item_id.
+	_itemID, err = _requestPathItemID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Get.
+	_item_1, err = s.Item.Get(_itemID)
+
+	// Response code 200 OK for item.
+	if _item_1 != nil {
+		var __item_1 []byte
+		__item_1, err = json.Marshal(_item_1)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__item_1)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __item_1 []byte
+	__item_1, err = json.Marshal(_item_1)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__item_1)
+
+	return
+}
+
+// _operationDeleteGroupItemItemID Is the route of Delete
+func _operationDeleteGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _itemID int
+
+	// Parsing item_id.
+	_itemID, err = _requestPathItemID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Delete.
+	err = s.Item.Delete(_itemID)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationPostGroupItem Is the route of Create
+func _operationPostGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _item *githubComWzshimingGenExamplesServiceItem.Item
+
+	// Parsing item.
+	_item, err = _requestBodyItem(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Create.
+	err = s.Item.Create(_item)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationPostGroupFile Is the route of Upload
+func _operationPostGroupFile(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _file io.Reader
+	var _filename_1 string
+
+	// Parsing file.
+	_file, err = _requestBodyFile(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/file Group.File.Upload.
+	_filename_1, err = s.File.Upload(_file)
+
+	// Response code 200 OK for filename.
+	if _filename_1 != "" {
+		var __filename_1 []byte
+		__filename_1, err = json.Marshal(_filename_1)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__filename_1)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __filename_1 []byte
+	__filename_1, err = json.Marshal(_filename_1)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__filename_1)
+
+	return
+}
+
+// _operationGetGroupFileFilename Is the route of Get
+func _operationGetGroupFileFilename(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _filename string
+	var _file_1 []byte
+
+	// Parsing filename.
+	_filename, err = _requestPathFilename(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/file Group.File.Get.
+	_file_1, err = s.File.Get(_filename)
+
+	// Response code 200 OK for file.
+	if _file_1 != nil {
+		var __file_1 []byte
+		__file_1 = _file_1
+
+		w.Header().Set("Content-Type", "application/octet-stream")
+		w.WriteHeader(200)
+		w.Write(__file_1)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __file_1 []byte
+	__file_1 = _file_1
+
+	w.Header().Set("Content-Type", "application/octet-stream")
+	w.WriteHeader(200)
+	w.Write(__file_1)
+
+	return
+}
+
+// _operationPutGroupAuthAuthID Is the route of Update
+func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _userID_1 uint64
+	var _authID int
+	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
+
+	// Permission verification call Verify.
+	_userID_1, err = _securityAPIKeyVerify(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing auth_id.
+	_authID, err = _requestPathAuthID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing auth.
+	_auth, err = _requestBodyAuth(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Update.
+	err = s.Auth.Update(_userID_1, _authID, _auth)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationGetGroupAuth Is the route of List
+func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _userID_1 uint64
+	var _offset int
+	var _limit int
+	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
+
+	// Permission verification call Verify.
+	_userID_1, err = _securityAPIKeyVerify(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing offset.
+	_offset, err = _requestQueryOffset(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing limit.
+	_limit, err = _requestQueryLimit(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.List.
+	_auths, err = s.Auth.List(_userID_1, _offset, _limit)
+
+	// Response code 200 OK for auths.
+	if _auths != nil {
+		var __auths []byte
+		__auths, err = json.Marshal(_auths)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__auths)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __auths []byte
+	__auths, err = json.Marshal(_auths)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__auths)
+
+	return
+}
+
+// _operationGetGroupAuthAuthID Is the route of Get
+func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _userID_1 uint64
+	var _authID int
+	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
+
+	// Permission verification call Verify.
+	_userID_1, err = _securityAPIKeyVerify(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing auth_id.
+	_authID, err = _requestPathAuthID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Get.
+	_auth_1, err = s.Auth.Get(_userID_1, _authID)
+
+	// Response code 200 OK for auth.
+	if _auth_1 != nil {
+		var __auth_1 []byte
+		__auth_1, err = json.Marshal(_auth_1)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__auth_1)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __auth_1 []byte
+	__auth_1, err = json.Marshal(_auth_1)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__auth_1)
+
+	return
+}
+
+// _operationDeleteGroupAuthAuthID Is the route of Delete
+func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _userID_1 uint64
+	var _authID int
+
+	// Permission verification call Verify.
+	_userID_1, err = _securityAPIKeyVerify(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing auth_id.
+	_authID, err = _requestPathAuthID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Delete.
+	err = s.Auth.Delete(_userID_1, _authID)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationPostGroupAuth Is the route of Create
+func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _userID_1 uint64
+	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
+
+	// Permission verification call Verify.
+	_userID_1, err = _securityAPIKeyVerify(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing auth.
+	_auth, err = _requestBodyAuth(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Create.
+	err = s.Auth.Create(_userID_1, _auth)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationPutGroupMiddMiddID Is the route of Update
+func _operationPutGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	var _middID int
+	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
+
+	// Permission middlewares call MiddelSession.
+	_session_1, err = _middlewareSessionMiddelSession(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing midd_id.
+	_middID, err = _requestPathMiddID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing midd.
+	_midd, err = _requestBodyMidd(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/midd Group.Midd.Update.
+	err = s.Midd.Update(_session_1, _middID, _midd)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationGetGroupMidd Is the route of List
+func _operationGetGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _token_2 string
+	var _offset int
+	var _limit int
+	var _midds []*githubComWzshimingGenExamplesServiceMidd.MiddWithID
+
+	// Permission middlewares call MiddelToken.
+	_token_2, err = _middlewareTokenMiddelToken(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing offset.
+	_offset, err = _requestQueryOffset(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing limit.
+	_limit, err = _requestQueryLimit(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/midd Group.Midd.List.
+	_midds, err = s.Midd.List(_token_2, _offset, _limit)
+
+	// Response code 200 OK for midds.
+	if _midds != nil {
+		var __midds []byte
+		__midds, err = json.Marshal(_midds)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__midds)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __midds []byte
+	__midds, err = json.Marshal(_midds)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__midds)
+
+	return
+}
+
+// _operationGetGroupMiddMiddID Is the route of Get
+func _operationGetGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _token_2 string
+	var _middID int
+	var _midd_1 *githubComWzshimingGenExamplesServiceMidd.MiddWithID
+
+	// Permission middlewares call MiddelToken.
+	_token_2, err = _middlewareTokenMiddelToken(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing midd_id.
+	_middID, err = _requestPathMiddID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/midd Group.Midd.Get.
+	_midd_1, err = s.Midd.Get(_token_2, _middID)
+
+	// Response code 200 OK for midd.
+	if _midd_1 != nil {
+		var __midd_1 []byte
+		__midd_1, err = json.Marshal(_midd_1)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
+		w.WriteHeader(200)
+		w.Write(__midd_1)
+		return
+	}
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	var __midd_1 []byte
+	__midd_1, err = json.Marshal(_midd_1)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write(__midd_1)
+
+	return
+}
+
+// _operationDeleteGroupMiddMiddID Is the route of Delete
+func _operationDeleteGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	var _middID int
+
+	// Permission middlewares call MiddelSession.
+	_session_1, err = _middlewareSessionMiddelSession(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing midd_id.
+	_middID, err = _requestPathMiddID(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/midd Group.Midd.Delete.
+	err = s.Midd.Delete(_session_1, _middID)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
+// _operationPostGroupMidd Is the route of Create
+func _operationPostGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+
+	var err error
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
+
+	// Permission middlewares call MiddelSession.
+	_session_1, err = _middlewareSessionMiddelSession(w, r)
+	if err != nil {
+		return
+	}
+
+	// Parsing midd.
+	_midd, err = _requestBodyMidd(w, r)
+	if err != nil {
+		return
+	}
+
+	// Call github.com/wzshiming/gen-examples/service/midd Group.Midd.Create.
+	err = s.Midd.Create(_session_1, _midd)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(200)
+	w.Write([]byte("null"))
+
+	return
+}
+
 // _operationPutItemItemID Is the route of Update
 func _operationPutItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemService, w http.ResponseWriter, r *http.Request) {
 
@@ -996,12 +1913,12 @@ func _operationPostItem(s *githubComWzshimingGenExamplesServiceItem.ItemService,
 }
 
 // _operationPutMiddMiddID Is the route of Update
-func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddService, w http.ResponseWriter, r *http.Request) {
+func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
 
 	var err error
-	var _session_1 *githubComWzshimingGenExamplesServiceMiddle.Session
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
 	var _middID int
-	var _midd *githubComWzshimingGenExamplesServiceMiddle.Midd
+	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
 
 	// Permission middlewares call MiddelSession.
 	_session_1, err = _middlewareSessionMiddelSession(w, r)
@@ -1021,7 +1938,7 @@ func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddS
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddService.Update.
+	// Call github.com/wzshiming/gen-examples/service/midd MiddService.Update.
 	err = s.Update(_session_1, _middID, _midd)
 
 	// Response code 400 Bad Request for err.
@@ -1038,13 +1955,13 @@ func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddS
 }
 
 // _operationGetMidd Is the route of List
-func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMiddle.MiddService, w http.ResponseWriter, r *http.Request) {
+func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	var _token_2 string
 	var _offset int
 	var _limit int
-	var _midds []*githubComWzshimingGenExamplesServiceMiddle.MiddWithID
+	var _midds []*githubComWzshimingGenExamplesServiceMidd.MiddWithID
 
 	// Permission middlewares call MiddelToken.
 	_token_2, err = _middlewareTokenMiddelToken(w, r)
@@ -1064,7 +1981,7 @@ func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMiddle.MiddService
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddService.List.
+	// Call github.com/wzshiming/gen-examples/service/midd MiddService.List.
 	_midds, err = s.List(_token_2, _offset, _limit)
 
 	// Response code 200 OK for midds.
@@ -1103,12 +2020,12 @@ func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMiddle.MiddService
 }
 
 // _operationGetMiddMiddID Is the route of Get
-func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddService, w http.ResponseWriter, r *http.Request) {
+func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
 
 	var err error
 	var _token_2 string
 	var _middID int
-	var _midd_1 *githubComWzshimingGenExamplesServiceMiddle.MiddWithID
+	var _midd_1 *githubComWzshimingGenExamplesServiceMidd.MiddWithID
 
 	// Permission middlewares call MiddelToken.
 	_token_2, err = _middlewareTokenMiddelToken(w, r)
@@ -1122,7 +2039,7 @@ func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddS
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddService.Get.
+	// Call github.com/wzshiming/gen-examples/service/midd MiddService.Get.
 	_midd_1, err = s.Get(_token_2, _middID)
 
 	// Response code 200 OK for midd.
@@ -1161,10 +2078,10 @@ func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddS
 }
 
 // _operationDeleteMiddMiddID Is the route of Delete
-func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.MiddService, w http.ResponseWriter, r *http.Request) {
+func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
 
 	var err error
-	var _session_1 *githubComWzshimingGenExamplesServiceMiddle.Session
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
 	var _middID int
 
 	// Permission middlewares call MiddelSession.
@@ -1179,7 +2096,7 @@ func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.Mi
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddService.Delete.
+	// Call github.com/wzshiming/gen-examples/service/midd MiddService.Delete.
 	err = s.Delete(_session_1, _middID)
 
 	// Response code 400 Bad Request for err.
@@ -1196,11 +2113,11 @@ func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMiddle.Mi
 }
 
 // _operationPostMidd Is the route of Create
-func _operationPostMidd(s *githubComWzshimingGenExamplesServiceMiddle.MiddService, w http.ResponseWriter, r *http.Request) {
+func _operationPostMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
 
 	var err error
-	var _session_1 *githubComWzshimingGenExamplesServiceMiddle.Session
-	var _midd *githubComWzshimingGenExamplesServiceMiddle.Midd
+	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
 
 	// Permission middlewares call MiddelSession.
 	_session_1, err = _middlewareSessionMiddelSession(w, r)
@@ -1214,7 +2131,7 @@ func _operationPostMidd(s *githubComWzshimingGenExamplesServiceMiddle.MiddServic
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/middle MiddService.Create.
+	// Call github.com/wzshiming/gen-examples/service/midd MiddService.Create.
 	err = s.Create(_session_1, _midd)
 
 	// Response code 400 Bad Request for err.

@@ -294,6 +294,584 @@
     }
    }
   },
+  "/group/auth": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "List of the Auth #route:\"GET /\"#",
+    "description": "List of the Auth #route:\"GET /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/AuthWithID"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   },
+   "post": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Create a Auth #route:\"POST /\"#",
+    "description": "Create a Auth #route:\"POST /\"#",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/auth"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   }
+  },
+  "/group/auth/{auth_id}": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Get the Auth #route:\"GET /{auth_id}\"#",
+    "description": "Get the Auth #route:\"GET /{auth_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/auth_id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/AuthWithID"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   },
+   "put": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Update the Auth #route:\"PUT /{auth_id}\"#",
+    "description": "Update the Auth #route:\"PUT /{auth_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/auth_id"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/auth"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   },
+   "delete": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
+    "description": "Delete the Auth #route:\"DELETE /{auth_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/auth_id"
+     }
+    ],
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "Verify": []
+     }
+    ]
+   }
+  },
+  "/group/file": {
+   "post": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Upload a file #route:\"POST /\"#",
+    "description": "Upload a file #route:\"POST /\"#",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/file"
+    },
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/group/file/{filename}": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Get a file #route:\"GET /{filename}\"#",
+    "description": "Get a file #route:\"GET /{filename}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/filename"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "#content:\"application/octet-stream\"#",
+      "content": {
+       "application/octet-stream": {}
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/group/item": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "List of the Item #route:\"GET /\"#",
+    "description": "List of the Item #route:\"GET /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/ItemWithID"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Create a Item #route:\"POST /\"#",
+    "description": "Create a Item #route:\"POST /\"#",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/item"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/group/item/{item_id}": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Get the Item #route:\"GET /{item_id}\"#",
+    "description": "Get the Item #route:\"GET /{item_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/item_id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ItemWithID"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Update the Item #route:\"PUT /{item_id}\"#",
+    "description": "Update the Item #route:\"PUT /{item_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/item_id"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/item"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Delete the Item #route:\"DELETE /{item_id}\"#",
+    "description": "Delete the Item #route:\"DELETE /{item_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/item_id"
+     }
+    ],
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/group/midd": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "List of the Midd #route:\"GET /\"#",
+    "description": "List of the Midd #route:\"GET /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/offset"
+     },
+     {
+      "$ref": "#/components/parameters/limit"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/MiddWithID"
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Create a Midd #route:\"POST /\"#",
+    "description": "Create a Midd #route:\"POST /\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/midd"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/group/midd/{midd_id}": {
+   "get": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Get the Midd #route:\"GET /{midd_id}\"#",
+    "description": "Get the Midd #route:\"GET /{midd_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/midd_id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Response code is 200",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/MiddWithID"
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Update the Midd #route:\"PUT /{midd_id}\"#",
+    "description": "Update the Midd #route:\"PUT /{midd_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/midd_id"
+     }
+    ],
+    "requestBody": {
+     "$ref": "#/components/requestBodies/midd"
+    },
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "tags": [
+     "Group"
+    ],
+    "summary": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
+    "description": "Delete the Midd #route:\"DELETE /{midd_id}\"#",
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/x-token"
+     },
+     {
+      "$ref": "#/components/parameters/midd_id"
+     }
+    ],
+    "responses": {
+     "400": {
+      "description": "Response code is 400",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "format": "error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "/item": {
    "get": {
     "tags": [
@@ -640,6 +1218,10 @@
     },
     "description": "Auth is a auth"
    },
+   "AuthService": {
+    "type": "object",
+    "description": "AuthService #path:\"/auth/\"#"
+   },
    "AuthWithID": {
     "type": "object",
     "allOf": [
@@ -660,6 +1242,15 @@
     },
     "description": "AuthWithID is Auth with ID"
    },
+   "FileService": {
+    "type": "object",
+    "properties": {
+     "BasePath": {
+      "type": "string"
+     }
+    },
+    "description": "FileService #path:\"/file/\"#"
+   },
    "Item": {
     "type": "object",
     "properties": {
@@ -673,6 +1264,10 @@
      }
     },
     "description": "Item is a item"
+   },
+   "ItemService": {
+    "type": "object",
+    "description": "ItemService #path:\"/item/\"#"
    },
    "ItemWithID": {
     "type": "object",
@@ -712,6 +1307,10 @@
      }
     },
     "description": "Midd is a midd"
+   },
+   "MiddService": {
+    "type": "object",
+    "description": "MiddService #path:\"/midd/\"#"
    },
    "MiddWithID": {
     "type": "object",
@@ -1008,6 +1607,10 @@
   {
    "name": "FileService",
    "description": "FileService #path:\"/file/\"#"
+  },
+  {
+   "name": "Group",
+   "description": "Group #path:\"/group\"#"
   },
   {
    "name": "ItemService",

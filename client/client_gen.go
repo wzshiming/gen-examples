@@ -31,6 +31,14 @@ type FileService struct {
 	BasePath string //
 }
 
+// Group #path:"/group"#
+type Group struct {
+	Item ItemService // #path:"/item"#
+	File FileService // #path:"/file"#
+	Auth AuthService // #path:"/auth"#
+	Midd MiddService // #path:"/midd"#
+}
+
 // Item is a item
 type Item struct {
 	Name    string // Name is the name of item
@@ -252,6 +260,452 @@ func (FileService) Get(_filename_1 string) (_file_1 []byte /* #content:"applicat
 
 	if err != nil {
 		return nil, err
+	}
+
+	return
+}
+
+// Update the Item #route:"PUT /{item_id}"#
+func (Group) Update(_itemID int /* #name:"item_id"# */, _item *Item) (err error) {
+	resp, err := Client.Clone().
+		SetPath("item_id", fmt.Sprint(_itemID)).
+		SetJSON(_item).
+		Put("group/item/{item_id}")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// List of the Item #route:"GET /"#
+func (Group) List(_offset int, _limit int) (_items []*ItemWithID, err error) {
+	resp, err := Client.Clone().
+		SetQuery("offset", fmt.Sprint(_offset)).
+		SetQuery("limit", fmt.Sprint(_limit)).
+		Get("group/item")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_items)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Get the Item #route:"GET /{item_id}"#
+func (Group) Get(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID, err error) {
+	resp, err := Client.Clone().
+		SetPath("item_id", fmt.Sprint(_itemID)).
+		Get("group/item/{item_id}")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_item_1)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Delete the Item #route:"DELETE /{item_id}"#
+func (Group) Delete(_itemID int /* #name:"item_id"# */) (err error) {
+	resp, err := Client.Clone().
+		SetPath("item_id", fmt.Sprint(_itemID)).
+		Delete("group/item/{item_id}")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// Create a Item #route:"POST /"#
+func (Group) Create(_item *Item) (err error) {
+	resp, err := Client.Clone().
+		SetJSON(_item).
+		Post("group/item")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// Upload a file #route:"POST /"#
+func (Group) Upload(_file io.Reader) (_filename string, err error) {
+	resp, err := Client.Clone().
+		SetBody(_file).
+		Post("group/file")
+	if err != nil {
+		return "", err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_filename)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return "", err
+	}
+
+	return
+}
+
+// Get a file #route:"GET /{filename}"#
+func (Group) Get_1(_filename_1 string) (_file_1 []byte /* #content:"application/octet-stream"# */, err error) {
+	resp, err := Client.Clone().
+		SetPath("filename", fmt.Sprint(_filename_1)).
+		Get("group/file/{filename}")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Update the Auth #route:"PUT /{auth_id}"#
+func (Group) Update_1(_authID int /* #name:"auth_id"# */, _auth *Auth) (err error) {
+	resp, err := Client.Clone().
+		SetPath("auth_id", fmt.Sprint(_authID)).
+		SetJSON(_auth).
+		Put("group/auth/{auth_id}")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// List of the Auth #route:"GET /"#
+func (Group) List_1(_offset int, _limit int) (_auths []*AuthWithID, err error) {
+	resp, err := Client.Clone().
+		SetQuery("offset", fmt.Sprint(_offset)).
+		SetQuery("limit", fmt.Sprint(_limit)).
+		Get("group/auth")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_auths)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Get the Auth #route:"GET /{auth_id}"#
+func (Group) Get_2(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID, err error) {
+	resp, err := Client.Clone().
+		SetPath("auth_id", fmt.Sprint(_authID)).
+		Get("group/auth/{auth_id}")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_auth_1)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Delete the Auth #route:"DELETE /{auth_id}"#
+func (Group) Delete_1(_authID int /* #name:"auth_id"# */) (err error) {
+	resp, err := Client.Clone().
+		SetPath("auth_id", fmt.Sprint(_authID)).
+		Delete("group/auth/{auth_id}")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// Create a Auth #route:"POST /"#
+func (Group) Create_1(_auth *Auth) (err error) {
+	resp, err := Client.Clone().
+		SetJSON(_auth).
+		Post("group/auth")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// Update the Midd #route:"PUT /{midd_id}"#
+func (Group) Update_2(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */, _midd *Midd) (err error) {
+	resp, err := Client.Clone().
+		SetPath("midd_id", fmt.Sprint(_middID)).
+		SetJSON(_midd).
+		Put("group/midd/{midd_id}")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// List of the Midd #route:"GET /"#
+func (Group) List_2(_xToken string /* #in:"header" name:"x-token"# */, _offset int, _limit int) (_midds []*MiddWithID, err error) {
+	resp, err := Client.Clone().
+		SetQuery("offset", fmt.Sprint(_offset)).
+		SetQuery("limit", fmt.Sprint(_limit)).
+		Get("group/midd")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_midds)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Get the Midd #route:"GET /{midd_id}"#
+func (Group) Get_3(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (_midd_1 *MiddWithID, err error) {
+	resp, err := Client.Clone().
+		SetPath("midd_id", fmt.Sprint(_middID)).
+		Get("group/midd/{midd_id}")
+	if err != nil {
+		return nil, err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 200:
+		err = json.Unmarshal(resp.Body(), &_midd_1)
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
+// Delete the Midd #route:"DELETE /{midd_id}"#
+func (Group) Delete_2(_xToken string /* #in:"header" name:"x-token"# */, _middID int /* #name:"midd_id"# */) (err error) {
+	resp, err := Client.Clone().
+		SetPath("midd_id", fmt.Sprint(_middID)).
+		Delete("group/midd/{midd_id}")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return
+}
+
+// Create a Midd #route:"POST /"#
+func (Group) Create_2(_xToken string /* #in:"header" name:"x-token"# */, _midd *Midd) (err error) {
+	resp, err := Client.Clone().
+		SetJSON(_midd).
+		Post("group/midd")
+	if err != nil {
+		return err
+	}
+
+	switch code := resp.StatusCode(); code {
+	case 400:
+		err = fmt.Errorf(string(resp.Body()))
+	default:
+		if code >= 400 {
+			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
+		}
+	}
+
+	if err != nil {
+		return err
 	}
 
 	return
