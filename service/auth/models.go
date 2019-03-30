@@ -10,7 +10,7 @@
 package auth
 
 import (
-	"net/url"
+	"net/http"
 	"strconv"
 )
 
@@ -26,6 +26,7 @@ func VerifyApiKey(token string /* #in:"header"# */) (userID uint64, err error) {
 }
 
 // VerifyBasic #security:"basic"#
-func VerifyBasic(userInfo *url.Userinfo) (userID uint64, err error) {
-	return strconv.ParseUint(userInfo.Username(), 0, 0)
+func VerifyBasic(r *http.Request) (userID uint64, err error) {
+	u, _, _ := r.BasicAuth()
+	return strconv.ParseUint(u, 0, 0)
 }
