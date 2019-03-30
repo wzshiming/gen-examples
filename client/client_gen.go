@@ -72,10 +72,17 @@ type MiddWithID struct {
 
 type Session struct{}
 
-// Verify #security:"apiKey"#
-func Verify(_token string /* #in:"header"# */) {
+// VerifyApiKey #security:"apiKey"#
+func VerifyApiKey(_token string /* #in:"header"# */) {
 	Client = Client.
 		SetHeader("token", fmt.Sprint(_token))
+
+}
+
+// VerifyBasic #security:"basic"#
+func VerifyBasic(username string, password string) {
+	Client = Client.
+		SetBasicAuth(username, password)
 
 }
 

@@ -597,8 +597,8 @@ func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token
 	return
 }
 
-// _securityAPIKeyVerify Is the security of Verify
-func _securityAPIKeyVerify(w http.ResponseWriter, r *http.Request) (_userID uint64, err error) {
+// _securityAPIKeyVerifyAPIKey Is the security of VerifyApiKey
+func _securityAPIKeyVerifyAPIKey(w http.ResponseWriter, r *http.Request) (_userID uint64, err error) {
 	var _token string
 
 	// Parsing token.
@@ -607,8 +607,23 @@ func _securityAPIKeyVerify(w http.ResponseWriter, r *http.Request) (_userID uint
 		return
 	}
 
-	// Call github.com/wzshiming/gen-examples/service/auth Verify.
-	_userID, err = githubComWzshimingGenExamplesServiceAuth.Verify(_token)
+	// Call github.com/wzshiming/gen-examples/service/auth VerifyApiKey.
+	_userID, err = githubComWzshimingGenExamplesServiceAuth.VerifyApiKey(_token)
+
+	// Response code 400 Bad Request for err.
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	return
+}
+
+// _securityBasicVerifyBasic Is the security of VerifyBasic
+func _securityBasicVerifyBasic(w http.ResponseWriter, r *http.Request) (_userID uint64, err error) {
+
+	// Call github.com/wzshiming/gen-examples/service/auth VerifyBasic.
+	_userID, err = githubComWzshimingGenExamplesServiceAuth.VerifyBasic(r.URL.User)
 
 	// Response code 400 Bad Request for err.
 	if err != nil {
@@ -627,8 +642,13 @@ func _operationPutAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 	var _authID int
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -670,8 +690,13 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 	var _limit int
 	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -734,8 +759,13 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 	var _authID int
 	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -791,8 +821,13 @@ func _operationDeleteAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.Auth
 	var _userID_1 uint64
 	var _authID int
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -826,8 +861,13 @@ func _operationPostAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService,
 	var _userID_1 uint64
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -1250,8 +1290,13 @@ func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 	var _authID int
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -1293,8 +1338,13 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 	var _limit int
 	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -1357,8 +1407,13 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 	var _authID int
 	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -1414,8 +1469,13 @@ func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGrou
 	var _userID_1 uint64
 	var _authID int
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyApiKey.
+	_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	if err != nil {
+		// Permission verification call VerifyBasic.
+		_userID_1, err = _securityBasicVerifyBasic(w, r)
+	}
+
 	if err != nil {
 		return
 	}
@@ -1449,8 +1509,13 @@ func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group,
 	var _userID_1 uint64
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
 
-	// Permission verification call Verify.
-	_userID_1, err = _securityAPIKeyVerify(w, r)
+	// Permission verification call VerifyBasic.
+	_userID_1, err = _securityBasicVerifyBasic(w, r)
+	if err != nil {
+		// Permission verification call VerifyApiKey.
+		_userID_1, err = _securityAPIKeyVerifyAPIKey(w, r)
+	}
+
 	if err != nil {
 		return
 	}

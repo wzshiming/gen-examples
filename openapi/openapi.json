@@ -88,7 +88,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    },
@@ -116,7 +119,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyApiKey": []
+     },
+     {
+      "VerifyBasic": []
      }
     ]
    }
@@ -158,7 +164,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    },
@@ -191,7 +200,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    },
@@ -221,7 +233,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyApiKey": []
+     },
+     {
+      "VerifyBasic": []
      }
     ]
    }
@@ -337,7 +352,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    },
@@ -365,7 +383,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    }
@@ -407,7 +428,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    },
@@ -440,7 +464,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    },
@@ -470,7 +497,10 @@
     },
     "security": [
      {
-      "Verify": []
+      "VerifyBasic": []
+     },
+     {
+      "VerifyApiKey": []
      }
     ]
    }
@@ -1591,11 +1621,16 @@
    }
   },
   "securitySchemes": {
-   "Verify": {
+   "VerifyApiKey": {
     "type": "apiKey",
-    "description": "Verify #security:\"apiKey\"#",
+    "description": "VerifyApiKey #security:\"apiKey\"#",
     "name": "token",
     "in": "header"
+   },
+   "VerifyBasic": {
+    "type": "http",
+    "description": "VerifyBasic #security:\"basic\"#",
+    "scheme": "basic"
    }
   }
  },
