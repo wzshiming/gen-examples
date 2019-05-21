@@ -8,7 +8,7 @@ import (
 
 // MiddWithID is Midd with ID
 type MiddWithID struct {
-	ID int `json:"midd_id,string"`
+	ID int `json:"midd_id"`
 	Midd
 }
 
