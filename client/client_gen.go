@@ -29,6 +29,10 @@ type AuthWithID struct {
 	Auth     //
 }
 
+type Error struct {
+	Error string `json:"error"` //
+}
+
 // FileService
 // #path:"/file/"#
 type FileService struct {
@@ -73,7 +77,7 @@ type MiddService struct{}
 
 // MiddWithID is Midd with ID
 type MiddWithID struct {
-	ID   int `json:"midd_id,string"` //
+	ID   int `json:"midd_id"` //
 	Midd     //
 }
 
@@ -117,7 +121,13 @@ func (AuthService) Update(_authID int /* #name:"auth_id"# */, _auth *Auth /* #na
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -153,7 +163,13 @@ func (AuthService) List(_offset int /* #name:"offset"# */, _limit int /* #name:"
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_auths)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -185,7 +201,13 @@ func (AuthService) Get(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID 
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_auth_1)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -215,7 +237,13 @@ func (AuthService) Delete(_authID int /* #name:"auth_id"# */) (err error /* #nam
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -242,7 +270,13 @@ func (AuthService) Create(_auth *Auth /* #name:"auth"# */) (err error /* #name:"
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -271,7 +305,13 @@ func (FileService) Upload(_file io.Reader /* #name:"file"# */) (_filename string
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_filename)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -301,7 +341,13 @@ func (FileService) Get(_filename_1 string /* #name:"filename"# */) (_file_1 []by
 	switch code := resp.StatusCode(); code {
 	case 200:
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -332,7 +378,13 @@ func (Group) ItemUpdate(_itemID int /* #name:"item_id"# */, _item *Item /* #name
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -368,7 +420,13 @@ func (Group) ItemList(_offset int /* #name:"offset"# */, _limit int /* #name:"li
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_items)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -400,7 +458,13 @@ func (Group) ItemGet(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID /*
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_item_1)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -430,7 +494,13 @@ func (Group) ItemDelete(_itemID int /* #name:"item_id"# */) (err error /* #name:
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -457,7 +527,13 @@ func (Group) ItemCreate(_item *Item /* #name:"item"# */) (err error /* #name:"er
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -486,7 +562,13 @@ func (Group) FileUpload(_file io.Reader /* #name:"file"# */) (_filename string /
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_filename)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -516,7 +598,13 @@ func (Group) FileGet(_filename_1 string /* #name:"filename"# */) (_file_1 []byte
 	switch code := resp.StatusCode(); code {
 	case 200:
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -547,7 +635,13 @@ func (Group) AuthUpdate(_authID int /* #name:"auth_id"# */, _auth *Auth /* #name
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -583,7 +677,13 @@ func (Group) AuthList(_offset int /* #name:"offset"# */, _limit int /* #name:"li
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_auths)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -615,7 +715,13 @@ func (Group) AuthGet(_authID int /* #name:"auth_id"# */) (_auth_1 *AuthWithID /*
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_auth_1)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -645,7 +751,13 @@ func (Group) AuthDelete(_authID int /* #name:"auth_id"# */) (err error /* #name:
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -672,7 +784,13 @@ func (Group) AuthCreate(_auth *Auth /* #name:"auth"# */) (err error /* #name:"er
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -703,7 +821,13 @@ func (Group) MiddUpdate(_xToken string /* #in:"header" name:"x-token"# */, _midd
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -739,7 +863,13 @@ func (Group) MiddList(_xToken string /* #in:"header" name:"x-token"# */, _offset
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_midds)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -771,7 +901,13 @@ func (Group) MiddGet(_xToken string /* #in:"header" name:"x-token"# */, _middID 
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_midd_1)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -801,7 +937,13 @@ func (Group) MiddDelete(_xToken string /* #in:"header" name:"x-token"# */, _midd
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -828,7 +970,13 @@ func (Group) MiddCreate(_xToken string /* #in:"header" name:"x-token"# */, _midd
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -859,7 +1007,13 @@ func (ItemService) Update(_itemID int /* #name:"item_id"# */, _item *Item /* #na
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -895,7 +1049,13 @@ func (ItemService) List(_offset int /* #name:"offset"# */, _limit int /* #name:"
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_items)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -927,7 +1087,13 @@ func (ItemService) Get(_itemID int /* #name:"item_id"# */) (_item_1 *ItemWithID 
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_item_1)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -957,7 +1123,13 @@ func (ItemService) Delete(_itemID int /* #name:"item_id"# */) (err error /* #nam
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -984,7 +1156,13 @@ func (ItemService) Create(_item *Item /* #name:"item"# */) (err error /* #name:"
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -1015,7 +1193,13 @@ func (MiddService) Update(_xToken string /* #in:"header" name:"x-token"# */, _mi
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -1051,7 +1235,13 @@ func (MiddService) List(_xToken string /* #in:"header" name:"x-token"# */, _offs
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_midds)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -1083,7 +1273,13 @@ func (MiddService) Get(_xToken string /* #in:"header" name:"x-token"# */, _middI
 	case 200:
 		err = json.Unmarshal(resp.Body(), &_midd_1)
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -1113,7 +1309,13 @@ func (MiddService) Delete(_xToken string /* #in:"header" name:"x-token"# */, _mi
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))
@@ -1140,7 +1342,13 @@ func (MiddService) Create(_xToken string /* #in:"header" name:"x-token"# */, _mi
 
 	switch code := resp.StatusCode(); code {
 	case 400:
-		err = fmt.Errorf(string(resp.Body()))
+		var _e *Error
+		err = json.Unmarshal(resp.Body(), &_e)
+
+		if err == nil {
+			err = fmt.Errorf("%+v", _e)
+		}
+
 	default:
 		if code >= 400 {
 			err = fmt.Errorf("Undefined code %d %s", code, http.StatusText(code))

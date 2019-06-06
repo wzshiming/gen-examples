@@ -77,6 +77,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -88,10 +93,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    },
@@ -108,6 +113,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -119,10 +129,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    }
@@ -153,6 +163,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -164,10 +179,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    },
@@ -189,6 +204,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -200,10 +220,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    },
@@ -222,6 +242,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -265,6 +290,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -303,6 +333,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -346,6 +381,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -357,10 +397,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    },
@@ -377,6 +417,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -388,10 +433,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    }
@@ -422,6 +467,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -433,10 +483,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    },
@@ -458,6 +508,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -469,10 +524,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    },
@@ -491,6 +546,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -502,10 +562,10 @@
     },
     "security": [
      {
-      "VerifyBasic": []
+      "VerifyApiKey": []
      },
      {
-      "VerifyApiKey": []
+      "VerifyBasic": []
      }
     ]
    }
@@ -534,6 +594,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -572,6 +637,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -615,6 +685,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -638,6 +713,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -675,6 +755,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -703,6 +788,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -728,6 +818,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -774,6 +869,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -802,6 +902,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -842,6 +947,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -873,6 +983,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -901,6 +1016,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -944,6 +1064,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -967,6 +1092,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1004,6 +1134,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1032,6 +1167,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1057,6 +1197,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1103,6 +1248,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1131,6 +1281,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1171,6 +1326,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1202,6 +1362,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1230,6 +1395,11 @@
      "400": {
       "description": "Response code is 400",
       "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       },
        "text/plain": {
         "schema": {
          "type": "string",
@@ -1288,6 +1458,17 @@
      }
     },
     "description": "AuthWithID is Auth with ID"
+   },
+   "Error": {
+    "required": [
+     "error"
+    ],
+    "type": "object",
+    "properties": {
+     "error": {
+      "type": "string"
+     }
+    }
    },
    "FileService": {
     "required": [
@@ -1391,7 +1572,7 @@
     ],
     "properties": {
      "midd_id": {
-      "type": "string",
+      "type": "integer",
       "format": "int64"
      }
     },
@@ -1430,9 +1611,24 @@
      }
     }
    },
+   "e_body": {
+    "description": "\n#code:\"400\"#",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    }
+   },
    "err_body": {
     "description": "Response code is 400",
     "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     },
      "text/plain": {
       "schema": {
        "type": "string",
