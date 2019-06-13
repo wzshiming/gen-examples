@@ -1742,6 +1742,7 @@
     "in": "path",
     "description": "#name:\"auth_id\"#",
     "required": true,
+    "explode": false,
     "schema": {
      "type": "integer",
      "format": "int64"
@@ -1751,6 +1752,7 @@
     "name": "filename",
     "in": "path",
     "required": true,
+    "explode": false,
     "schema": {
      "type": "string"
     }
@@ -1760,6 +1762,7 @@
     "in": "path",
     "description": "#name:\"item_id\"#",
     "required": true,
+    "explode": false,
     "schema": {
      "type": "integer",
      "format": "int64"
@@ -1768,6 +1771,7 @@
    "limit_query": {
     "name": "limit",
     "in": "query",
+    "explode": false,
     "schema": {
      "type": "integer",
      "format": "int64"
@@ -1778,6 +1782,7 @@
     "in": "path",
     "description": "#name:\"midd_id\"#",
     "required": true,
+    "explode": false,
     "schema": {
      "type": "integer",
      "format": "int64"
@@ -1786,6 +1791,7 @@
    "offset_query": {
     "name": "offset",
     "in": "query",
+    "explode": false,
     "schema": {
      "type": "integer",
      "format": "int64"
@@ -1795,6 +1801,7 @@
     "name": "token",
     "in": "header",
     "description": "#in:\"header\"#",
+    "explode": false,
     "schema": {
      "type": "string"
     }
@@ -1803,6 +1810,7 @@
     "name": "x-token",
     "in": "header",
     "description": "#in:\"header\" name:\"x-token\"#",
+    "explode": false,
     "schema": {
      "type": "string"
     }

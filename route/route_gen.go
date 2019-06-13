@@ -7,6 +7,7 @@ import (
 	bytes "bytes"
 	json "encoding/json"
 	errors "errors"
+	"fmt"
 	io "io"
 	ioutil "io/ioutil"
 	http "net/http"
@@ -21,6 +22,15 @@ import (
 	githubComWzshimingGenExamplesServiceItem "github.com/wzshiming/gen-examples/service/item"
 	githubComWzshimingGenExamplesServiceMidd "github.com/wzshiming/gen-examples/service/midd"
 )
+
+// notFoundHandler Is the not found of handler
+func notFoundHandler(w http.ResponseWriter, r *http.Request) {
+
+	err := fmt.Errorf("Not found '%s %s'", r.Method, r.URL.Path)
+
+	_wrappingErrErrorResp(w, r, 404, err)
+
+}
 
 // Router is all routing for package
 // generated do not edit.
@@ -47,6 +57,7 @@ func Router() http.Handler {
 	var _middService githubComWzshimingGenExamplesServiceMidd.MiddService
 	RouteMiddService(router, &_middService)
 
+	router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
 	return router
 }
 
@@ -96,6 +107,9 @@ func RouteAuthService(router *mux.Router, _authService *githubComWzshimingGenExa
 	})
 	_routeAuth.Methods("PUT").Path("/{auth_id}").Handler(__operationPutAuthAuthID)
 
+	if router.NotFoundHandler == nil {
+		router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+	}
 	return router
 }
 
@@ -124,6 +138,9 @@ func RouteFileService(router *mux.Router, _fileService *githubComWzshimingGenExa
 	})
 	_routeFile.Methods("GET").Path("/{filename}").Handler(__operationGetFileFilename)
 
+	if router.NotFoundHandler == nil {
+		router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+	}
 	return router
 }
 
@@ -272,6 +289,9 @@ func RouteGroup(router *mux.Router, _group *githubComWzshimingGenExamplesService
 	})
 	_routeGroupAuth.Methods("PUT").Path("/{auth_id}").Handler(__operationPutGroupAuthAuthID)
 
+	if router.NotFoundHandler == nil {
+		router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+	}
 	return router
 }
 
@@ -321,6 +341,9 @@ func RouteItemService(router *mux.Router, _itemService *githubComWzshimingGenExa
 	})
 	_routeItem.Methods("PUT").Path("/{item_id}").Handler(__operationPutItemItemID)
 
+	if router.NotFoundHandler == nil {
+		router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+	}
 	return router
 }
 
@@ -370,6 +393,9 @@ func RouteMiddService(router *mux.Router, _middService *githubComWzshimingGenExa
 	})
 	_routeMidd.Methods("PUT").Path("/{midd_id}").Handler(__operationPutMiddMiddID)
 
+	if router.NotFoundHandler == nil {
+		router.NotFoundHandler = http.HandlerFunc(notFoundHandler)
+	}
 	return router
 }
 
@@ -381,14 +407,14 @@ func _requestBodyAuth(w http.ResponseWriter, r *http.Request) (_auth *githubComW
 	var __auth []byte
 	__auth, err = ioutil.ReadAll(r.Body)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
 
 	err = json.Unmarshal(__auth, &_auth)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -406,7 +432,7 @@ func _requestPathAuthID(w http.ResponseWriter, r *http.Request) (_authID int, er
 	}
 
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -440,7 +466,7 @@ func _requestBodyFile(w http.ResponseWriter, r *http.Request) (_file io.Reader, 
 	__file := bytes.NewBuffer(nil)
 	_, err = io.Copy(__file, body)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -456,7 +482,7 @@ func _requestPathFilename(w http.ResponseWriter, r *http.Request) (_filename str
 	var _rawFilename = mux.Vars(r)["filename"]
 	_filename = string(_rawFilename)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -472,14 +498,14 @@ func _requestBodyItem(w http.ResponseWriter, r *http.Request) (_item *githubComW
 	var __item []byte
 	__item, err = ioutil.ReadAll(r.Body)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
 
 	err = json.Unmarshal(__item, &_item)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -497,7 +523,7 @@ func _requestPathItemID(w http.ResponseWriter, r *http.Request) (_itemID int, er
 	}
 
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -514,12 +540,14 @@ func _requestQueryLimit(w http.ResponseWriter, r *http.Request) (_limit int, err
 		return
 	}
 
-	if __limit, err := strconv.ParseInt(_rawLimit[0], 0, 0); err == nil {
+	__rawLimit_0 := _rawLimit[0]
+
+	if __limit, err := strconv.ParseInt(__rawLimit_0, 0, 0); err == nil {
 		_limit = int(__limit)
 	}
 
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -535,14 +563,14 @@ func _requestBodyMidd(w http.ResponseWriter, r *http.Request) (_midd *githubComW
 	var __midd []byte
 	__midd, err = ioutil.ReadAll(r.Body)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
 
 	err = json.Unmarshal(__midd, &_midd)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -560,7 +588,7 @@ func _requestPathMiddID(w http.ResponseWriter, r *http.Request) (_middID int, er
 	}
 
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -577,12 +605,14 @@ func _requestQueryOffset(w http.ResponseWriter, r *http.Request) (_offset int, e
 		return
 	}
 
-	if __offset, err := strconv.ParseInt(_rawOffset[0], 0, 0); err == nil {
+	__rawOffset_0 := _rawOffset[0]
+
+	if __offset, err := strconv.ParseInt(__rawOffset_0, 0, 0); err == nil {
 		_offset = int(__offset)
 	}
 
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -596,7 +626,7 @@ func _requestHeaderToken(w http.ResponseWriter, r *http.Request) (_token string,
 	var _rawToken = r.Header.Get("token")
 	_token = string(_rawToken)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -610,7 +640,7 @@ func _requestHeaderXToken(w http.ResponseWriter, r *http.Request) (_xToken strin
 	var _rawXToken = r.Header.Get("x-token")
 	_xToken = string(_rawXToken)
 	if err != nil {
-		_wrappingErrErrorResp(w, r, err)
+		_wrappingErrErrorResp(w, r, 400, err)
 
 		return
 	}
@@ -633,7 +663,7 @@ func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_s
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -655,7 +685,7 @@ func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -663,7 +693,7 @@ func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token
 }
 
 // _wrappingErrErrorResp Is the wrapping of ErrorResp
-func _wrappingErrErrorResp(w http.ResponseWriter, r *http.Request, _rawErr error) {
+func _wrappingErrErrorResp(w http.ResponseWriter, r *http.Request, _code int, _rawErr error) {
 	var _e *githubComWzshimingGenExamplesServiceErrresp.Error
 	var _err error
 
@@ -673,13 +703,13 @@ func _wrappingErrErrorResp(w http.ResponseWriter, r *http.Request, _rawErr error
 	var __e []byte
 	__e, _err = json.Marshal(_e)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.WriteHeader(400)
+	w.WriteHeader(_code)
 	w.Write(__e)
 
 	return
@@ -700,7 +730,7 @@ func _securityAPIKeyVerifyAPIKey(w http.ResponseWriter, r *http.Request) (_userI
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -715,7 +745,7 @@ func _securityBasicVerifyBasic(w http.ResponseWriter, r *http.Request) (_userID 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -738,7 +768,7 @@ func _operationPutAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -760,7 +790,7 @@ func _operationPutAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -788,7 +818,7 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -813,7 +843,7 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 		var __auths []byte
 		__auths, _err = json.Marshal(_auths)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -826,14 +856,14 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __auths []byte
 	__auths, _err = json.Marshal(_auths)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -861,7 +891,7 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -880,7 +910,7 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 		var __auth_1 []byte
 		__auth_1, _err = json.Marshal(_auth_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -893,14 +923,14 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __auth_1 []byte
 	__auth_1, _err = json.Marshal(_auth_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -927,7 +957,7 @@ func _operationDeleteAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.Auth
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -943,7 +973,7 @@ func _operationDeleteAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.Auth
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -969,7 +999,7 @@ func _operationPostAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService,
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -985,7 +1015,7 @@ func _operationPostAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1016,7 +1046,7 @@ func _operationPostFile(s *githubComWzshimingGenExamplesServiceFile.FileService,
 		var __filename_1 []byte
 		__filename_1, _err = json.Marshal(_filename_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1029,14 +1059,14 @@ func _operationPostFile(s *githubComWzshimingGenExamplesServiceFile.FileService,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __filename_1 []byte
 	__filename_1, _err = json.Marshal(_filename_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1076,7 +1106,7 @@ func _operationGetFileFilename(s *githubComWzshimingGenExamplesServiceFile.FileS
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1113,7 +1143,7 @@ func _operationPutGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1151,7 +1181,7 @@ func _operationGetGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 		var __items []byte
 		__items, _err = json.Marshal(_items)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1164,14 +1194,14 @@ func _operationGetGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __items []byte
 	__items, _err = json.Marshal(_items)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1203,7 +1233,7 @@ func _operationGetGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.G
 		var __item_1 []byte
 		__item_1, _err = json.Marshal(_item_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1216,14 +1246,14 @@ func _operationGetGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __item_1 []byte
 	__item_1, _err = json.Marshal(_item_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1251,7 +1281,7 @@ func _operationDeleteGroupItemItemID(s *githubComWzshimingGenExamplesServiceGrou
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1278,7 +1308,7 @@ func _operationPostGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1309,7 +1339,7 @@ func _operationPostGroupFile(s *githubComWzshimingGenExamplesServiceGroup.Group,
 		var __filename_1 []byte
 		__filename_1, _err = json.Marshal(_filename_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1322,14 +1352,14 @@ func _operationPostGroupFile(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __filename_1 []byte
 	__filename_1, _err = json.Marshal(_filename_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1369,7 +1399,7 @@ func _operationGetGroupFileFilename(s *githubComWzshimingGenExamplesServiceGroup
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1399,7 +1429,7 @@ func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -1421,7 +1451,7 @@ func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1449,7 +1479,7 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -1474,7 +1504,7 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 		var __auths []byte
 		__auths, _err = json.Marshal(_auths)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1487,14 +1517,14 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __auths []byte
 	__auths, _err = json.Marshal(_auths)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1522,7 +1552,7 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -1541,7 +1571,7 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 		var __auth_1 []byte
 		__auth_1, _err = json.Marshal(_auth_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1554,14 +1584,14 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __auth_1 []byte
 	__auth_1, _err = json.Marshal(_auth_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1588,7 +1618,7 @@ func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGrou
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -1604,7 +1634,7 @@ func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGrou
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1630,7 +1660,7 @@ func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group,
 		_err = errors.New("Unauthorized")
 	}
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 401, _err)
 
 		return
 	}
@@ -1646,7 +1676,7 @@ func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1687,7 +1717,7 @@ func _operationPutGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1732,7 +1762,7 @@ func _operationGetGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 		var __midds []byte
 		__midds, _err = json.Marshal(_midds)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1745,14 +1775,14 @@ func _operationGetGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __midds []byte
 	__midds, _err = json.Marshal(_midds)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1791,7 +1821,7 @@ func _operationGetGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.G
 		var __midd_1 []byte
 		__midd_1, _err = json.Marshal(_midd_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1804,14 +1834,14 @@ func _operationGetGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __midd_1 []byte
 	__midd_1, _err = json.Marshal(_midd_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -1846,7 +1876,7 @@ func _operationDeleteGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGrou
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1880,7 +1910,7 @@ func _operationPostGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1914,7 +1944,7 @@ func _operationPutItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemSer
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -1952,7 +1982,7 @@ func _operationGetItem(s *githubComWzshimingGenExamplesServiceItem.ItemService, 
 		var __items []byte
 		__items, _err = json.Marshal(_items)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -1965,14 +1995,14 @@ func _operationGetItem(s *githubComWzshimingGenExamplesServiceItem.ItemService, 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __items []byte
 	__items, _err = json.Marshal(_items)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -2004,7 +2034,7 @@ func _operationGetItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemSer
 		var __item_1 []byte
 		__item_1, _err = json.Marshal(_item_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -2017,14 +2047,14 @@ func _operationGetItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemSer
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __item_1 []byte
 	__item_1, _err = json.Marshal(_item_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -2052,7 +2082,7 @@ func _operationDeleteItemItemID(s *githubComWzshimingGenExamplesServiceItem.Item
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -2079,7 +2109,7 @@ func _operationPostItem(s *githubComWzshimingGenExamplesServiceItem.ItemService,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -2120,7 +2150,7 @@ func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddSer
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -2165,7 +2195,7 @@ func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, 
 		var __midds []byte
 		__midds, _err = json.Marshal(_midds)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -2178,14 +2208,14 @@ func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, 
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __midds []byte
 	__midds, _err = json.Marshal(_midds)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -2224,7 +2254,7 @@ func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddSer
 		var __midd_1 []byte
 		__midd_1, _err = json.Marshal(_midd_1)
 		if _err != nil {
-			_wrappingErrErrorResp(w, r, _err)
+			_wrappingErrErrorResp(w, r, 500, _err)
 
 			return
 		}
@@ -2237,14 +2267,14 @@ func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddSer
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
 	var __midd_1 []byte
 	__midd_1, _err = json.Marshal(_midd_1)
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 500, _err)
 
 		return
 	}
@@ -2279,7 +2309,7 @@ func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.Midd
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
@@ -2313,7 +2343,7 @@ func _operationPostMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService,
 
 	// Response code 400 Bad Request for err.
 	if _err != nil {
-		_wrappingErrErrorResp(w, r, _err)
+		_wrappingErrErrorResp(w, r, 400, _err)
 		return
 	}
 
