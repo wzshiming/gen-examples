@@ -51,7 +51,7 @@
      "AuthService"
     ],
     "summary": "List of the Auth ",
-    "description": "List of the Auth \n#route:\"GET /\"#",
+    "description": "List of the Auth \n\n#route:\"GET /\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/offset_query"
@@ -105,7 +105,7 @@
      "AuthService"
     ],
     "summary": "Create a Auth ",
-    "description": "Create a Auth \n#route:\"POST /\"#",
+    "description": "Create a Auth \n\n#route:\"POST /\"#",
     "requestBody": {
      "$ref": "#/components/requestBodies/auth_body"
     },
@@ -143,7 +143,7 @@
      "AuthService"
     ],
     "summary": "Get the Auth ",
-    "description": "Get the Auth \n#route:\"GET /{auth_id}\"#",
+    "description": "Get the Auth \n\n#route:\"GET /{auth_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/auth_id_path"
@@ -191,7 +191,7 @@
      "AuthService"
     ],
     "summary": "Update the Auth ",
-    "description": "Update the Auth \n#route:\"PUT /{auth_id}\"#",
+    "description": "Update the Auth \n\n#route:\"PUT /{auth_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/auth_id_path"
@@ -232,7 +232,7 @@
      "AuthService"
     ],
     "summary": "Delete the Auth ",
-    "description": "Delete the Auth \n#route:\"DELETE /{auth_id}\"#",
+    "description": "Delete the Auth \n\n#route:\"DELETE /{auth_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/auth_id_path"
@@ -272,7 +272,7 @@
      "FileService"
     ],
     "summary": "Upload a file ",
-    "description": "Upload a file \n#route:\"POST /\"#",
+    "description": "Upload a file \n\n#route:\"POST /\"#",
     "requestBody": {
      "$ref": "#/components/requestBodies/file_body"
     },
@@ -312,7 +312,7 @@
      "FileService"
     ],
     "summary": "Get a file ",
-    "description": "Get a file \n#route:\"GET /{filename}\"#",
+    "description": "Get a file \n\n#route:\"GET /{filename}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/filename_path"
@@ -320,7 +320,7 @@
     ],
     "responses": {
      "200": {
-      "description": "\n#content:\"application/octet-stream\"#",
+      "description": "\n\n#content:\"application/octet-stream\"#",
       "content": {
        "application/octet-stream": {
         "schema": {
@@ -355,7 +355,7 @@
      "Group"
     ],
     "summary": "List of the Auth ",
-    "description": "List of the Auth \n#route:\"GET /\"#",
+    "description": "List of the Auth \n\n#route:\"GET /\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/offset_query"
@@ -409,7 +409,7 @@
      "Group"
     ],
     "summary": "Create a Auth ",
-    "description": "Create a Auth \n#route:\"POST /\"#",
+    "description": "Create a Auth \n\n#route:\"POST /\"#",
     "requestBody": {
      "$ref": "#/components/requestBodies/auth_body"
     },
@@ -447,7 +447,7 @@
      "Group"
     ],
     "summary": "Get the Auth ",
-    "description": "Get the Auth \n#route:\"GET /{auth_id}\"#",
+    "description": "Get the Auth \n\n#route:\"GET /{auth_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/auth_id_path"
@@ -495,7 +495,7 @@
      "Group"
     ],
     "summary": "Update the Auth ",
-    "description": "Update the Auth \n#route:\"PUT /{auth_id}\"#",
+    "description": "Update the Auth \n\n#route:\"PUT /{auth_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/auth_id_path"
@@ -536,7 +536,7 @@
      "Group"
     ],
     "summary": "Delete the Auth ",
-    "description": "Delete the Auth \n#route:\"DELETE /{auth_id}\"#",
+    "description": "Delete the Auth \n\n#route:\"DELETE /{auth_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/auth_id_path"
@@ -576,7 +576,7 @@
      "Group"
     ],
     "summary": "Upload a file ",
-    "description": "Upload a file \n#route:\"POST /\"#",
+    "description": "Upload a file \n\n#route:\"POST /\"#",
     "requestBody": {
      "$ref": "#/components/requestBodies/file_body"
     },
@@ -616,7 +616,7 @@
      "Group"
     ],
     "summary": "Get a file ",
-    "description": "Get a file \n#route:\"GET /{filename}\"#",
+    "description": "Get a file \n\n#route:\"GET /{filename}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/filename_path"
@@ -624,7 +624,7 @@
     ],
     "responses": {
      "200": {
-      "description": "\n#content:\"application/octet-stream\"#",
+      "description": "\n\n#content:\"application/octet-stream\"#",
       "content": {
        "application/octet-stream": {
         "schema": {
@@ -659,13 +659,13 @@
      "Group"
     ],
     "summary": "List of the Item ",
-    "description": "List of the Item \n#route:\"GET /\"#",
+    "description": "List of the Item \n\n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/offset_query"
+      "$ref": "#/components/parameters/offset_query.1"
      },
      {
-      "$ref": "#/components/parameters/limit_query"
+      "$ref": "#/components/parameters/limit_query.1"
      }
     ],
     "responses": {
@@ -705,7 +705,7 @@
      "Group"
     ],
     "summary": "Create a Item ",
-    "description": "Create a Item \n#route:\"POST /\"#",
+    "description": "Create a Item \n\n#route:\"POST /\"#",
     "requestBody": {
      "$ref": "#/components/requestBodies/item_body"
     },
@@ -735,7 +735,7 @@
      "Group"
     ],
     "summary": "Get the Item ",
-    "description": "Get the Item \n#route:\"GET /{item_id}\"#",
+    "description": "Get the Item \n\n#route:\"GET /{item_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/item_id_path"
@@ -775,7 +775,7 @@
      "Group"
     ],
     "summary": "Update the Item ",
-    "description": "Update the Item \n#route:\"PUT /{item_id}\"#",
+    "description": "Update the Item \n\n#route:\"PUT /{item_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/item_id_path"
@@ -808,7 +808,7 @@
      "Group"
     ],
     "summary": "Delete the Item ",
-    "description": "Delete the Item \n#route:\"DELETE /{item_id}\"#",
+    "description": "Delete the Item \n\n#route:\"DELETE /{item_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/item_id_path"
@@ -840,16 +840,16 @@
      "Group"
     ],
     "summary": "List of the Midd ",
-    "description": "List of the Midd \n#route:\"GET /\"#",
+    "description": "List of the Midd \n\n#route:\"GET /\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/offset_query"
+      "$ref": "#/components/parameters/offset_query.2"
      },
      {
-      "$ref": "#/components/parameters/limit_query"
+      "$ref": "#/components/parameters/limit_query.2"
      }
     ],
     "responses": {
@@ -889,7 +889,7 @@
      "Group"
     ],
     "summary": "Create a Midd ",
-    "description": "Create a Midd \n#route:\"POST /\"#",
+    "description": "Create a Midd \n\n#route:\"POST /\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -924,7 +924,7 @@
      "Group"
     ],
     "summary": "Get the Midd ",
-    "description": "Get the Midd \n#route:\"GET /{midd_id}\"#",
+    "description": "Get the Midd \n\n#route:\"GET /{midd_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -967,7 +967,7 @@
      "Group"
     ],
     "summary": "Update the Midd ",
-    "description": "Update the Midd \n#route:\"PUT /{midd_id}\"#",
+    "description": "Update the Midd \n\n#route:\"PUT /{midd_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -1003,7 +1003,7 @@
      "Group"
     ],
     "summary": "Delete the Midd ",
-    "description": "Delete the Midd \n#route:\"DELETE /{midd_id}\"#",
+    "description": "Delete the Midd \n\n#route:\"DELETE /{midd_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -1038,13 +1038,13 @@
      "ItemService"
     ],
     "summary": "List of the Item ",
-    "description": "List of the Item \n#route:\"GET /\"#",
+    "description": "List of the Item \n\n#route:\"GET /\"#",
     "parameters": [
      {
-      "$ref": "#/components/parameters/offset_query"
+      "$ref": "#/components/parameters/offset_query.1"
      },
      {
-      "$ref": "#/components/parameters/limit_query"
+      "$ref": "#/components/parameters/limit_query.1"
      }
     ],
     "responses": {
@@ -1084,7 +1084,7 @@
      "ItemService"
     ],
     "summary": "Create a Item ",
-    "description": "Create a Item \n#route:\"POST /\"#",
+    "description": "Create a Item \n\n#route:\"POST /\"#",
     "requestBody": {
      "$ref": "#/components/requestBodies/item_body"
     },
@@ -1114,7 +1114,7 @@
      "ItemService"
     ],
     "summary": "Get the Item ",
-    "description": "Get the Item \n#route:\"GET /{item_id}\"#",
+    "description": "Get the Item \n\n#route:\"GET /{item_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/item_id_path"
@@ -1154,7 +1154,7 @@
      "ItemService"
     ],
     "summary": "Update the Item ",
-    "description": "Update the Item \n#route:\"PUT /{item_id}\"#",
+    "description": "Update the Item \n\n#route:\"PUT /{item_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/item_id_path"
@@ -1187,7 +1187,7 @@
      "ItemService"
     ],
     "summary": "Delete the Item ",
-    "description": "Delete the Item \n#route:\"DELETE /{item_id}\"#",
+    "description": "Delete the Item \n\n#route:\"DELETE /{item_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/item_id_path"
@@ -1219,16 +1219,16 @@
      "MiddService"
     ],
     "summary": "List of the Midd ",
-    "description": "List of the Midd \n#route:\"GET /\"#",
+    "description": "List of the Midd \n\n#route:\"GET /\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
      },
      {
-      "$ref": "#/components/parameters/offset_query"
+      "$ref": "#/components/parameters/offset_query.2"
      },
      {
-      "$ref": "#/components/parameters/limit_query"
+      "$ref": "#/components/parameters/limit_query.2"
      }
     ],
     "responses": {
@@ -1268,7 +1268,7 @@
      "MiddService"
     ],
     "summary": "Create a Midd ",
-    "description": "Create a Midd \n#route:\"POST /\"#",
+    "description": "Create a Midd \n\n#route:\"POST /\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -1303,7 +1303,7 @@
      "MiddService"
     ],
     "summary": "Get the Midd ",
-    "description": "Get the Midd \n#route:\"GET /{midd_id}\"#",
+    "description": "Get the Midd \n\n#route:\"GET /{midd_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -1346,7 +1346,7 @@
      "MiddService"
     ],
     "summary": "Update the Midd ",
-    "description": "Update the Midd \n#route:\"PUT /{midd_id}\"#",
+    "description": "Update the Midd \n\n#route:\"PUT /{midd_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -1382,7 +1382,7 @@
      "MiddService"
     ],
     "summary": "Delete the Midd ",
-    "description": "Delete the Midd \n#route:\"DELETE /{midd_id}\"#",
+    "description": "Delete the Midd \n\n#route:\"DELETE /{midd_id}\"#",
     "parameters": [
      {
       "$ref": "#/components/parameters/x-token_header"
@@ -1423,18 +1423,18 @@
     "properties": {
      "message": {
       "type": "string",
-      "description": "Name is the message"
+      "description": "Name is the message\n"
      },
      "name": {
       "type": "string",
-      "description": "Name is the name"
+      "description": "Name is the name\n"
      }
     },
-    "description": "Auth is a auth"
+    "description": "Auth is a auth\n"
    },
-   "AuthService": {
+   "AuthService.1": {
     "type": "object",
-    "description": "AuthService \n#path:\"/auth/\"#"
+    "description": "AuthService \n\n\n#path:\"/auth/\"#"
    },
    "AuthWithID": {
     "required": [
@@ -1448,7 +1448,7 @@
         "$ref": "#/components/schemas/Auth"
        }
       ],
-      "description": "Auth is a auth"
+      "description": "Auth is a auth\n"
      }
     ],
     "properties": {
@@ -1457,7 +1457,7 @@
       "format": "int64"
      }
     },
-    "description": "AuthWithID is Auth with ID"
+    "description": "AuthWithID is Auth with ID\n"
    },
    "Error": {
     "required": [
@@ -1470,7 +1470,7 @@
      }
     }
    },
-   "FileService": {
+   "FileService.1": {
     "required": [
      "BasePath"
     ],
@@ -1480,7 +1480,7 @@
       "type": "string"
      }
     },
-    "description": "FileService \n#path:\"/file/\"#"
+    "description": "FileService \n\n\n#path:\"/file/\"#"
    },
    "Item": {
     "required": [
@@ -1491,18 +1491,18 @@
     "properties": {
      "Message": {
       "type": "string",
-      "description": "Message is the message of item"
+      "description": "Message is the message of item\n"
      },
      "Name": {
       "type": "string",
-      "description": "Name is the name of item"
+      "description": "Name is the name of item\n"
      }
     },
-    "description": "Item is a item"
+    "description": "Item is a item\n"
    },
    "ItemService": {
     "type": "object",
-    "description": "ItemService \n#path:\"/item/\"#"
+    "description": "ItemService \n\n\n#path:\"/item/\"#"
    },
    "ItemWithID": {
     "required": [
@@ -1516,7 +1516,7 @@
         "$ref": "#/components/schemas/Item"
        }
       ],
-      "description": "Item is a item"
+      "description": "Item is a item\n"
      }
     ],
     "properties": {
@@ -1525,7 +1525,7 @@
       "format": "int64"
      }
     },
-    "description": "ItemWithID is Item with ID"
+    "description": "ItemWithID is Item with ID\n"
    },
    "Midd": {
     "required": [
@@ -1537,23 +1537,23 @@
     "properties": {
      "message": {
       "type": "string",
-      "description": "Name is the message"
+      "description": "Name is the message\n"
      },
      "midd_id": {
       "type": "integer",
-      "description": "MiddID is the Midd ID",
+      "description": "MiddID is the Midd ID\n",
       "format": "int64"
      },
      "name": {
       "type": "string",
-      "description": "Name is the name"
+      "description": "Name is the name\n"
      }
     },
-    "description": "Midd is a midd"
+    "description": "Midd is a midd\n"
    },
    "MiddService": {
     "type": "object",
-    "description": "MiddService \n#path:\"/midd/\"#"
+    "description": "MiddService \n\n\n#path:\"/midd/\"#"
    },
    "MiddWithID": {
     "required": [
@@ -1567,7 +1567,7 @@
         "$ref": "#/components/schemas/Midd"
        }
       ],
-      "description": "Midd is a midd"
+      "description": "Midd is a midd\n"
      }
     ],
     "properties": {
@@ -1576,11 +1576,11 @@
       "format": "int64"
      }
     },
-    "description": "MiddWithID is Midd with ID"
+    "description": "MiddWithID is Midd with ID\n"
    },
    "Reader": {
     "type": "string",
-    "description": "Reader is the interface that wraps the basic Read method.\n\nRead reads up to len(p) bytes into p. It returns the number of bytes\nread (0 \u003c= n \u003c= len(p)) and any error encountered. Even if Read\nreturns n \u003c len(p), it may use all of p as scratch space during the call.\nIf some data is available but not len(p) bytes, Read conventionally\nreturns what is available instead of waiting for more.\n\nWhen Read encounters an error or end-of-file condition after\nsuccessfully reading n \u003e 0 bytes, it returns the number of\nbytes read. It may return the (non-nil) error from the same call\nor return the error (and n == 0) from a subsequent call.\nAn instance of this general case is that a Reader returning\na non-zero number of bytes at the end of the input stream may\nreturn either err == EOF or err == nil. The next Read should\nreturn 0, EOF.\n\nCallers should always process the n \u003e 0 bytes returned before\nconsidering the error err. Doing so correctly handles I/O errors\nthat happen after reading some bytes and also both of the\nallowed EOF behaviors.\n\nImplementations of Read are discouraged from returning a\nzero byte count with a nil error, except when len(p) == 0.\nCallers should treat a return of 0 and nil as indicating that\nnothing happened; in particular it does not indicate EOF.\n\nImplementations must not retain p.",
+    "description": "Reader is the interface that wraps the basic Read method.\nRead reads up to len(p) bytes into p. It returns the number of bytes\nread (0 \u003c= n \u003c= len(p)) and any error encountered. Even if Read\nreturns n \u003c len(p), it may use all of p as scratch space during the call.\nIf some data is available but not len(p) bytes, Read conventionally\nreturns what is available instead of waiting for more.\nWhen Read encounters an error or end-of-file condition after\nsuccessfully reading n \u003e 0 bytes, it returns the number of\nbytes read. It may return the (non-nil) error from the same call\nor return the error (and n == 0) from a subsequent call.\nAn instance of this general case is that a Reader returning\na non-zero number of bytes at the end of the input stream may\nreturn either err == EOF or err == nil. The next Read should\nreturn 0, EOF.\nCallers should always process the n \u003e 0 bytes returned before\nconsidering the error err. Doing so correctly handles I/O errors\nthat happen after reading some bytes and also both of the\nallowed EOF behaviors.\nImplementations of Read are discouraged from returning a\nzero byte count with a nil error, except when len(p) == 0.\nCallers should treat a return of 0 and nil as indicating that\nnothing happened; in particular it does not indicate EOF.\nImplementations must not retain p.\n",
     "format": "binary"
    },
    "Session": {
@@ -1612,7 +1612,7 @@
     }
    },
    "e_body": {
-    "description": "\n#code:\"400\"#",
+    "description": "\n\n#code:\"400\"#",
     "content": {
      "application/json": {
       "schema": {
@@ -1637,8 +1637,72 @@
      }
     }
    },
+   "err_body.1": {
+    "description": "Response code is 400",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     },
+     "text/plain": {
+      "schema": {
+       "type": "string",
+       "format": "error"
+      }
+     }
+    }
+   },
+   "err_body.2": {
+    "description": "Response code is 400",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     },
+     "text/plain": {
+      "schema": {
+       "type": "string",
+       "format": "error"
+      }
+     }
+    }
+   },
+   "err_body.3": {
+    "description": "Response code is 400",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     },
+     "text/plain": {
+      "schema": {
+       "type": "string",
+       "format": "error"
+      }
+     }
+    }
+   },
+   "err_body.4": {
+    "description": "Response code is 400",
+    "content": {
+     "application/json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     },
+     "text/plain": {
+      "schema": {
+       "type": "string",
+       "format": "error"
+      }
+     }
+    }
+   },
    "file_body": {
-    "description": "\n#content:\"application/octet-stream\"#",
+    "description": "\n\n#content:\"application/octet-stream\"#",
     "content": {
      "application/octet-stream": {
       "schema": {
@@ -1740,7 +1804,7 @@
    "auth_id_path": {
     "name": "auth_id",
     "in": "path",
-    "description": "#name:\"auth_id\"#",
+    "description": "\n\n#name:\"auth_id\"#",
     "required": true,
     "explode": false,
     "schema": {
@@ -1760,7 +1824,7 @@
    "item_id_path": {
     "name": "item_id",
     "in": "path",
-    "description": "#name:\"item_id\"#",
+    "description": "\n\n#name:\"item_id\"#",
     "required": true,
     "explode": false,
     "schema": {
@@ -1777,10 +1841,28 @@
      "format": "int64"
     }
    },
+   "limit_query.1": {
+    "name": "limit",
+    "in": "query",
+    "explode": false,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "limit_query.2": {
+    "name": "limit",
+    "in": "query",
+    "explode": false,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
    "midd_id_path": {
     "name": "midd_id",
     "in": "path",
-    "description": "#name:\"midd_id\"#",
+    "description": "\n\n#name:\"midd_id\"#",
     "required": true,
     "explode": false,
     "schema": {
@@ -1797,10 +1879,28 @@
      "format": "int64"
     }
    },
+   "offset_query.1": {
+    "name": "offset",
+    "in": "query",
+    "explode": false,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
+   "offset_query.2": {
+    "name": "offset",
+    "in": "query",
+    "explode": false,
+    "schema": {
+     "type": "integer",
+     "format": "int64"
+    }
+   },
    "token_header": {
     "name": "token",
     "in": "header",
-    "description": "#in:\"header\"#",
+    "description": "\n\n#in:\"header\"#",
     "explode": false,
     "schema": {
      "type": "string"
@@ -1809,7 +1909,7 @@
    "x-token_header": {
     "name": "x-token",
     "in": "header",
-    "description": "#in:\"header\" name:\"x-token\"#",
+    "description": "\n\n#in:\"header\" name:\"x-token\"#",
     "explode": false,
     "schema": {
      "type": "string"
@@ -1862,13 +1962,13 @@
   "securitySchemes": {
    "VerifyApiKey": {
     "type": "apiKey",
-    "description": "VerifyApiKey \n#security:\"apiKey\"#",
+    "description": "VerifyApiKey \n\n#security:\"apiKey\"#",
     "name": "token",
     "in": "header"
    },
    "VerifyBasic": {
     "type": "http",
-    "description": "VerifyBasic \n#security:\"basic\"#",
+    "description": "VerifyBasic \n\n#security:\"basic\"#",
     "scheme": "basic"
    }
   }
@@ -1876,23 +1976,23 @@
  "tags": [
   {
    "name": "AuthService",
-   "description": "AuthService \n#path:\"/auth/\"#"
+   "description": "AuthService \n\n\n#path:\"/auth/\"#"
   },
   {
    "name": "FileService",
-   "description": "FileService \n#path:\"/file/\"#"
+   "description": "FileService \n\n\n#path:\"/file/\"#"
   },
   {
    "name": "Group",
-   "description": "Group \n#path:\"/group\"#"
+   "description": "Group \n\n\n#path:\"/group\"#"
   },
   {
    "name": "ItemService",
-   "description": "ItemService \n#path:\"/item/\"#"
+   "description": "ItemService \n\n\n#path:\"/item/\"#"
   },
   {
    "name": "MiddService",
-   "description": "MiddService \n#path:\"/midd/\"#"
+   "description": "MiddService \n\n\n#path:\"/midd/\"#"
   }
  ]
 }

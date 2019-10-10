@@ -555,6 +555,54 @@ func _requestQueryLimit(w http.ResponseWriter, r *http.Request) (_limit int, err
 	return
 }
 
+// _requestQueryLimit_1 Parsing the query for of limit
+func _requestQueryLimit_1(w http.ResponseWriter, r *http.Request) (_limit_1 int, err error) {
+
+	var _rawLimit1 = r.URL.Query()["limit"]
+
+	if len(_rawLimit1) == 0 {
+		return
+	}
+
+	__rawLimit1_0 := _rawLimit1[0]
+
+	if __limit_1, err := strconv.ParseInt(__rawLimit1_0, 0, 0); err == nil {
+		_limit_1 = int(__limit_1)
+	}
+
+	if err != nil {
+		_wrappingErrErrorResp(w, r, 400, err)
+
+		return
+	}
+
+	return
+}
+
+// _requestQueryLimit_2 Parsing the query for of limit
+func _requestQueryLimit_2(w http.ResponseWriter, r *http.Request) (_limit_2 int, err error) {
+
+	var _rawLimit2 = r.URL.Query()["limit"]
+
+	if len(_rawLimit2) == 0 {
+		return
+	}
+
+	__rawLimit2_0 := _rawLimit2[0]
+
+	if __limit_2, err := strconv.ParseInt(__rawLimit2_0, 0, 0); err == nil {
+		_limit_2 = int(__limit_2)
+	}
+
+	if err != nil {
+		_wrappingErrErrorResp(w, r, 400, err)
+
+		return
+	}
+
+	return
+}
+
 // _requestBodyMidd Parsing the body for of midd
 func _requestBodyMidd(w http.ResponseWriter, r *http.Request) (_midd *githubComWzshimingGenExamplesServiceMidd.Midd, err error) {
 
@@ -620,6 +668,54 @@ func _requestQueryOffset(w http.ResponseWriter, r *http.Request) (_offset int, e
 	return
 }
 
+// _requestQueryOffset_1 Parsing the query for of offset
+func _requestQueryOffset_1(w http.ResponseWriter, r *http.Request) (_offset_1 int, err error) {
+
+	var _rawOffset1 = r.URL.Query()["offset"]
+
+	if len(_rawOffset1) == 0 {
+		return
+	}
+
+	__rawOffset1_0 := _rawOffset1[0]
+
+	if __offset_1, err := strconv.ParseInt(__rawOffset1_0, 0, 0); err == nil {
+		_offset_1 = int(__offset_1)
+	}
+
+	if err != nil {
+		_wrappingErrErrorResp(w, r, 400, err)
+
+		return
+	}
+
+	return
+}
+
+// _requestQueryOffset_2 Parsing the query for of offset
+func _requestQueryOffset_2(w http.ResponseWriter, r *http.Request) (_offset_2 int, err error) {
+
+	var _rawOffset2 = r.URL.Query()["offset"]
+
+	if len(_rawOffset2) == 0 {
+		return
+	}
+
+	__rawOffset2_0 := _rawOffset2[0]
+
+	if __offset_2, err := strconv.ParseInt(__rawOffset2_0, 0, 0); err == nil {
+		_offset_2 = int(__offset_2)
+	}
+
+	if err != nil {
+		_wrappingErrErrorResp(w, r, 400, err)
+
+		return
+	}
+
+	return
+}
+
 // _requestHeaderToken Parsing the header for of token
 func _requestHeaderToken(w http.ResponseWriter, r *http.Request) (_token string, err error) {
 
@@ -650,6 +746,7 @@ func _requestHeaderXToken(w http.ResponseWriter, r *http.Request) (_xToken strin
 
 // _middlewareSessionMiddelSession Is the middleware of MiddelSession
 func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_session *githubComWzshimingGenExamplesServiceMidd.Session, _err error) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddelSession.x-token
 	var _xToken string
 
 	// Parsing x-token.
@@ -672,6 +769,7 @@ func _middlewareSessionMiddelSession(w http.ResponseWriter, r *http.Request) (_s
 
 // _middlewareTokenMiddelToken Is the middleware of MiddelToken
 func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token_1 string, _err error) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddelToken.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
 
 	// Permission middlewares call MiddelSession.
@@ -694,16 +792,18 @@ func _middlewareTokenMiddelToken(w http.ResponseWriter, r *http.Request) (_token
 
 // _wrappingErrErrorResp Is the wrapping of ErrorResp
 func _wrappingErrErrorResp(w http.ResponseWriter, r *http.Request, _code int, _rawErr error) {
+	// responses github.com/wzshiming/gen-examples/service/errresp ErrorResp.e
 	var _e *githubComWzshimingGenExamplesServiceErrresp.Error
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/errresp ErrorResp.err
+	var _err_1 error
 
 	// Call github.com/wzshiming/gen-examples/service/errresp ErrorResp.
-	_e, _err = githubComWzshimingGenExamplesServiceErrresp.ErrorResp(_rawErr)
+	_e, _err_1 = githubComWzshimingGenExamplesServiceErrresp.ErrorResp(_rawErr)
 
 	var __e []byte
-	__e, _err = json.Marshal(_e)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__e, _err_1 = json.Marshal(_e)
+	if _err_1 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_1)
 
 		return
 	}
@@ -716,21 +816,22 @@ func _wrappingErrErrorResp(w http.ResponseWriter, r *http.Request, _code int, _r
 }
 
 // _securityAPIKeyVerifyAPIKey Is the security of VerifyApiKey
-func _securityAPIKeyVerifyAPIKey(w http.ResponseWriter, r *http.Request) (_userID uint64, _err error) {
+func _securityAPIKeyVerifyAPIKey(w http.ResponseWriter, r *http.Request) (_userID uint64, _err_2 error) {
+	// requests github.com/wzshiming/gen-examples/service/auth VerifyApiKey.token
 	var _token string
 
 	// Parsing token.
-	_token, _err = _requestHeaderToken(w, r)
-	if _err != nil {
+	_token, _err_2 = _requestHeaderToken(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth VerifyApiKey.
-	_userID, _err = githubComWzshimingGenExamplesServiceAuth.VerifyApiKey(_token)
+	_userID, _err_2 = githubComWzshimingGenExamplesServiceAuth.VerifyApiKey(_token)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -738,14 +839,14 @@ func _securityAPIKeyVerifyAPIKey(w http.ResponseWriter, r *http.Request) (_userI
 }
 
 // _securityBasicVerifyBasic Is the security of VerifyBasic
-func _securityBasicVerifyBasic(w http.ResponseWriter, r *http.Request) (_userID uint64, _err error) {
+func _securityBasicVerifyBasic(w http.ResponseWriter, r *http.Request) (_userID uint64, _err_2 error) {
 
 	// Call github.com/wzshiming/gen-examples/service/auth VerifyBasic.
-	_userID, _err = githubComWzshimingGenExamplesServiceAuth.VerifyBasic(r)
+	_userID, _err_2 = githubComWzshimingGenExamplesServiceAuth.VerifyBasic(r)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -754,43 +855,47 @@ func _securityBasicVerifyBasic(w http.ResponseWriter, r *http.Request) (_userID 
 
 // _operationPutAuthAuthID Is the route of Update
 func _operationPutAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Update.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Update.auth_id
 	var _authID int
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Update.auth
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.Update.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth_id.
-	_authID, _err = _requestPathAuthID(w, r)
-	if _err != nil {
+	_authID, _err_2 = _requestPathAuthID(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Parsing auth.
-	_auth, _err = _requestBodyAuth(w, r)
-	if _err != nil {
+	_auth, _err_2 = _requestBodyAuth(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth AuthService.Update.
-	_err = s.Update(_userID_1, _authID, _auth)
+	_err_2 = s.Update(_userID_1, _authID, _auth)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -803,47 +908,52 @@ func _operationPutAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 
 // _operationGetAuth Is the route of List
 func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.List.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.List.offset
 	var _offset int
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.List.limit
 	var _limit int
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.List.auths
 	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.List.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing offset.
-	_offset, _err = _requestQueryOffset(w, r)
-	if _err != nil {
+	_offset, _err_2 = _requestQueryOffset(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Parsing limit.
-	_limit, _err = _requestQueryLimit(w, r)
-	if _err != nil {
+	_limit, _err_2 = _requestQueryLimit(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth AuthService.List.
-	_auths, _err = s.List(_userID_1, _offset, _limit)
+	_auths, _err_2 = s.List(_userID_1, _offset, _limit)
 
 	// Response code 200 OK for auths.
 	if _auths != nil {
 		var __auths []byte
-		__auths, _err = json.Marshal(_auths)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__auths, _err_2 = json.Marshal(_auths)
+		if _err_2 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_2)
 
 			return
 		}
@@ -855,15 +965,15 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
 	var __auths []byte
-	__auths, _err = json.Marshal(_auths)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__auths, _err_2 = json.Marshal(_auths)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_2)
 
 		return
 	}
@@ -877,40 +987,44 @@ func _operationGetAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, 
 
 // _operationGetAuthAuthID Is the route of Get
 func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Get.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Get.auth_id
 	var _authID int
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.Get.auth
 	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.Get.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth_id.
-	_authID, _err = _requestPathAuthID(w, r)
-	if _err != nil {
+	_authID, _err_2 = _requestPathAuthID(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth AuthService.Get.
-	_auth_1, _err = s.Get(_userID_1, _authID)
+	_auth_1, _err_2 = s.Get(_userID_1, _authID)
 
 	// Response code 200 OK for auth.
 	if _auth_1 != nil {
 		var __auth_1 []byte
-		__auth_1, _err = json.Marshal(_auth_1)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__auth_1, _err_2 = json.Marshal(_auth_1)
+		if _err_2 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_2)
 
 			return
 		}
@@ -922,15 +1036,15 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
 	var __auth_1 []byte
-	__auth_1, _err = json.Marshal(_auth_1)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__auth_1, _err_2 = json.Marshal(_auth_1)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_2)
 
 		return
 	}
@@ -944,36 +1058,39 @@ func _operationGetAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthSer
 
 // _operationDeleteAuthAuthID Is the route of Delete
 func _operationDeleteAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.AuthService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Delete.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Delete.auth_id
 	var _authID int
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.Delete.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth_id.
-	_authID, _err = _requestPathAuthID(w, r)
-	if _err != nil {
+	_authID, _err_2 = _requestPathAuthID(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth AuthService.Delete.
-	_err = s.Delete(_userID_1, _authID)
+	_err_2 = s.Delete(_userID_1, _authID)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -986,36 +1103,39 @@ func _operationDeleteAuthAuthID(s *githubComWzshimingGenExamplesServiceAuth.Auth
 
 // _operationPostAuth Is the route of Create
 func _operationPostAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Create.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth AuthService.Create.auth
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth AuthService.Create.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth.
-	_auth, _err = _requestBodyAuth(w, r)
-	if _err != nil {
+	_auth, _err_2 = _requestBodyAuth(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth AuthService.Create.
-	_err = s.Create(_userID_1, _auth)
+	_err_2 = s.Create(_userID_1, _auth)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -1028,25 +1148,28 @@ func _operationPostAuth(s *githubComWzshimingGenExamplesServiceAuth.AuthService,
 
 // _operationPostFile Is the route of Upload
 func _operationPostFile(s *githubComWzshimingGenExamplesServiceFile.FileService, w http.ResponseWriter, r *http.Request) {
+	// requests  FileService.Upload.file
 	var _file io.Reader
+	// responses github.com/wzshiming/gen-examples/service/file FileService.Upload.filename
 	var _filename_1 string
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/file FileService.Upload.err
+	var _err_3 error
 
 	// Parsing file.
-	_file, _err = _requestBodyFile(w, r)
-	if _err != nil {
+	_file, _err_3 = _requestBodyFile(w, r)
+	if _err_3 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/file FileService.Upload.
-	_filename_1, _err = s.Upload(_file)
+	_filename_1, _err_3 = s.Upload(_file)
 
 	// Response code 200 OK for filename.
 	if _filename_1 != "" {
 		var __filename_1 []byte
-		__filename_1, _err = json.Marshal(_filename_1)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__filename_1, _err_3 = json.Marshal(_filename_1)
+		if _err_3 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_3)
 
 			return
 		}
@@ -1058,15 +1181,15 @@ func _operationPostFile(s *githubComWzshimingGenExamplesServiceFile.FileService,
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_3 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_3)
 		return
 	}
 
 	var __filename_1 []byte
-	__filename_1, _err = json.Marshal(_filename_1)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__filename_1, _err_3 = json.Marshal(_filename_1)
+	if _err_3 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_3)
 
 		return
 	}
@@ -1080,18 +1203,21 @@ func _operationPostFile(s *githubComWzshimingGenExamplesServiceFile.FileService,
 
 // _operationGetFileFilename Is the route of Get
 func _operationGetFileFilename(s *githubComWzshimingGenExamplesServiceFile.FileService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/file FileService.Get.filename
 	var _filename string
+	// responses github.com/wzshiming/gen-examples/service/file FileService.Get.file
 	var _file_1 []byte
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/file FileService.Get.err
+	var _err_3 error
 
 	// Parsing filename.
-	_filename, _err = _requestPathFilename(w, r)
-	if _err != nil {
+	_filename, _err_3 = _requestPathFilename(w, r)
+	if _err_3 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/file FileService.Get.
-	_file_1, _err = s.Get(_filename)
+	_file_1, _err_3 = s.Get(_filename)
 
 	// Response code 200 OK for file.
 	if _file_1 != nil {
@@ -1105,8 +1231,8 @@ func _operationGetFileFilename(s *githubComWzshimingGenExamplesServiceFile.FileS
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_3 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_3)
 		return
 	}
 
@@ -1122,28 +1248,31 @@ func _operationGetFileFilename(s *githubComWzshimingGenExamplesServiceFile.FileS
 
 // _operationPutGroupItemItemID Is the route of Update
 func _operationPutGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item Group.Update.item_id
 	var _itemID int
+	// requests github.com/wzshiming/gen-examples/service/item Group.Update.item
 	var _item *githubComWzshimingGenExamplesServiceItem.Item
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item Group.Update.err
+	var _err_4 error
 
 	// Parsing item_id.
-	_itemID, _err = _requestPathItemID(w, r)
-	if _err != nil {
+	_itemID, _err_4 = _requestPathItemID(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Parsing item.
-	_item, _err = _requestBodyItem(w, r)
-	if _err != nil {
+	_item, _err_4 = _requestBodyItem(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Update.
-	_err = s.Item.Update(_itemID, _item)
+	_err_4 = s.Item.Update(_itemID, _item)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
@@ -1156,32 +1285,36 @@ func _operationPutGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 // _operationGetGroupItem Is the route of List
 func _operationGetGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
-	var _offset int
-	var _limit int
+	// requests github.com/wzshiming/gen-examples/service/item Group.List.offset
+	var _offset_1 int
+	// requests github.com/wzshiming/gen-examples/service/item Group.List.limit
+	var _limit_1 int
+	// responses github.com/wzshiming/gen-examples/service/item Group.List.items
 	var _items []*githubComWzshimingGenExamplesServiceItem.ItemWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item Group.List.err
+	var _err_4 error
 
 	// Parsing offset.
-	_offset, _err = _requestQueryOffset(w, r)
-	if _err != nil {
+	_offset_1, _err_4 = _requestQueryOffset_1(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Parsing limit.
-	_limit, _err = _requestQueryLimit(w, r)
-	if _err != nil {
+	_limit_1, _err_4 = _requestQueryLimit_1(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item Group.Item.List.
-	_items, _err = s.Item.List(_offset, _limit)
+	_items, _err_4 = s.Item.List(_offset_1, _limit_1)
 
 	// Response code 200 OK for items.
 	if _items != nil {
 		var __items []byte
-		__items, _err = json.Marshal(_items)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__items, _err_4 = json.Marshal(_items)
+		if _err_4 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_4)
 
 			return
 		}
@@ -1193,15 +1326,15 @@ func _operationGetGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
 	var __items []byte
-	__items, _err = json.Marshal(_items)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__items, _err_4 = json.Marshal(_items)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_4)
 
 		return
 	}
@@ -1215,25 +1348,28 @@ func _operationGetGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 
 // _operationGetGroupItemItemID Is the route of Get
 func _operationGetGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item Group.Get.item_id
 	var _itemID int
+	// responses github.com/wzshiming/gen-examples/service/item Group.Get.item
 	var _item_1 *githubComWzshimingGenExamplesServiceItem.ItemWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item Group.Get.err
+	var _err_4 error
 
 	// Parsing item_id.
-	_itemID, _err = _requestPathItemID(w, r)
-	if _err != nil {
+	_itemID, _err_4 = _requestPathItemID(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Get.
-	_item_1, _err = s.Item.Get(_itemID)
+	_item_1, _err_4 = s.Item.Get(_itemID)
 
 	// Response code 200 OK for item.
 	if _item_1 != nil {
 		var __item_1 []byte
-		__item_1, _err = json.Marshal(_item_1)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__item_1, _err_4 = json.Marshal(_item_1)
+		if _err_4 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_4)
 
 			return
 		}
@@ -1245,15 +1381,15 @@ func _operationGetGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.G
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
 	var __item_1 []byte
-	__item_1, _err = json.Marshal(_item_1)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__item_1, _err_4 = json.Marshal(_item_1)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_4)
 
 		return
 	}
@@ -1267,21 +1403,23 @@ func _operationGetGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 // _operationDeleteGroupItemItemID Is the route of Delete
 func _operationDeleteGroupItemItemID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item Group.Delete.item_id
 	var _itemID int
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item Group.Delete.err
+	var _err_4 error
 
 	// Parsing item_id.
-	_itemID, _err = _requestPathItemID(w, r)
-	if _err != nil {
+	_itemID, _err_4 = _requestPathItemID(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Delete.
-	_err = s.Item.Delete(_itemID)
+	_err_4 = s.Item.Delete(_itemID)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
@@ -1294,21 +1432,23 @@ func _operationDeleteGroupItemItemID(s *githubComWzshimingGenExamplesServiceGrou
 
 // _operationPostGroupItem Is the route of Create
 func _operationPostGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item Group.Create.item
 	var _item *githubComWzshimingGenExamplesServiceItem.Item
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item Group.Create.err
+	var _err_4 error
 
 	// Parsing item.
-	_item, _err = _requestBodyItem(w, r)
-	if _err != nil {
+	_item, _err_4 = _requestBodyItem(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item Group.Item.Create.
-	_err = s.Item.Create(_item)
+	_err_4 = s.Item.Create(_item)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
@@ -1321,25 +1461,28 @@ func _operationPostGroupItem(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 // _operationPostGroupFile Is the route of Upload
 func _operationPostGroupFile(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests  Group.Upload.file
 	var _file io.Reader
+	// responses github.com/wzshiming/gen-examples/service/file Group.Upload.filename
 	var _filename_1 string
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/file Group.Upload.err
+	var _err_3 error
 
 	// Parsing file.
-	_file, _err = _requestBodyFile(w, r)
-	if _err != nil {
+	_file, _err_3 = _requestBodyFile(w, r)
+	if _err_3 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/file Group.File.Upload.
-	_filename_1, _err = s.File.Upload(_file)
+	_filename_1, _err_3 = s.File.Upload(_file)
 
 	// Response code 200 OK for filename.
 	if _filename_1 != "" {
 		var __filename_1 []byte
-		__filename_1, _err = json.Marshal(_filename_1)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__filename_1, _err_3 = json.Marshal(_filename_1)
+		if _err_3 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_3)
 
 			return
 		}
@@ -1351,15 +1494,15 @@ func _operationPostGroupFile(s *githubComWzshimingGenExamplesServiceGroup.Group,
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_3 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_3)
 		return
 	}
 
 	var __filename_1 []byte
-	__filename_1, _err = json.Marshal(_filename_1)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__filename_1, _err_3 = json.Marshal(_filename_1)
+	if _err_3 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_3)
 
 		return
 	}
@@ -1373,18 +1516,21 @@ func _operationPostGroupFile(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 // _operationGetGroupFileFilename Is the route of Get
 func _operationGetGroupFileFilename(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/file Group.Get.filename
 	var _filename string
+	// responses github.com/wzshiming/gen-examples/service/file Group.Get.file
 	var _file_1 []byte
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/file Group.Get.err
+	var _err_3 error
 
 	// Parsing filename.
-	_filename, _err = _requestPathFilename(w, r)
-	if _err != nil {
+	_filename, _err_3 = _requestPathFilename(w, r)
+	if _err_3 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/file Group.File.Get.
-	_file_1, _err = s.File.Get(_filename)
+	_file_1, _err_3 = s.File.Get(_filename)
 
 	// Response code 200 OK for file.
 	if _file_1 != nil {
@@ -1398,8 +1544,8 @@ func _operationGetGroupFileFilename(s *githubComWzshimingGenExamplesServiceGroup
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_3 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_3)
 		return
 	}
 
@@ -1415,43 +1561,47 @@ func _operationGetGroupFileFilename(s *githubComWzshimingGenExamplesServiceGroup
 
 // _operationPutGroupAuthAuthID Is the route of Update
 func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Update.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Update.auth_id
 	var _authID int
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Update.auth
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth Group.Update.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth_id.
-	_authID, _err = _requestPathAuthID(w, r)
-	if _err != nil {
+	_authID, _err_2 = _requestPathAuthID(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Parsing auth.
-	_auth, _err = _requestBodyAuth(w, r)
-	if _err != nil {
+	_auth, _err_2 = _requestBodyAuth(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Update.
-	_err = s.Auth.Update(_userID_1, _authID, _auth)
+	_err_2 = s.Auth.Update(_userID_1, _authID, _auth)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -1464,47 +1614,52 @@ func _operationPutGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 // _operationGetGroupAuth Is the route of List
 func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth Group.List.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth Group.List.offset
 	var _offset int
+	// requests github.com/wzshiming/gen-examples/service/auth Group.List.limit
 	var _limit int
+	// responses github.com/wzshiming/gen-examples/service/auth Group.List.auths
 	var _auths []*githubComWzshimingGenExamplesServiceAuth.AuthWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth Group.List.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing offset.
-	_offset, _err = _requestQueryOffset(w, r)
-	if _err != nil {
+	_offset, _err_2 = _requestQueryOffset(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Parsing limit.
-	_limit, _err = _requestQueryLimit(w, r)
-	if _err != nil {
+	_limit, _err_2 = _requestQueryLimit(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.List.
-	_auths, _err = s.Auth.List(_userID_1, _offset, _limit)
+	_auths, _err_2 = s.Auth.List(_userID_1, _offset, _limit)
 
 	// Response code 200 OK for auths.
 	if _auths != nil {
 		var __auths []byte
-		__auths, _err = json.Marshal(_auths)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__auths, _err_2 = json.Marshal(_auths)
+		if _err_2 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_2)
 
 			return
 		}
@@ -1516,15 +1671,15 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
 	var __auths []byte
-	__auths, _err = json.Marshal(_auths)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__auths, _err_2 = json.Marshal(_auths)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_2)
 
 		return
 	}
@@ -1538,40 +1693,44 @@ func _operationGetGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 
 // _operationGetGroupAuthAuthID Is the route of Get
 func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Get.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Get.auth_id
 	var _authID int
+	// responses github.com/wzshiming/gen-examples/service/auth Group.Get.auth
 	var _auth_1 *githubComWzshimingGenExamplesServiceAuth.AuthWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth Group.Get.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth_id.
-	_authID, _err = _requestPathAuthID(w, r)
-	if _err != nil {
+	_authID, _err_2 = _requestPathAuthID(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Get.
-	_auth_1, _err = s.Auth.Get(_userID_1, _authID)
+	_auth_1, _err_2 = s.Auth.Get(_userID_1, _authID)
 
 	// Response code 200 OK for auth.
 	if _auth_1 != nil {
 		var __auth_1 []byte
-		__auth_1, _err = json.Marshal(_auth_1)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__auth_1, _err_2 = json.Marshal(_auth_1)
+		if _err_2 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_2)
 
 			return
 		}
@@ -1583,15 +1742,15 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
 	var __auth_1 []byte
-	__auth_1, _err = json.Marshal(_auth_1)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__auth_1, _err_2 = json.Marshal(_auth_1)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_2)
 
 		return
 	}
@@ -1605,36 +1764,39 @@ func _operationGetGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 // _operationDeleteGroupAuthAuthID Is the route of Delete
 func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Delete.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Delete.auth_id
 	var _authID int
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth Group.Delete.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth_id.
-	_authID, _err = _requestPathAuthID(w, r)
-	if _err != nil {
+	_authID, _err_2 = _requestPathAuthID(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Delete.
-	_err = s.Auth.Delete(_userID_1, _authID)
+	_err_2 = s.Auth.Delete(_userID_1, _authID)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -1647,36 +1809,39 @@ func _operationDeleteGroupAuthAuthID(s *githubComWzshimingGenExamplesServiceGrou
 
 // _operationPostGroupAuth Is the route of Create
 func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Create.userID
 	var _userID_1 uint64
+	// requests github.com/wzshiming/gen-examples/service/auth Group.Create.auth
 	var _auth *githubComWzshimingGenExamplesServiceAuth.Auth
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/auth Group.Create.err
+	var _err_2 error
 
 	// Permission verification
 	if r.Header.Get("token") != "" { // Call VerifyApiKey.
-		_userID_1, _err = _securityAPIKeyVerifyAPIKey(w, r)
+		_userID_1, _err_2 = _securityAPIKeyVerifyAPIKey(w, r)
 	} else if strings.HasPrefix(r.Header.Get("Authorization"), "Basic ") { // Call VerifyBasic.
-		_userID_1, _err = _securityBasicVerifyBasic(w, r)
+		_userID_1, _err_2 = _securityBasicVerifyBasic(w, r)
 	} else {
-		_err = errors.New("Unauthorized")
+		_err_2 = errors.New("Unauthorized")
 	}
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 401, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 401, _err_2)
 
 		return
 	}
 
 	// Parsing auth.
-	_auth, _err = _requestBodyAuth(w, r)
-	if _err != nil {
+	_auth, _err_2 = _requestBodyAuth(w, r)
+	if _err_2 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/auth Group.Auth.Create.
-	_err = s.Auth.Create(_userID_1, _auth)
+	_err_2 = s.Auth.Create(_userID_1, _auth)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_2 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_2)
 		return
 	}
 
@@ -1689,9 +1854,13 @@ func _operationPostGroupAuth(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 // _operationPutGroupMiddMiddID Is the route of Update
 func _operationPutGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Update.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Update.midd_id
 	var _middID int
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Update.midd
 	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
+	// responses github.com/wzshiming/gen-examples/service/midd Group.Update.err
 	var _err error
 
 	// Permission middlewares call MiddelSession.
@@ -1730,10 +1899,15 @@ func _operationPutGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 // _operationGetGroupMidd Is the route of List
 func _operationGetGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd Group.List.token
 	var _token_2 string
-	var _offset int
-	var _limit int
+	// requests github.com/wzshiming/gen-examples/service/midd Group.List.offset
+	var _offset_2 int
+	// requests github.com/wzshiming/gen-examples/service/midd Group.List.limit
+	var _limit_2 int
+	// responses github.com/wzshiming/gen-examples/service/midd Group.List.midds
 	var _midds []*githubComWzshimingGenExamplesServiceMidd.MiddWithID
+	// responses github.com/wzshiming/gen-examples/service/midd Group.List.err
 	var _err error
 
 	// Permission middlewares call MiddelToken.
@@ -1743,19 +1917,19 @@ func _operationGetGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 	}
 
 	// Parsing offset.
-	_offset, _err = _requestQueryOffset(w, r)
+	_offset_2, _err = _requestQueryOffset_2(w, r)
 	if _err != nil {
 		return
 	}
 
 	// Parsing limit.
-	_limit, _err = _requestQueryLimit(w, r)
+	_limit_2, _err = _requestQueryLimit_2(w, r)
 	if _err != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/midd Group.Midd.List.
-	_midds, _err = s.Midd.List(_token_2, _offset, _limit)
+	_midds, _err = s.Midd.List(_token_2, _offset_2, _limit_2)
 
 	// Response code 200 OK for midds.
 	if _midds != nil {
@@ -1796,9 +1970,13 @@ func _operationGetGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, 
 
 // _operationGetGroupMiddMiddID Is the route of Get
 func _operationGetGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Get.token
 	var _token_2 string
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Get.midd_id
 	var _middID int
+	// responses github.com/wzshiming/gen-examples/service/midd Group.Get.midd
 	var _midd_1 *githubComWzshimingGenExamplesServiceMidd.MiddWithID
+	// responses github.com/wzshiming/gen-examples/service/midd Group.Get.err
 	var _err error
 
 	// Permission middlewares call MiddelToken.
@@ -1855,8 +2033,11 @@ func _operationGetGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.G
 
 // _operationDeleteGroupMiddMiddID Is the route of Delete
 func _operationDeleteGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Delete.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Delete.midd_id
 	var _middID int
+	// responses github.com/wzshiming/gen-examples/service/midd Group.Delete.err
 	var _err error
 
 	// Permission middlewares call MiddelSession.
@@ -1889,8 +2070,11 @@ func _operationDeleteGroupMiddMiddID(s *githubComWzshimingGenExamplesServiceGrou
 
 // _operationPostGroupMidd Is the route of Create
 func _operationPostGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Create.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	// requests github.com/wzshiming/gen-examples/service/midd Group.Create.midd
 	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
+	// responses github.com/wzshiming/gen-examples/service/midd Group.Create.err
 	var _err error
 
 	// Permission middlewares call MiddelSession.
@@ -1923,28 +2107,31 @@ func _operationPostGroupMidd(s *githubComWzshimingGenExamplesServiceGroup.Group,
 
 // _operationPutItemItemID Is the route of Update
 func _operationPutItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.Update.item_id
 	var _itemID int
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.Update.item
 	var _item *githubComWzshimingGenExamplesServiceItem.Item
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.Update.err
+	var _err_4 error
 
 	// Parsing item_id.
-	_itemID, _err = _requestPathItemID(w, r)
-	if _err != nil {
+	_itemID, _err_4 = _requestPathItemID(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Parsing item.
-	_item, _err = _requestBodyItem(w, r)
-	if _err != nil {
+	_item, _err_4 = _requestBodyItem(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item ItemService.Update.
-	_err = s.Update(_itemID, _item)
+	_err_4 = s.Update(_itemID, _item)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
@@ -1957,32 +2144,36 @@ func _operationPutItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemSer
 
 // _operationGetItem Is the route of List
 func _operationGetItem(s *githubComWzshimingGenExamplesServiceItem.ItemService, w http.ResponseWriter, r *http.Request) {
-	var _offset int
-	var _limit int
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.List.offset
+	var _offset_1 int
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.List.limit
+	var _limit_1 int
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.List.items
 	var _items []*githubComWzshimingGenExamplesServiceItem.ItemWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.List.err
+	var _err_4 error
 
 	// Parsing offset.
-	_offset, _err = _requestQueryOffset(w, r)
-	if _err != nil {
+	_offset_1, _err_4 = _requestQueryOffset_1(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Parsing limit.
-	_limit, _err = _requestQueryLimit(w, r)
-	if _err != nil {
+	_limit_1, _err_4 = _requestQueryLimit_1(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item ItemService.List.
-	_items, _err = s.List(_offset, _limit)
+	_items, _err_4 = s.List(_offset_1, _limit_1)
 
 	// Response code 200 OK for items.
 	if _items != nil {
 		var __items []byte
-		__items, _err = json.Marshal(_items)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__items, _err_4 = json.Marshal(_items)
+		if _err_4 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_4)
 
 			return
 		}
@@ -1994,15 +2185,15 @@ func _operationGetItem(s *githubComWzshimingGenExamplesServiceItem.ItemService, 
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
 	var __items []byte
-	__items, _err = json.Marshal(_items)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__items, _err_4 = json.Marshal(_items)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_4)
 
 		return
 	}
@@ -2016,25 +2207,28 @@ func _operationGetItem(s *githubComWzshimingGenExamplesServiceItem.ItemService, 
 
 // _operationGetItemItemID Is the route of Get
 func _operationGetItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.Get.item_id
 	var _itemID int
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.Get.item
 	var _item_1 *githubComWzshimingGenExamplesServiceItem.ItemWithID
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.Get.err
+	var _err_4 error
 
 	// Parsing item_id.
-	_itemID, _err = _requestPathItemID(w, r)
-	if _err != nil {
+	_itemID, _err_4 = _requestPathItemID(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item ItemService.Get.
-	_item_1, _err = s.Get(_itemID)
+	_item_1, _err_4 = s.Get(_itemID)
 
 	// Response code 200 OK for item.
 	if _item_1 != nil {
 		var __item_1 []byte
-		__item_1, _err = json.Marshal(_item_1)
-		if _err != nil {
-			_wrappingErrErrorResp(w, r, 500, _err)
+		__item_1, _err_4 = json.Marshal(_item_1)
+		if _err_4 != nil {
+			_wrappingErrErrorResp(w, r, 500, _err_4)
 
 			return
 		}
@@ -2046,15 +2240,15 @@ func _operationGetItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemSer
 	}
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
 	var __item_1 []byte
-	__item_1, _err = json.Marshal(_item_1)
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 500, _err)
+	__item_1, _err_4 = json.Marshal(_item_1)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 500, _err_4)
 
 		return
 	}
@@ -2068,21 +2262,23 @@ func _operationGetItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemSer
 
 // _operationDeleteItemItemID Is the route of Delete
 func _operationDeleteItemItemID(s *githubComWzshimingGenExamplesServiceItem.ItemService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.Delete.item_id
 	var _itemID int
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.Delete.err
+	var _err_4 error
 
 	// Parsing item_id.
-	_itemID, _err = _requestPathItemID(w, r)
-	if _err != nil {
+	_itemID, _err_4 = _requestPathItemID(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item ItemService.Delete.
-	_err = s.Delete(_itemID)
+	_err_4 = s.Delete(_itemID)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
@@ -2095,21 +2291,23 @@ func _operationDeleteItemItemID(s *githubComWzshimingGenExamplesServiceItem.Item
 
 // _operationPostItem Is the route of Create
 func _operationPostItem(s *githubComWzshimingGenExamplesServiceItem.ItemService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/item ItemService.Create.item
 	var _item *githubComWzshimingGenExamplesServiceItem.Item
-	var _err error
+	// responses github.com/wzshiming/gen-examples/service/item ItemService.Create.err
+	var _err_4 error
 
 	// Parsing item.
-	_item, _err = _requestBodyItem(w, r)
-	if _err != nil {
+	_item, _err_4 = _requestBodyItem(w, r)
+	if _err_4 != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/item ItemService.Create.
-	_err = s.Create(_item)
+	_err_4 = s.Create(_item)
 
 	// Response code 400 Bad Request for err.
-	if _err != nil {
-		_wrappingErrErrorResp(w, r, 400, _err)
+	if _err_4 != nil {
+		_wrappingErrErrorResp(w, r, 400, _err_4)
 		return
 	}
 
@@ -2122,9 +2320,13 @@ func _operationPostItem(s *githubComWzshimingGenExamplesServiceItem.ItemService,
 
 // _operationPutMiddMiddID Is the route of Update
 func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Update.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Update.midd_id
 	var _middID int
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Update.midd
 	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.Update.err
 	var _err error
 
 	// Permission middlewares call MiddelSession.
@@ -2163,10 +2365,15 @@ func _operationPutMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddSer
 
 // _operationGetMidd Is the route of List
 func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.List.token
 	var _token_2 string
-	var _offset int
-	var _limit int
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.List.offset
+	var _offset_2 int
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.List.limit
+	var _limit_2 int
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.List.midds
 	var _midds []*githubComWzshimingGenExamplesServiceMidd.MiddWithID
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.List.err
 	var _err error
 
 	// Permission middlewares call MiddelToken.
@@ -2176,19 +2383,19 @@ func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, 
 	}
 
 	// Parsing offset.
-	_offset, _err = _requestQueryOffset(w, r)
+	_offset_2, _err = _requestQueryOffset_2(w, r)
 	if _err != nil {
 		return
 	}
 
 	// Parsing limit.
-	_limit, _err = _requestQueryLimit(w, r)
+	_limit_2, _err = _requestQueryLimit_2(w, r)
 	if _err != nil {
 		return
 	}
 
 	// Call github.com/wzshiming/gen-examples/service/midd MiddService.List.
-	_midds, _err = s.List(_token_2, _offset, _limit)
+	_midds, _err = s.List(_token_2, _offset_2, _limit_2)
 
 	// Response code 200 OK for midds.
 	if _midds != nil {
@@ -2229,9 +2436,13 @@ func _operationGetMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, 
 
 // _operationGetMiddMiddID Is the route of Get
 func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Get.token
 	var _token_2 string
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Get.midd_id
 	var _middID int
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.Get.midd
 	var _midd_1 *githubComWzshimingGenExamplesServiceMidd.MiddWithID
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.Get.err
 	var _err error
 
 	// Permission middlewares call MiddelToken.
@@ -2288,8 +2499,11 @@ func _operationGetMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddSer
 
 // _operationDeleteMiddMiddID Is the route of Delete
 func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Delete.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Delete.midd_id
 	var _middID int
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.Delete.err
 	var _err error
 
 	// Permission middlewares call MiddelSession.
@@ -2322,8 +2536,11 @@ func _operationDeleteMiddMiddID(s *githubComWzshimingGenExamplesServiceMidd.Midd
 
 // _operationPostMidd Is the route of Create
 func _operationPostMidd(s *githubComWzshimingGenExamplesServiceMidd.MiddService, w http.ResponseWriter, r *http.Request) {
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Create.session
 	var _session_1 *githubComWzshimingGenExamplesServiceMidd.Session
+	// requests github.com/wzshiming/gen-examples/service/midd MiddService.Create.midd
 	var _midd *githubComWzshimingGenExamplesServiceMidd.Midd
+	// responses github.com/wzshiming/gen-examples/service/midd MiddService.Create.err
 	var _err error
 
 	// Permission middlewares call MiddelSession.
