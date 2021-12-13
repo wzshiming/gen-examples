@@ -2,8 +2,8 @@ PACKAGES := ./service/...
 
 .PHONY: run generate client route openapi
 
-run:
-	gen run ${PACKAGES}
+run: generate
+	go run ./cmd/test
 
 generate: client route openapi
 
