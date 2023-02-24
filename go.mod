@@ -13,7 +13,7 @@ require (
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/wzshiming/go-bindata v4.0.0+incompatible // indirect
 	github.com/wzshiming/openapi v0.0.0-20200703170606-f8ff864b47e1 // indirect
-	golang.org/x/net v0.0.0-20190607181551-461777fb6f67 // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
